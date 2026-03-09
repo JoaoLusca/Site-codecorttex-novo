@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Manrope:wght@200..800&family=Space+Grotesk:wght@300..700&display=swap"
+        rel="stylesheet">
+    <title>Home</title>
+</head>
+
+<body>
+    <!-- CURSOR -->
+    <div id="cur"></div>
+    <div id="cur-r"></div>
+
+    <header>
+        <div class="logo"><a href="index.html"><img src="img/logo-codecortex-transparente.png" alt="Code Corttex"></a>
+        </div>
+        <nav>
+            <a href="#Início">Início</a>
+            <a href="#sobre">Sobre</a>
+            <a href="#servicos">Soluções</a>
+            <a href="#metodo">Método</a>
+            <a href="#cases">Cases</a>
+            <a href="#impacto">Impacto</a>
+            <a href="#faq">FAQ</a>
+            <a href="#contato">Contato</a>
+        </nav>
+
+        <button class="nav-btn">Iniciar nova fase</button>
+    </header>
+
+    <section class="hero" id="Início">
+         <video class="hero-video" autoplay loop playsinline muted preload="metadata">
+                <source src="midia/6009997_Animal_Nature_1920x1080.mp4" type="video/mp4" />
+            </video>
+
+        <div class="hero-content">
+            <p class="hero-tagline">Marketing digital</p>
+            <h1>Sua marca no lugar <span>certo</span>.</h1>
+            <p class="p-hero">A Code Corttex transforma presença digital em resultado real através da tecnologia,
+                estratégia e um cuidado que a maioria das agências esqueceu de ter...</p>
+            <div class="btn-container">
+                <button class="btn">Iniciar nova fase</button>
+                <button class="btn-2">Ver portfólio</button>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@beta/bundled/locomotive-scroll.min.js"></script>
+    <script>
+        const scroll = new LocomotiveScroll({
+            el: document.querySelector('#app'),
+            smooth: true,
+        });
+    </script>
+    <script src="script/cursor.js"></script>
+    <script src="script/video-transition.js"></script>
+</body>
+
+</html>

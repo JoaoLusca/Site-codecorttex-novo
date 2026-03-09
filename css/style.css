@@ -1,0 +1,274 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/*ESTILO CURSOR*/
+
+#cur,
+#cur-r {
+    position: fixed !important;
+    /* Força o posicionamento fixo */
+    pointer-events: none;
+    z-index: 99999;
+    /* Valor muito alto para ficar acima do scroll */
+}
+
+/* O ponto central */
+#cur {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 10px;
+    height: 10px;
+    background: #B424FB;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    will-change: left, top;
+}
+
+/* O círculo seguidor (com atraso/suavização) */
+#cur-r {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 34px;
+    height: 34px;
+    border: 1.5px solid rgba(180, 36, 251, .5);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: width .3s, height .3s, border-color .3s;
+    will-change: left, top;
+}
+
+/* Estilo quando o mouse está sobre um elemento interativo */
+body.h #cur-r {
+    width: 56px;
+    height: 56px;
+    border-color: #B424FB;
+}
+
+body.h #cur {
+    opacity: .4;
+}
+
+/*Estilo do Span*/
+span {
+    color: #b324fb;
+    font-family: "DM Serif Display", sans-serif;
+    font-style: italic;
+    font-weight: 400;
+}
+
+body {
+    background: #111;
+    color: #fff;
+    font-family: "Manrope", sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+
+    cursor: none;
+    /* Esconde o cursor padrão do sistema */
+
+}
+
+header {
+    position: fixed;
+    display: flex;
+    padding: 3rem;
+    top: 0;
+    left: 0;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+}
+
+.logo a img {
+    height: auto;
+    width: 200px;
+}
+
+nav {
+    display: flex;
+    margin: auto;
+    gap: 2rem;
+}
+
+/*=== SEÇÃO HERO ===*/
+.hero {
+    position: relative;
+    min-height: 100vh;
+    /* Garante que a seção tenha altura total */
+    display: flex;
+    align-items: center;
+    /* Centraliza o conteúdo verticalmente */
+    overflow: hidden;
+    /* Esconde sobras do vídeo */
+    padding: 2rem;
+    width: 100%;
+}
+
+.hero .hero-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -1;
+    /* Joga para trás de tudo */
+    transform: translate(-50%, -50%);
+    /* Centraliza perfeitamente */
+    object-fit: contain;
+    /* Garante que preencha sem distorcer */
+    opacity: 0.3;
+    /* Controle a transparência aqui para o texto aparecer bem */
+}
+
+/* Classe que faremos o trigger via JS */
+.video-fade {
+    animation: fadeThroughBlack 1s ease-in-out;
+}
+
+@keyframes fadeThroughBlack {
+    0% {
+        opacity: 0.20;
+    }
+
+    /* Opacidade normal do seu vídeo */
+    50% {
+        opacity: 0;
+    }
+
+    /* No meio da transição (corte), fica invisível */
+    100% {
+        opacity: 0.20;
+    }
+
+    /* Volta à opacidade normal */
+}
+
+.hero .hero-content {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    width: 30%;
+    gap: 1rem;
+    margin-left: 250px;
+    position: relative;
+    z-index: 1;
+    pointer-events: auto;
+    /* Garante que botões funcionem */
+
+    & .hero-tagline {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-family: 'Manrope', sans-serif;
+        font-size: .7rem;
+        font-weight: 600;
+        letter-spacing: .14em;
+        text-transform: uppercase;
+        color: #b324fb;
+        border: 1px solid rgba(180, 36, 251, .2);
+        border-radius: 50px;
+        padding: 6px 16px;
+        margin-bottom: 28px;
+        width: 33%;
+        backdrop-filter: blur(10px);
+        /* The magic sauce */
+        -webkit-backdrop-filter: blur(10px);
+        /* For compatibility */
+    }
+
+    & .hero-tagline::before {
+        content: '';
+        width: 6px;
+        height: 6px;
+        background: #B424FB;
+        border-radius: 50%;
+        animation: blink 2s infinite;
+    }
+
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: .3;
+    }
+}
+
+.hero .hero-content h1 {
+    font-size: 5rem;
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 800;
+}
+
+.hero .hero-content .p-hero {
+    font-size: 18px;
+    color: #aaaaaa;
+    width: 80%;
+}
+
+
+.hero .hero-content .btn-container {
+    display: flex;
+    gap: 10px;
+    /* Espaço entre os botões */
+}
+
+.hero .hero-content .btn-container .btn {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: .86rem;
+    letter-spacing: .04em;
+    color: #fff;
+    background: #B424FB;
+    border: none;
+    border-radius: 50px;
+    padding: 14px 32px;
+    cursor: none;
+    transition: box-shadow .3s, transform .2s;
+    text-decoration: none;
+    display: inline-block
+}
+
+.hero .hero-content .btn-container .btn:hover {
+    box-shadow: 0 0 32px #b324fb, 0 0 64px rgba(180, 36, 251, .1);
+    transform: translateY(-2px)
+}
+
+.hero .hero-content .btn-container .btn-2 {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 500;
+    font-size: .86rem;
+    color: rgba(255, 255, 253, .6);
+    background: transparent;
+    border: 1px solid rgba(255, 255, 253, .1);
+    border-radius: 50px;
+    padding: 13px 28px;
+    cursor: none;
+    transition: border-color .3s, color .3s;
+    text-decoration: none;
+    display: inline-block;
+    backdrop-filter: blur(10px);
+}
+
+.hero .hero-content .btn-container .btn-2:hover {
+    border-color: #b324fb;
+    color: #fff
+}
