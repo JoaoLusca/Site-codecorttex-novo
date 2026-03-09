@@ -73,7 +73,7 @@ body {
     align-items: center;
     height: 100vh;
     overflow-x: none;
-
+    font-size: 18px;
     cursor: none;
     /* Esconde o cursor padrão do sistema */
 
@@ -132,7 +132,7 @@ header .nav-btn {
     font-weight: 500;
     font-size: 14px;
     color: #fff;
-    background: #B424FB;
+    background: #B324FB;
     border: none;
     border-radius: 50px;
     padding: 14px 32px;
@@ -142,7 +142,7 @@ header .nav-btn {
 }
 
 header .nav-btn:hover {
-    box-shadow: 0 0 32px #b324fb, 0 0 64px rgba(180, 36, 251, .1);
+    box-shadow: 0 0 32px #B324FB, 0 0 64px rgba(180, 36, 251, .1);
     transform: translateY(-2px)
 }
 
@@ -177,26 +177,15 @@ header .nav-btn:hover {
 }
 
 /* Classe que faremos o trigger via JS */
-.video-fade {
-    animation: fadeThroughBlack 1s ease-in-out;
+/* Garanta que o seletor está correto e tem prioridade */
+.hero-video.video-fade {
+    animation: fadeThroughBlack 1.2s ease-in-out forwards;
 }
 
 @keyframes fadeThroughBlack {
-    0% {
-        opacity: 0.20;
-    }
-
-    /* Opacidade normal do seu vídeo */
-    50% {
-        opacity: 0;
-    }
-
-    /* No meio da transição (corte), fica invisível */
-    100% {
-        opacity: 0.20;
-    }
-
-    /* Volta à opacidade normal */
+    0% { opacity: 0.3; }   /* Opacidade normal do seu vídeo */
+    50% { opacity: 0; }    /* O "fade out" no momento do reset */
+    100% { opacity: 0.3; } /* O "fade in" após o reset */
 }
 
 .hero .hero-content {
@@ -281,7 +270,7 @@ header .nav-btn:hover {
     font-size: .86rem;
     letter-spacing: .04em;
     color: #fff;
-    background: #B424FB;
+    background: #B324FB;
     border: none;
     border-radius: 50px;
     padding: 14px 32px;
@@ -292,7 +281,7 @@ header .nav-btn:hover {
 }
 
 .hero .hero-content .btn-container .btn:hover {
-    box-shadow: 0 0 32px #b324fb, 0 0 64px rgba(180, 36, 251, .1);
+    box-shadow: 0 0 32px #B324FB, 0 0 64px rgba(180, 36, 251, .1);
     transform: translateY(-2px)
 }
 
@@ -328,6 +317,7 @@ header .nav-btn:hover {
     display: flex;
     white-space: nowrap; /* Garante que os grupos fiquem lado a lado */
     height: auto;
+    background-color: rgba(64, 1, 95, 0.2);
 }
 
 .group {
@@ -340,6 +330,14 @@ header .nav-btn:hover {
     font-size: 14px;
     font-family: 'Space Grotesk', sans-serif;
 }
+
+.card {
+    transition: 0.4s ease-in-out;
+}
+
+.card:hover {
+    color: #b324fb;
+    transform: translateY(-2px);}
 
 /* Nova animação corrigida */
 @keyframes scroll {
@@ -358,7 +356,7 @@ header .nav-btn:hover {
 
 /*===SEÇÃO DE DOR===*/
 .pain-section {
-    padding: 10vh 5% 20vh;
+    padding: 10vh 5% 8vh;
     background: #050505;
 }
 
@@ -405,31 +403,32 @@ header .nav-btn:hover {
 }
 
 /* Diferenciação sutil de cor/elevação para cada card */
+/* Transição suave entre tons de roxo profundo */
 .card-1 {
     transform: scale(0.95);
-    background: #080808;
+    background: #08030a; /* Quase preto */
 }
 
 .card-2 {
     transform: scale(0.97);
-    background: #0a0a0a;
+    background: #0e0613; /* Roxo extremamente escuro */
 }
 
 .card-3 {
     transform: scale(0.99);
-    background: #0c0c0c;
+    background: #14081b; /* Transição média */
 }
 
 .card-4 {
     transform: scale(1.00);
-    background: #0d0d0d;
+    background: #1b0b24; /* Roxo profundo (o mais claro, mas ainda sóbrio) */
 }
 
 .pain-card span {
     font-family: "DM Serif Display", serif;
     font-style: italic;
     font-size: 1.5rem;
-    color: var(--p);
+    color: #b324fb;
     margin-bottom: 1rem;
 }
 
@@ -459,4 +458,472 @@ header .nav-btn:hover {
     color: var(--p);
     font-size: 2rem;
     margin: 20px 0;
+}
+
+/*EFEITO DRAMÁTICO MOUSE*/
+/* Camada de máscara (Overlay) */
+.spotlight-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: black;
+    z-index: 99990; /* Abaixo do cursor, mas acima de tudo */
+    opacity: 0;
+    pointer-events: none; /* Permite clicar através dela */
+    transition: opacity 0.5s ease;
+    /* O gradiente cria o furo do holofote */
+    mask-image: radial-gradient(circle 150px at var(--x) var(--y), transparent 100%, black 100%);
+    -webkit-mask-image: radial-gradient(circle 150px at var(--x) var(--y), transparent 0%, black 100%);
+}
+
+/* Quando o foco está ativo */
+body.spotlight-active .spotlight-overlay {
+    opacity: 0.95; /* Nível de escuridão do restante da tela */
+}
+
+/* Estilo da palavra durante o foco */
+.spotlight-trigger {
+    cursor: none;
+    position: relative;
+    z-index: 99991; /* Garante que a palavra fique acima da máscara */
+    transition: color 0.2s;
+}
+
+/*SEÇÃO SOBRE*/
+
+/* ── WRAPPER PRINCIPAL DA SEÇÃO ──────────────────────────────
+   Posicionamento relativo para o número fantasma absoluto.
+   overflow:hidden evita scroll horizontal pelo número "03".  */
+.sobre {
+    position: relative;
+    min-height: 100vh;
+    padding: 20px 0 0;
+    overflow: hidden;
+    background: #050505; /* Mesma cor da .pain-section do seu CSS */
+}
+
+/* ── CONTAINER INTERNO ───────────────────────────────────────
+   Limita largura e centraliza o conteúdo.
+   Prefixo "sb-" evita conflito com qualquer outro .container
+   que você venha a ter no projeto.                           */
+.sb-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 48px;
+    position: relative;
+    z-index: 2; /* Acima do número fantasma */
+}
+
+
+/* ── LABEL DA SEÇÃO ("03 — Sobre a Code Corttex") ────────────
+   Entra com fade + slide de baixo via classe .sb-visible,
+   adicionada pelo IntersectionObserver no JS.               */
+.sb-label {
+    font-family: 'Manrope', sans-serif; /* Fonte já carregada no seu site */
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    color: #B424FB; /* Roxo padrão do seu site */
+    text-transform: uppercase;
+    margin-bottom: 48px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    /* Estado inicial (antes do reveal) */
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+/* Linha decorativa após o texto do label */
+.sb-label::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 1px;
+    background: #B424FB;
+    opacity: 0.5;
+}
+
+/* Estado visível — adicionado pelo JS */
+.sb-label.sb-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* ── HEADLINE PRINCIPAL ──────────────────────────────────────
+   Usa Space Grotesk (já carregado no seu site).
+   O <em> herda o estilo italic roxo do seu span global,
+   mas usamos classe própria para não depender disso.        */
+.sb-headline-wrap {
+    margin-bottom: 100px;
+}
+
+.sb-headline {
+    font-family: 'Space Grotesk', sans-serif; /* Fonte já carregada no seu site */
+    font-size: clamp(36px, 5.5vw, 72px);
+    font-weight: 800; /* Peso igual ao h1 do seu hero */
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: #fff;
+
+    /* Estado inicial (antes do reveal) */
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1s ease 0.2s, transform 1s ease 0.2s;
+}
+
+/* Estado visível — adicionado pelo JS */
+.sb-headline.sb-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Parte em itálico roxo da headline */
+.sb-headline-em {
+    font-family: 'DM Serif Display', serif; /* Fonte já carregada no seu site */
+    font-style: italic;
+    font-weight: 400;
+    color: #B424FB;
+    position: relative;
+}
+
+/* Linha sublinhada que cresce da esquerda após reveal */
+.sb-headline-em::after {
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #B424FB;
+    transition: width 1.5s ease 1s; /* Delay de 1s para aparecer após o texto */
+}
+
+.sb-headline.sb-visible .sb-headline-em::after {
+    width: 100%;
+}
+
+
+/* ── GRID PRINCIPAL (manifesto 2 colunas) ───────────────────
+   Coluna esquerda: blocos de texto/carta.
+   Coluna direita: stats + frase de encerramento.            */
+.sb-manifesto {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+}
+
+
+/* ── COLUNA DA CARTA (esquerda) ──────────────────────────────
+   Separador vertical sutil no lado direito.                 */
+.sb-letter-col {
+    padding-right: 80px;
+    border-right: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Cada bloco de parágrafo da carta */
+.sb-letter-block {
+    margin-bottom: 64px;
+
+    /* Estado inicial (antes do reveal) */
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+}
+
+/* Estado visível — adicionado pelo JS */
+.sb-letter-block.sb-visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Numeração estilo código: "// 01" */
+.sb-block-num {
+    font-family: 'Manrope', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    color: #B424FB;
+    opacity: 0.7;
+    margin-bottom: 16px;
+}
+
+/* Texto corrido dos parágrafos */
+.sb-letter-text {
+    font-family: 'Manrope', sans-serif; /* Fonte body já carregada no seu site */
+    font-size: clamp(15px, 1.4vw, 18px);
+    line-height: 1.85;
+    color: rgba(255, 255, 253, 0.65); /* Mesma opacidade usada no .p-hero do seu site */
+    font-weight: 300;
+}
+
+/* Destaque em negrito dentro dos parágrafos */
+.sb-letter-text strong {
+    color: #fff;
+    font-weight: 700;
+}
+
+/* Cursor piscante no último parágrafo (efeito "ainda sendo escrito") */
+.sb-letter-text--typing::after {
+    content: '|';
+    color: #B424FB;
+    /* Usa o keyframe "blink" que JÁ EXISTE no seu style.css */
+    animation: blink 1s step-end infinite;
+}
+
+
+/* ── COLUNA LATERAL (direita: stats + encerramento) ──────────*/
+.sb-side-col {
+    padding-left: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+
+/* ── GRID DE STATS (2x2) ─────────────────────────────────────
+   Quatro cards com números de prova social.                 */
+.sb-stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 48px;
+}
+
+/* Card individual de stat */
+.sb-stat-card {
+    background: rgba(180, 36, 251, 0.04);
+    border: 1px solid rgba(180, 36, 251, 0.15); /* Roxo do site */
+    padding: 28px 24px;
+    position: relative;
+    overflow: hidden;
+    cursor: default;
+
+    /* Estado inicial (antes do reveal) */
+    opacity: 0;
+    transform: translateY(30px) scale(0.97);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+/* Estado visível — adicionado pelo JS */
+.sb-stat-card.sb-visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* Gradiente de hover no fundo do card */
+.sb-stat-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(180, 36, 251, 0.08) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+
+.sb-stat-card:hover::before {
+    opacity: 1;
+}
+
+/* Linha roxa que cresce na base do card no hover */
+.sb-stat-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #B424FB, transparent);
+    transition: width 0.6s ease;
+}
+
+.sb-stat-card:hover::after {
+    width: 100%;
+}
+
+/* Número grande do stat (ex: "+50", "R$2M") */
+.sb-stat-number {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(36px, 4vw, 52px);
+    color: #fff;
+    line-height: 1;
+    margin-bottom: 8px;
+    letter-spacing: 0.02em;
+}
+
+/* Prefixos/sufixos coloridos dentro do número ("+", "R$", "M", "%") */
+.sb-stat-number .sb-stat-accent {
+    color: #B424FB;
+}
+
+/* Descrição abaixo do número */
+.sb-stat-label {
+    font-family: 'Manrope', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    color: rgba(255, 255, 253, 0.4);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    line-height: 1.4;
+}
+
+
+/* ── FRASE DE ENCERRAMENTO ───────────────────────────────────
+   Bloco com aspas gigantes decorativas e pontos pulsantes.  */
+.sb-closing {
+    padding: 52px 40px;
+    background: rgba(180, 36, 251, 0.04);
+    border: 1px solid rgba(180, 36, 251, 0.12);
+    position: relative;
+    overflow: hidden;
+
+    /* Estado inicial (antes do reveal) */
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+/* Estado visível — adicionado pelo JS */
+.sb-closing.sb-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Aspas decorativas gigantes no fundo do bloco */
+.sb-closing::before {
+    content: '"';
+    position: absolute;
+    top: -40px;
+    left: 20px;
+    font-family: 'DM Serif Display', serif; /* Já carregada no site */
+    font-size: 200px;
+    color: rgba(180, 36, 251, 0.06);
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+}
+
+/* Texto da frase de encerramento */
+.sb-closing-text {
+    font-family: 'DM Serif Display', serif; /* Fonte já carregada no site */
+    font-size: clamp(17px, 2vw, 22px);
+    font-style: italic;
+    font-weight: 400;
+    color: rgba(255, 255, 253, 0.85);
+    line-height: 1.8;
+    position: relative;
+    z-index: 1; /* Acima das aspas decorativas */
+}
+
+/* Ponto final pulsante — reforça o "ritmo" da frase */
+.sb-closing-dot {
+    display: inline-block;
+    color: #B424FB;
+    animation: sb-pulse 2s ease-in-out infinite;
+}
+
+/* Cada ponto tem um delay diferente para criar ondulação */
+.sb-closing-dot:nth-child(2) { animation-delay: 0.4s; }
+.sb-closing-dot:nth-child(3) { animation-delay: 0.8s; }
+
+@keyframes sb-pulse {
+    0%,
+    100% { opacity: 1; transform: scale(1); }
+    50%   { opacity: 0.4; transform: scale(1.4); }
+}
+
+
+/* ── TIRA DIVISÓRIA FINAL ────────────────────────────────────
+   Linha com gradiente que separa esta seção da próxima.     */
+.sb-cta-strip {
+    padding: 80px 0 120px;
+    display: flex;
+    align-items: center;
+    gap: 48px;
+
+    /* Estado inicial (antes do reveal) */
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+/* Estado visível — adicionado pelo JS */
+.sb-cta-strip.sb-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* As duas linhas horizontais de cada lado do texto */
+.sb-cta-line {
+    flex: 1;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.07);
+}
+
+/* Texto "scroll para continuar" entre as linhas */
+.sb-cta-text {
+    font-family: 'Manrope', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    color: rgba(255, 255, 253, 0.3);
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+
+/* ── RESPONSIVO — MOBILE (≤ 768px) ──────────────────────────
+   Colapsa o grid de 2 colunas para 1 coluna linear.        */
+@media (max-width: 768px) {
+
+    /* Grid passa para coluna única */
+    .sb-manifesto {
+        grid-template-columns: 1fr;
+    }
+
+    /* Remove padding/borda lateral, adiciona separador inferior */
+    .sb-letter-col {
+        padding-right: 0;
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        padding-bottom: 60px;
+        margin-bottom: 60px;
+    }
+
+    /* Remove padding lateral da coluna de stats */
+    .sb-side-col {
+        padding-left: 0;
+    }
+
+    /* Stats mantém 2 colunas mesmo no mobile */
+    .sb-stats-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    /* Reduz padding do container */
+    .sb-container {
+        padding: 0 24px;
+    }
+
+    /* Reduz padding do bloco de encerramento */
+    .sb-closing {
+        padding: 36px 24px;
+    }
+
+    /* Número fantasma menor para não sobrecarregar */
+    .sb-ghost-number {
+        font-size: 160px;
+        right: -30px;
+    }
+
+    /* Headline mais compacta */
+    .sb-headline-wrap {
+        margin-bottom: 60px;
+    }
 }

@@ -33,3 +33,27 @@ hovEls.forEach(el => {
   el.addEventListener('mouseenter', () => document.body.classList.add('h'), { passive: true }); 
   el.addEventListener('mouseleave', () => document.body.classList.remove('h'), { passive: true }); 
 });
+
+//efeito crescer mouse
+const spotlightTrigger = document.querySelector('.spotlight-trigger');
+
+// Criar a div de overlay dinamicamente para não poluir o HTML
+const overlay = document.createElement('div');
+overlay.className = 'spotlight-overlay';
+document.body.appendChild(overlay);
+
+// Atualiza a posição do holofote conforme o mouse move
+document.addEventListener('mousemove', (e) => {
+    // Passamos as coordenadas para as variáveis CSS --x e --y
+    document.documentElement.style.setProperty('--x', e.clientX + 'px');
+    document.documentElement.style.setProperty('--y', e.clientY + 'px');
+});
+
+// Liga e desliga o efeito
+spotlightTrigger.addEventListener('mouseenter', () => {
+    document.body.classList.add('spotlight-active');
+});
+
+spotlightTrigger.addEventListener('mouseleave', () => {
+    document.body.classList.remove('spotlight-active');
+});

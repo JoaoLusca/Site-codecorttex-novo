@@ -2,18 +2,25 @@ const video = document.querySelector('.hero-video');
 
 if (video) {
     video.addEventListener('timeupdate', function() {
-        // Calcula quanto tempo falta para o vídeo acabar
-        // Vamos disparar o fade 0.5 segundos antes do fim
         const tempoRestante = video.duration - video.currentTime;
 
-        if (tempoRestante < 0.5 && !video.classList.contains('video-fade')) {
+        // Disparamos 0.6s antes do fim
+        if (tempoRestante < 0.6 && !video.classList.contains('video-fade')) {
             video.classList.add('video-fade');
         }
     });
 
-    // Remove a classe quando o vídeo reiniciar para poder disparar de novo no próximo loop
+    // O segredo está aqui: ao reiniciar o vídeo, removemos a classe
+    video.addEventListener('seeked', () => {
+        video.classList.remove('video-fade');
+        
+        // Forçamos um "reflow" (recalculo) para o navegador entender 
+        // que a animação deve rodar novamente no próximo loop
+        void video.offsetWidth; 
+    });
+
+    // Caso o atributo 'loop' do HTML não dispare o 'seeked' em alguns navegadores
     video.addEventListener('play', () => {
-        // Um pequeno delay para garantir que a animação terminou de rodar
         setTimeout(() => {
             video.classList.remove('video-fade');
         }, 1000);
