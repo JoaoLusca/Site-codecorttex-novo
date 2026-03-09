@@ -62,28 +62,28 @@ span {
     color: #b324fb;
     font-family: "DM Serif Display", sans-serif;
     font-style: italic;
-    font-weight: 400;
+    font-weight: 3 00;
 }
 
 body {
     background: #111;
     color: #fff;
     font-family: "Manrope", sans-serif;
-    display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    overflow: hidden;
+    overflow-x: none;
 
     cursor: none;
     /* Esconde o cursor padrão do sistema */
 
 }
 
+/*===MENU DE NAVEGAÇÃO===*/
 header {
     position: fixed;
     display: flex;
-    padding: 3rem;
+    padding: 3rem 7rem;
     top: 0;
     left: 0;
     width: 100%;
@@ -97,10 +97,53 @@ header {
     width: 200px;
 }
 
+.logo a img:hover {
+    border: 1px solid rgba(180, 36, 251, .2);
+    border-radius: 20px;
+    box-shadow: 0 0 32px #b324fb, 0 0 64px rgba(180, 36, 251, .1);
+    transform: translateY(-2px)
+}
+
 nav {
     display: flex;
     margin: auto;
     gap: 2rem;
+
+    & a {
+        font-family: 'Manrope', sans-serif;
+        font-weight: 500;
+        font-size: 14px;
+        color: rgba(255, 255, 253, .9);
+        text-decoration: none;
+        position: relative;
+        padding: 4px 0;
+
+        transition: 0.5s ease;
+    }
+}
+
+nav a:hover {
+    font-size: 14px;
+    transform: translateY(-4px)
+}
+
+header .nav-btn {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    color: #fff;
+    background: #B424FB;
+    border: none;
+    border-radius: 50px;
+    padding: 14px 32px;
+    cursor: none;
+    transition: box-shadow .3s, transform .2s;
+    text-decoration: none;
+}
+
+header .nav-btn:hover {
+    box-shadow: 0 0 32px #b324fb, 0 0 64px rgba(180, 36, 251, .1);
+    transform: translateY(-2px)
 }
 
 /*=== SEÇÃO HERO ===*/
@@ -129,7 +172,7 @@ nav {
     /* Centraliza perfeitamente */
     object-fit: contain;
     /* Garante que preencha sem distorcer */
-    opacity: 0.3;
+    opacity: 0.2;
     /* Controle a transparência aqui para o texto aparecer bem */
 }
 
@@ -220,8 +263,9 @@ nav {
 
 .hero .hero-content .p-hero {
     font-size: 18px;
-    color: #aaaaaa;
+    color: rgba(255, 255, 253, .9);
     width: 80%;
+    font-weight: 200;
 }
 
 
@@ -256,7 +300,7 @@ nav {
     font-family: 'Manrope', sans-serif;
     font-weight: 500;
     font-size: .86rem;
-    color: rgba(255, 255, 253, .6);
+    color: rgba(255, 255, 253, .9);
     background: transparent;
     border: 1px solid rgba(255, 255, 253, .1);
     border-radius: 50px;
@@ -271,4 +315,148 @@ nav {
 .hero .hero-content .btn-container .btn-2:hover {
     border-color: #b324fb;
     color: #fff
+}
+
+/*===CARROSEL INFINITO===*/
+
+.carousel {
+    border-top: 1px solid rgba(180, 36, 251, .2);
+    border-bottom: 1px solid rgba(180, 36, 251, .2);
+    padding: 20px;
+    width: 100%; /* Ocupa a largura total */
+    overflow: hidden; /* Esconde o que sai da tela */
+    display: flex;
+    white-space: nowrap; /* Garante que os grupos fiquem lado a lado */
+    height: auto;
+}
+
+.group {
+    display: flex;
+    flex-shrink: 0; /* Impede que o grupo encolha */
+    gap: 80px; /* Distância entre os itens */
+    padding-right: 20px; /* Mesma medida do gap para manter o ritmo */
+    animation: scroll 20s infinite linear;
+    height: auto;
+    font-size: 14px;
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+/* Nova animação corrigida */
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+/* Pausar ao passar o mouse (opcional, mas fica elegante) */
+.carousel:hover .group {
+    animation-play-state: paused;
+}
+
+/*===SEÇÃO DE DOR===*/
+.pain-section {
+    padding: 10vh 5% 20vh;
+    background: #050505;
+}
+
+.pain-intro,
+.pain-outro {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 100px;
+
+}
+
+.pain-intro h2 {
+    font-size: 3.5rem;
+    font-family: 'Space Grotesk', sans-serif;
+    margin-top: 1rem;
+}
+
+/* Container dos Cartões */
+.cards-stack {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    /* Espaço entre os cartões antes de colarem */
+}
+
+/* O Segredo do Efeito Stacking */
+.pain-card {
+    position: sticky;
+    top: 15vh;
+    /* Onde o cartão "para" ao scrollar */
+    width: 100%;
+    max-width: 900px;
+    min-height: 300px;
+    background: #0d0d0d;
+    border: 1px solid rgba(180, 36, 251, 0.5);
+    border-radius: 24px;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: 0 -20px 40px #b324fb1f;
+    /* Sombra para dar profundidade ao sobrepor */
+}
+
+/* Diferenciação sutil de cor/elevação para cada card */
+.card-1 {
+    transform: scale(0.95);
+    background: #080808;
+}
+
+.card-2 {
+    transform: scale(0.97);
+    background: #0a0a0a;
+}
+
+.card-3 {
+    transform: scale(0.99);
+    background: #0c0c0c;
+}
+
+.card-4 {
+    transform: scale(1.00);
+    background: #0d0d0d;
+}
+
+.pain-card span {
+    font-family: "DM Serif Display", serif;
+    font-style: italic;
+    font-size: 1.5rem;
+    color: var(--p);
+    margin-bottom: 1rem;
+}
+
+.pain-card h3 {
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+    font-family: "Space Grotesk", sans-serif;
+}
+
+.pain-card p {
+    font-size: 1.1rem;
+    color: #aaa;
+    line-height: 1.6;
+}
+
+.pain-outro {
+    margin-top: 150px;
+}
+
+.pain-outro h2 {
+    font-size: 3rem;
+    color: var(--w);
+}
+
+.pain-outro h3 {
+    font-family: 'Manrope', serif;
+    color: var(--p);
+    font-size: 2rem;
+    margin: 20px 0;
 }
