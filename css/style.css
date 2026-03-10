@@ -2210,7 +2210,7 @@ body.spotlight-active .spotlight-overlay {
 /* ── WRAPPER DA SEÇÃO ─────────────────────────────────────── */
 .portfolio {
     position: relative;
-    background: var(--pf-bg);
+    background: #0C0C0C;
     padding: 110px 0 80px;
     overflow: hidden;
 }
