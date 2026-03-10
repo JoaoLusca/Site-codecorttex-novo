@@ -499,9 +499,9 @@ body.spotlight-active .spotlight-overlay {
 .sobre {
     position: relative;
     min-height: 100vh;
-    padding: 20px 0 0;
+    padding: 100px;
     overflow: hidden;
-    background: #050505; /* Mesma cor da .pain-section do seu CSS */
+    background: #0c0c0c; /* Mesma cor da .pain-section do seu CSS */
 }
 
 /* ── CONTAINER INTERNO ───────────────────────────────────────
@@ -555,10 +555,7 @@ body.spotlight-active .spotlight-overlay {
 }
 
 
-/* ── HEADLINE PRINCIPAL ──────────────────────────────────────
-   Usa Space Grotesk (já carregado no seu site).
-   O <em> herda o estilo italic roxo do seu span global,
-   mas usamos classe própria para não depender disso.        */
+/* ── HEADLINE PRINCIPAL ──────────────────────────────────────*/
 .sb-headline-wrap {
     margin-bottom: 100px;
 }
@@ -927,3 +924,782 @@ body.spotlight-active .spotlight-overlay {
         margin-bottom: 60px;
     }
 }
+
+/*SEÇÃO SERVIÇOS*/
+
+
+/* ── WRAPPER DA SEÇÃO ────────────────────────────────────────
+   overflow:hidden para bolhas não escaparem lateralmente.   */
+.servicos {
+    position: relative;
+    background: #050505;
+    padding: 120px 0 140px;
+    overflow: hidden;
+}
+
+
+/* ── CONTAINER ───────────────────────────────────────────────
+   pointer-events:none faz cliques passarem para o canvas
+   nas áreas sem conteúdo, mantendo as bolhas clicáveis.    */
+.sv-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 48px;
+    position: relative;
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* Restaura interatividade nos elementos funcionais */
+.sv-container a,
+.sv-container button,
+.sv-container .sv-card {
+    pointer-events: auto;
+}
+
+
+/* ── CABEÇALHO ───────────────────────────────────────────────
+   Entra com fade + slide ao carregar a página.              */
+.sv-header {
+    margin-bottom: 72px;
+    animation: svFadeUp 0.9s ease 0.1s both;
+}
+
+@keyframes svFadeUp {
+    from { opacity: 0; transform: translateY(32px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Label "O QUE FAZEMOS" */
+.sv-label {
+    font-family: 'Manrope', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    color: #B424FB;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+/* Linha decorativa após o label */
+.sv-label::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 1px;
+    background: #B424FB;
+    opacity: 0.5;
+}
+
+/* Headline principal */
+.sv-headline {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(32px, 4.5vw, 60px);
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.1;
+    margin-bottom: 16px;
+}
+
+/* Parte itálica da headline */
+.sv-headline-em {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-weight: 400;
+    color: #B424FB;
+}
+
+/* Subtítulo */
+.sv-subline {
+    font-family: 'Manrope', sans-serif;
+    font-size: 16px;
+    font-weight: 300;
+    color: rgba(255, 255, 253, 0.5);
+    max-width: 480px;
+    padding-bottom: 32px ;
+}
+
+/* Hint "Clique nas bolhas" — some após 5.5s */
+.sv-hint {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 18px;
+    font-family: 'Manrope', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(180, 36, 251, 0.45);
+    pointer-events: none;
+    animation: svFadeUp 0.9s ease 0.6s both, svHintOut 0.8s ease 5.5s forwards;
+}
+
+/* Ponto piscante dentro do hint */
+.sv-hint-dot {
+    width: 6px;
+    height: 6px;
+    background: rgba(180, 36, 251, 0.5);
+    border-radius: 50%;
+    flex-shrink: 0;
+    /* Reutiliza o @keyframes "blink" que já existe no seu style.css */
+    animation: blink 1.5s ease-in-out infinite;
+}
+
+@keyframes svHintOut {
+    to { opacity: 0; }
+}
+
+
+/* ── GRID DE CARDS ───────────────────────────────────────────
+   3 colunas desktop, adaptável.                            */
+.sv-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+
+/* ── CARD INDIVIDUAL ─────────────────────────────────────────
+   Entrada escalonada via animation-delay nos nth-child.    */
+.sv-card {
+    background: #0d0d14;
+    border: 1px solid rgba(180, 36, 251, 0.18);
+    border-radius: 20px;
+    padding: 40px 36px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    cursor: default;
+    animation: svFadeUp 0.8s ease both;
+    transition: border-color 0.4s ease, box-shadow 0.4s ease;
+}
+.sv-card:nth-child(1) { animation-delay: 0.25s; }
+.sv-card:nth-child(2) { animation-delay: 0.42s; }
+.sv-card:nth-child(3) { animation-delay: 0.59s; }
+
+/* Hover: borda mais brilhante + sombra */
+.sv-card:hover {
+    border-color: rgba(180, 36, 251, 0.45);
+    box-shadow: 0 0 40px rgba(180, 36, 251, 0.08),
+                0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+/* Gradiente de canto no hover */
+.sv-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle at top left,
+        rgba(180, 36, 251, 0.07) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+}
+.sv-card:hover::before { opacity: 1; }
+
+/* Linha roxa no topo do card no hover */
+.sv-card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 0; height: 2px;
+    background: linear-gradient(90deg, #B424FB, transparent);
+    transition: width 0.6s ease;
+}
+.sv-card:hover::after { width: 60%; }
+
+
+/* ── ÍCONE DO CARD ───────────────────────────────────────── */
+.sv-card-icon {
+    width: 52px;
+    height: 52px;
+    background: rgba(180, 36, 251, 0.12);
+    border: 1px solid rgba(180, 36, 251, 0.2);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 28px;
+    flex-shrink: 0;
+    transition: background 0.3s ease, border-color 0.3s ease;
+}
+.sv-card:hover .sv-card-icon {
+    background: rgba(180, 36, 251, 0.2);
+    border-color: rgba(180, 36, 251, 0.4);
+}
+.sv-card-icon svg {
+    width: 22px; height: 22px;
+    stroke: #B424FB; fill: none;
+    stroke-width: 1.5;
+    stroke-linecap: round; stroke-linejoin: round;
+}
+
+
+/* ── TEXTOS DO CARD ──────────────────────────────────────── */
+
+/* Título do serviço */
+.sv-card-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 14px;
+    line-height: 1.2;
+}
+
+/* Descrição */
+.sv-card-desc {
+    font-family: 'Manrope', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    color: rgba(255, 255, 253, 0.55);
+    line-height: 1.75;
+    margin-bottom: 20px;
+    flex: 1; /* Empurra quote, tags e botão para baixo */
+}
+
+/* Frase de impacto em itálico */
+.sv-card-quote {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: rgba(180, 36, 251, 0.7);
+    line-height: 1.5;
+    margin-bottom: 24px;
+    padding-left: 12px;
+    border-left: 2px solid rgba(180, 36, 251, 0.3);
+}
+
+/* Container de tags */
+.sv-card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 32px;
+}
+
+/* Badge de tecnologia */
+.sv-tag {
+    font-family: 'Manrope', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(180, 36, 251, 0.8);
+    background: rgba(180, 36, 251, 0.07);
+    border: 1px solid rgba(180, 36, 251, 0.18);
+    border-radius: 50px;
+    padding: 4px 12px;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+.sv-card:hover .sv-tag {
+    background: rgba(180, 36, 251, 0.13);
+    color: #B424FB;
+}
+
+/* Botão "Saiba mais" */
+.sv-card-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Manrope', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: rgba(255, 255, 255, 0.7);
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 50px;
+    padding: 12px 24px;
+    text-decoration: none;
+    cursor: none; /* Mantém cursor customizado do site */
+    transition: color 0.3s ease, border-color 0.3s ease,
+                background 0.3s ease, box-shadow 0.3s ease,
+                transform 0.2s ease;
+    align-self: flex-start;
+    margin-top: auto;
+}
+.sv-card-btn-arrow {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+.sv-card-btn:hover {
+    color: #fff;
+    border-color: #B424FB;
+    background: rgba(180, 36, 251, 0.12);
+    box-shadow: 0 0 20px rgba(180, 36, 251, 0.15);
+    transform: translateY(-2px);
+}
+.sv-card-btn:hover .sv-card-btn-arrow {
+    transform: translateX(4px);
+}
+
+
+/* ── RESPONSIVO TABLET (≤ 1024px) ───────────────────────── */
+@media (max-width: 1024px) {
+    .sv-cards-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+    .sv-card:nth-child(3) {
+        grid-column: 1 / -1;
+        max-width: 600px;
+        margin: 0 auto;
+        width: 100%;
+    }
+}
+
+/* ── RESPONSIVO MOBILE (≤ 768px) ────────────────────────── */
+@media (max-width: 768px) {
+    .servicos { padding: 80px 0 100px; }
+    .sv-container { padding: 0 24px; }
+    .sv-cards-grid { grid-template-columns: 1fr; gap: 16px; }
+    .sv-card:nth-child(3) { grid-column: auto; max-width: none; }
+    .sv-card { padding: 32px 28px; }
+}
+
+/* ============================================================
+   SEÇÃO MÉTODO
+   Layout: 100vh, sem scroll, dois painéis lado a lado.
+   ============================================================ */
+.metodo {
+    width: 100%;
+    height: 90vh;
+    display: grid;
+    /* Roda centralizada (42%), gap explícito, conteúdo (55%) */
+    grid-template-columns: 42% 58%;
+    column-gap: 0; /* gap controlado pelo padding do painel direito */
+    position: relative;
+    overflow: hidden;
+    background: #070709;
+}
+
+/* Linha decorativa no topo */
+.metodo::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent 0%, rgba(180,36,251,0.4) 40%, transparent 100%);
+    z-index: 10;
+    pointer-events: none;
+}
+
+/* ============================================================
+   PAINEL ESQUERDO — RODA
+   A roda é maior que o container e fica parcialmente cortada
+   pela borda esquerda, exatamente como no vídeo de referência.
+   ============================================================ */
+.mt-wheel-panel {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centralizado horizontalmente */
+    padding-bottom: 70px;    /* Empurra levemente para cima */
+    padding-left: 100px;
+    overflow: hidden;
+}
+
+/* Container SVG centralizado */
+.mt-wheel-container {
+    position: relative;
+    width: clamp(300px, 38vw, 460px);
+    height: clamp(300px, 38vw, 460px);
+    flex-shrink: 0;
+    /* Sem margin-left negativo — roda fica totalmente visível e centrada */
+}
+
+/* O SVG da roda */
+.mt-wheel-svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible; /* Permite que o arco ativo "saia" */
+}
+
+/* ── Arcos (fatias da roda) ── */
+
+/*
+  Cada arco é um <path> SVG.
+  Estado padrão: dentro da roda, tom escuro.
+  Estado ativo: o arco se desloca para fora (translate radial)
+               e acende com roxo brilhante.
+  A animação é feita com CSS transition + transform no SVG.
+*/
+
+/* Grupo de cada arco — recebe a classe mt-arc-active via JS */
+.mt-arc-group {
+    cursor: pointer;
+    transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-origin: center center; /* Sobreescrito por JS para cada arco */
+}
+
+/* O path do arco em si */
+.mt-arc-path {
+    transition: fill 0.4s ease, opacity 0.4s ease, filter 0.4s ease;
+    fill: #1a0a2e;
+    opacity: 0.5;
+}
+
+/* Arco ativo: brilha e se desloca para fora */
+.mt-arc-group.mt-arc-active .mt-arc-path {
+    fill: url(#mtArcGrad);
+    opacity: 1;
+    filter: drop-shadow(0 0 16px rgba(180,36,251,0.8));
+}
+
+/* Número dentro do arco */
+.mt-arc-num {
+    font-family: 'Manrope', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    fill: rgba(255,255,255,0.25);
+    pointer-events: none;
+    transition: fill 0.4s ease;
+}
+.mt-arc-group.mt-arc-active .mt-arc-num {
+    fill: rgba(255,255,255,0.9);
+}
+
+/* Círculos concêntricos decorativos (não interativos) */
+.mt-ring {
+    fill: none;
+    pointer-events: none;
+}
+
+/* Círculo central */
+.mt-center-circle {
+    fill: #0e0b1a;
+    stroke: rgba(180,36,251,0.25);
+    stroke-width: 1.5;
+    pointer-events: none;
+}
+.mt-center-ring-inner {
+    fill: none;
+    stroke: rgba(180,36,251,0.08);
+    stroke-width: 1;
+    pointer-events: none;
+}
+
+/* Logo / ícone no centro da roda */
+.mt-wheel-logo {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 22%;
+    aspect-ratio: 1;
+}
+
+/*
+  Ícones SVG do centro da roda.
+  Cada .mt-center-icon corresponde a uma etapa (data-mt-icon="0"...).
+  Apenas o ícone da etapa ativa fica visível.
+*/
+.mt-center-icon {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%) scale(0.7);
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+    /* Tamanho do ícone: proporcional ao raio central da roda */
+    width: clamp(28px, 3.8vw, 48px);
+    height: clamp(28px, 3.8vw, 48px);
+}
+
+/* Ícone ativo: visível e no tamanho normal */
+.mt-center-icon.mt-icon-active {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* Ícone saindo: encolhe e some */
+.mt-center-icon.mt-icon-exit {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.6);
+}
+
+/* Stroke dos ícones — roxo suave com brilho */
+.mt-center-icon svg {
+    width: 100%;
+    height: 100%;
+    stroke: #d068ff;
+    fill: none;
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    filter: drop-shadow(0 0 6px rgba(180,36,251,0.6));
+}
+
+
+/* ============================================================
+   PAINEL DIREITO — CONTEÚDO
+   ============================================================ */
+.mt-content-panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* padding-left maior = mais distância da roda centralizada */
+    padding: 40px 60px 40px 56px;
+    position: relative;
+    z-index: 2;
+}
+
+/* ── Cabeçalho do painel direito ── */
+.mt-content-header {
+    margin-bottom: 28px; /* Era 40px */
+}
+
+/* Label "05 — Processo" */
+.mt-label {
+    font-family: 'Manrope', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: #B424FB;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.mt-label.mt-visible { opacity: 1; transform: translateY(0); }
+.mt-label::after {
+    content: '';
+    display: block;
+    width: 40px; height: 1px;
+    background: #B424FB;
+    opacity: 0.5;
+}
+
+/* Título grande */
+.mt-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(26px, 3vw, 48px);
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.1;
+    margin-bottom: 10px;
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.7s ease 0.1s, transform 0.7s ease 0.1s;
+}
+.mt-title.mt-visible { opacity: 1; transform: translateY(0); }
+
+.mt-title-em {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-weight: 400;
+    color: #B424FB;
+}
+
+/* Subtítulo */
+.mt-subtitle {
+    font-family: 'Manrope', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.4);
+    line-height: 1.6;
+    max-width: 420px;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.7s ease 0.2s, transform 0.7s ease 0.2s;
+}
+.mt-subtitle.mt-visible { opacity: 1; transform: translateY(0); }
+
+
+/* ── TABS de navegação ── */
+/*
+  Barra de tabs com o nome de cada etapa.
+  A tab ativa tem linha roxa embaixo (idêntico ao vídeo).
+  Clicar numa tab muda a etapa (sincronizado com a roda).
+*/
+.mt-tabs {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    margin-bottom: 24px;
+    flex-shrink: 0;
+}
+
+.mt-tab {
+    font-family: 'Manrope', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.28);
+    padding: 10px 22px 12px;
+    background: none;
+    border: none;
+    position: relative;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    white-space: nowrap;
+}
+.mt-tab:hover { color: rgba(255,255,255,0.6); }
+.mt-tab::after {
+    content: '';
+    position: absolute;
+    bottom: -1px; left: 0; right: 0;
+    height: 2px;
+    background: #B424FB;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
+}
+.mt-tab.mt-tab-active {
+    color: #fff;
+}
+.mt-tab.mt-tab-active::after {
+    transform: scaleX(1);
+}
+
+
+/* ── PAINÉIS DE CARDS ── */
+/*
+  Container relativo com altura fixa.
+  Cada painel fica absolute e transiciona com fade+slide.
+*/
+.mt-panels-wrap {
+    position: relative;
+    flex: 1;
+    min-height: 0;
+    max-height: 350px;
+}
+
+.mt-panel {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow: hidden;
+
+    /* Invisível por padrão */
+    opacity: 0;
+    transform: translateY(14px);
+    pointer-events: none;
+    transition: opacity 0.45s ease, transform 0.45s ease;
+}
+
+.mt-panel.mt-panel-active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+    /* Precisa de position: relative para sair do absolute e ter altura */
+    position: relative;
+}
+
+.mt-panel.mt-panel-exit {
+    opacity: 0;
+    transform: translateY(-14px);
+    pointer-events: none;
+}
+
+
+/* ── Cards de conteúdo ── */
+/*
+  Cada card: borda sutil, background levemente diferente do fundo.
+  Hover: borda roxa acende.
+  Idêntico ao estilo do vídeo de referência.
+*/
+.mt-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 10px;
+    padding: 18px 22px;
+    flex-shrink: 0;
+    transition: border-color 0.3s ease, background 0.3s ease;
+}
+.mt-card:hover {
+    border-color: rgba(180,36,251,0.35);
+    background: rgba(180,36,251,0.04);
+}
+
+.mt-card-title {
+    font-family: 'Manrope', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #fff;
+    margin-bottom: 7px;
+}
+
+.mt-card-desc {
+    font-family: 'Manrope', sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.48);
+    line-height: 1.65;
+}
+
+
+/* ── Rodapé do painel direito ── */
+.mt-content-footer {
+    margin-top: 10px;   /* Era 20px — mais próximo dos cards */
+    padding-top: 12px;  /* Era 18px */
+    border-top: 1px solid rgba(255,255,255,0.05);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-shrink: 0;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.7s ease 0.3s, transform 0.7s ease 0.3s;
+}
+.mt-content-footer.mt-visible { opacity: 1; transform: translateY(0); }
+
+.mt-footer-text {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-size: clamp(15px, 1.5vw, 20px);
+    color: rgba(255,255,255,0.55);
+    line-height: 1.35;
+}
+.mt-footer-text strong {
+    color: #B424FB;
+    font-weight: 400;
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+}
+
+.mt-footer-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Manrope', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: #fff;
+    background: #B424FB;
+    border: none;
+    border-radius: 50px;
+    padding: 12px 28px;
+    text-decoration: none;
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: box-shadow 0.3s, transform 0.2s;
+}
+.mt-footer-btn:hover {
+    box-shadow: 0 0 28px rgba(180,36,251,0.7);
+    transform: translateY(-2px);
+}
+.mt-footer-btn-arrow { transition: transform 0.3s; }
+.mt-footer-btn:hover .mt-footer-btn-arrow { transform: translateX(3px); }
