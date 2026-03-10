@@ -2188,3 +2188,425 @@ body.spotlight-active .spotlight-overlay {
     .dp-slide:not(.dp-slide-active) { opacity: 0.18; filter: blur(2.5px); }
     .dp-track { padding: 12px 40px; }
 }
+
+/* ==========================
+        Seção de cases
+   ========================== */
+
+/* ── VARIÁVEIS ───────────────────────────────────────────────
+   Centralize aqui todos os valores que podem mudar.
+   Para trocar a cor principal: altere apenas --pf-accent.
+   ─────────────────────────────────────────────────────────── */
+:root {
+    --pf-accent:      #B424FB;
+    --pf-accent-dim:  rgba(180, 36, 251, 0.18);
+    --pf-bg:          #070709;
+    --pf-text:        rgba(255, 255, 253, 0.85);
+    --pf-muted:       rgba(255, 255, 253, 0.32);
+    --pf-ease:        cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+
+/* ── WRAPPER DA SEÇÃO ─────────────────────────────────────── */
+.portfolio {
+    position: relative;
+    background: var(--pf-bg);
+    padding: 110px 0 80px;
+    overflow: hidden;
+}
+
+/* Linha separadora superior — padrão do site */
+.portfolio::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg,
+        transparent, rgba(180,36,251,0.35), transparent);
+    pointer-events: none;
+    z-index: 1;
+}
+
+
+/* ── CABEÇALHO ───────────────────────────────────────────── */
+.pf-header {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 48px 52px;
+}
+
+/* Label "PORTFÓLIO ——" */
+.pf-label {
+    font-size: 10px; font-weight: 600;
+    letter-spacing: 0.38em; text-transform: uppercase;
+    color: var(--pf-accent);
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 16px;
+    /* Reveal: começa deslocado, sobe ao ficar visível */
+    opacity: 0; transform: translateY(14px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.pf-label.pf-visible { opacity: 1; transform: translateY(0); }
+.pf-label::after { /* Traço decorativo */
+    content: ''; width: 36px; height: 1px;
+    background: var(--pf-accent); opacity: 0.5;
+}
+
+/* Título */
+.pf-title {
+    font-size: clamp(30px, 4vw, 54px); font-weight: 800;
+    color: #fff; line-height: 1.08; letter-spacing: -0.025em;
+    margin-bottom: 16px;
+    opacity: 0; transform: translateY(18px);
+    transition: opacity 0.8s ease 0.08s, transform 0.8s ease 0.08s;
+}
+.pf-title.pf-visible { opacity: 1; transform: translateY(0); }
+
+/* Parte em itálico serif */
+.pf-title-em {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic; font-weight: 400;
+    color: var(--pf-accent);
+}
+
+/* Subtítulo */
+.pf-subtitle {
+    font-size: 14px; font-weight: 300;
+    color: var(--pf-muted); line-height: 1.75;
+    max-width: 500px;
+    opacity: 0; transform: translateY(14px);
+    transition: opacity 0.7s ease 0.16s, transform 0.7s ease 0.16s;
+}
+.pf-subtitle.pf-visible { opacity: 1; transform: translateY(0); }
+
+
+/* ── GRID DE CARDS ───────────────────────────────────────── */
+.pf-grid {
+    max-width: 1200px; margin: 0 auto;
+    padding: 0 48px;
+    display: grid;
+    grid-template-columns: 1.55fr 1fr; /* ~60% / ~40% */
+    grid-template-rows: 310px;
+    gap: 14px;
+}
+
+/* Linha 2 — ocupa as 2 colunas e divide em 3 iguais */
+.pf-row2 {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    height: 252px;
+}
+
+
+/* ── CARD BASE ───────────────────────────────────────────── */
+.pf-card {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    /* Reveal: começa deslocado */
+    opacity: 0; transform: translateY(28px);
+    transition: opacity 0.75s var(--pf-ease), transform 0.75s var(--pf-ease);
+}
+.pf-card.pf-visible { opacity: 1; transform: translateY(0); }
+
+
+/* ── FUNDO DE GRADIENTE ──────────────────────────────────── */
+/*
+  A transform usa variáveis CSS injetadas pelo JS no hover.
+  --pf-rx e --pf-ry: deslocamento do paralaxe em px.
+  O scale(1.1) garante que não hajam bordas brancas ao mover.
+*/
+.pf-card-bg {
+    position: absolute; inset: 0; z-index: 0;
+    transform: scale(1.1) translate(var(--pf-rx, 0px), var(--pf-ry, 0px));
+    transition: transform 0.9s var(--pf-ease);
+    will-change: transform;
+}
+/* Variante A — roxo quente (cards 1, 3, 5) */
+.pf-bg-a {
+    background:
+        radial-gradient(ellipse 80% 70% at 25% 20%, rgba(130,20,210,0.7) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 80% at 75% 85%, rgba(55,5,120,0.65) 0%, transparent 58%),
+        linear-gradient(145deg, #0f0822 0%, #1c0a38 50%, #0a0515 100%);
+}
+/* Variante B — índigo frio (cards 2, 4) */
+.pf-bg-b {
+    background:
+        radial-gradient(ellipse 70% 65% at 70% 25%, rgba(85,15,185,0.6) 0%, transparent 58%),
+        radial-gradient(ellipse 80% 55% at 20% 75%, rgba(150,30,230,0.55) 0%, transparent 62%),
+        linear-gradient(155deg, #0d0723 0%, #160c30 55%, #080514 100%);
+}
+
+/* Borda do card — via ::after para ficar sempre acima de tudo */
+.pf-card::after {
+    content: '';
+    position: absolute; inset: 0;
+    border-radius: 16px;
+    border: 1px solid rgba(180,36,251,0.15);
+    z-index: 10;
+    pointer-events: none;
+    transition: border-color 0.4s ease;
+}
+/* Borda mais intensa ao hover (somente cards reais) */
+.pf-card:not(.pf-card-soon):hover::after {
+    border-color: rgba(180,36,251,0.42);
+}
+
+
+/* ── HOVER — CAMADAS EMPILHADAS ──────────────────────────── */
+/*
+  Os cards com projeto real têm 4 camadas sobrepostas que
+  reagem ao hover de formas complementares:
+
+    z-index 0 → .pf-card-bg    (gradiente / paralaxe)
+    z-index 1 → .pf-card-img   (screenshot / foto do projeto)
+    z-index 2 → .pf-card-overlay (escurece no hover)
+    z-index 3 → .pf-card-glow  (inner shadow roxo)
+    z-index 5 → .pf-card-info  (texto que sobe)
+    z-index 10→ ::after         (borda — sempre no topo)
+*/
+
+/* Cursor none — o cursor customizado substitui o padrão */
+.pf-card:not(.pf-card-soon) { cursor: none; }
+
+/* CAMADA 1 — Imagem do projeto */
+.pf-card-img {
+    position: absolute; inset: 0; z-index: 1; overflow: hidden;
+}
+.pf-card-img img {
+    width: 100%; height: 100%; object-fit: cover;
+    opacity: 0.55;  /* Normal: semi-transparente sobre o gradiente */
+    transform: scale(1.0);
+    transition: opacity 0.7s var(--pf-ease), transform 0.9s var(--pf-ease);
+}
+.pf-card:hover .pf-card-img img {
+    opacity: 0.35;      /* Hover: mais escuro para contraste com texto */
+    transform: scale(1.07); /* Zoom suave — sensação de profundidade */
+}
+/* Gradiente sobre a imagem: garante legibilidade do texto no rodapé */
+.pf-card-img::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(to bottom,
+        rgba(8,3,18,0.2) 0%,
+        rgba(8,3,18,0.75) 55%,
+        rgba(8,3,18,0.97) 100%);
+    z-index: 1;
+}
+
+/* CAMADA 2 — Overlay escuro (reforça contraste no hover) */
+.pf-card-overlay {
+    position: absolute; inset: 0; z-index: 2;
+    background: rgba(4, 1, 12, 0.5);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+}
+.pf-card:hover .pf-card-overlay { opacity: 1; }
+
+/* CAMADA 3 — Glow interno roxo (inner shadow no hover) */
+.pf-card-glow {
+    position: absolute; inset: 0; z-index: 3;
+    border-radius: 16px;
+    box-shadow: inset 0 0 0px rgba(180,36,251,0);
+    pointer-events: none;
+    transition: box-shadow 0.6s ease;
+}
+.pf-card:hover .pf-card-glow {
+    box-shadow: inset 0 0 70px rgba(180,36,251,0.13);
+}
+
+/* CAMADA 5 — Conteúdo: tag, título, cliente, resultado */
+.pf-card-info {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    z-index: 5;
+    padding: 24px 24px 22px;
+    transform: translateY(0);
+    transition: transform 0.55s var(--pf-ease);
+}
+.pf-card:hover .pf-card-info {
+    transform: translateY(-8px); /* Sobe levemente no hover */
+}
+
+/* Tag de categoria — "LANDING PAGE", "BRANDING", etc. */
+.pf-tag {
+    display: block;
+    font-size: 9px; font-weight: 700;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--pf-accent); margin-bottom: 7px;
+    /* Aparece no hover com delay pequeno */
+    opacity: 0; transform: translateY(8px);
+    transition: opacity 0.4s ease 0.05s, transform 0.4s ease 0.05s;
+}
+.pf-card:hover .pf-tag { opacity: 1; transform: translateY(0); }
+
+/* Título do projeto — visível sempre, mais brilhante no hover */
+.pf-card-title {
+    font-size: clamp(15px, 1.7vw, 21px); font-weight: 800;
+    color: #fff; line-height: 1.2; margin-bottom: 5px;
+    opacity: 0.88;
+    transition: opacity 0.4s ease;
+}
+.pf-card:hover .pf-card-title { opacity: 1; }
+
+/* Cliente / segmento — sempre visível, mais claro no hover */
+.pf-card-client {
+    font-size: 12px; font-weight: 400;
+    color: rgba(255,255,253,0.4); margin-bottom: 14px;
+    transition: color 0.4s ease;
+}
+.pf-card:hover .pf-card-client { color: rgba(255,255,253,0.62); }
+
+/* Badge de resultado — surge no hover com delay
+   Ex: "+40% de leads em 30 dias"
+   A seta ↑ é via ::before (sem HTML extra necessário) */
+.pf-result {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 11px; font-weight: 600; letter-spacing: 0.04em;
+    color: rgba(180,36,251,0.95);
+    background: rgba(180,36,251,0.1);
+    border: 1px solid rgba(180,36,251,0.25);
+    border-radius: 50px; padding: 5px 13px 5px 10px;
+    /* Oculto inicialmente */
+    opacity: 0; transform: translateY(10px);
+    transition: opacity 0.4s ease 0.12s, transform 0.4s ease 0.12s;
+}
+.pf-card:hover .pf-result { opacity: 1; transform: translateY(0); }
+.pf-result::before { content: '↑'; font-size: 12px; color: var(--pf-accent); }
+
+
+/* ── ESTADO "EM BREVE" ───────────────────────────────────── */
+/* Cards placeholder: fundo roxo + animação + sem hover */
+.pf-card-soon { cursor: default; }
+
+/* Container centralizado do indicador */
+.pf-soon-indicator {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    display: flex; flex-direction: column;
+    align-items: center; gap: 10px;
+    pointer-events: none; user-select: none;
+}
+
+/* Círculo pulsante */
+.pf-soon-dot {
+    width: 38px; height: 38px; border-radius: 50%;
+    border: 1.5px solid rgba(180,36,251,0.25);
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+}
+.pf-soon-dot::before { /* Ponto central que pulsa */
+    content: ''; width: 7px; height: 7px; border-radius: 50%;
+    background: rgba(180,36,251,0.65);
+    animation: pfDotPulse 2.6s ease-in-out infinite;
+}
+.pf-soon-dot::after { /* Anel que se expande e some */
+    content: ''; position: absolute; inset: -7px;
+    border-radius: 50%;
+    border: 1px solid rgba(180,36,251,0.14);
+    animation: pfRingExpand 2.6s ease-in-out infinite;
+}
+@keyframes pfDotPulse {
+    0%,100% { opacity: 0.5; transform: scale(1);    }
+    50%      { opacity: 1;   transform: scale(1.25); }
+}
+@keyframes pfRingExpand {
+    0%   { transform: scale(0.75); opacity: 0.35; }
+    50%  { transform: scale(1.3);  opacity: 0;    }
+    100% { transform: scale(0.75); opacity: 0.35; }
+}
+
+.pf-soon-label { /* "Em breve" */
+    font-family: 'DM Serif Display', serif;
+    font-style: italic; font-size: 15px;
+    color: rgba(255,255,255,0.2); letter-spacing: 0.04em;
+}
+.pf-soon-cat { /* Categoria: "Tráfego Pago", etc. */
+    font-size: 10px; font-weight: 500;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: rgba(255,255,255,0.1);
+}
+
+
+/* ── CURSOR CUSTOMIZADO "Ver →" ──────────────────────────── */
+/*
+  Singleton: um único elemento na página movido pelo JS.
+  position: fixed para acompanhar o scroll.
+  O CSS só gerencia aparição/sumiço via escala.
+  A posição (left/top) é controlada diretamente pelo JS.
+*/
+.pf-cursor {
+    position: fixed; z-index: 9999; pointer-events: none;
+    top: 0; left: 0;
+    width: 76px; height: 76px; border-radius: 50%;
+    background: var(--pf-accent);
+    display: flex; align-items: center; justify-content: center;
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+    will-change: transform, left, top;
+    transition: transform 0.35s var(--pf-ease), opacity 0.35s ease;
+}
+.pf-cursor.pf-cursor-on {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+}
+.pf-cursor span {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 0.04em; color: #fff;
+    white-space: nowrap; pointer-events: none;
+}
+
+
+/* ── RODAPÉ DA SEÇÃO ─────────────────────────────────────── */
+.pf-footer {
+    max-width: 1200px; margin: 0 auto;
+    padding: 30px 48px 0;
+    display: flex; align-items: center; gap: 24px;
+    opacity: 0; transform: translateY(14px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.pf-footer.pf-visible { opacity: 1; transform: translateY(0); }
+
+/* Botão "Ver portfólio completo →" */
+.pf-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 13px; font-weight: 600;
+    color: var(--pf-accent); background: transparent;
+    border: 1px solid rgba(180,36,251,0.32); border-radius: 50px;
+    padding: 12px 26px; text-decoration: none; cursor: pointer;
+    transition: background 0.3s, border-color 0.3s, color 0.3s, transform 0.25s;
+}
+.pf-btn:hover {
+    background: rgba(180,36,251,0.1);
+    border-color: rgba(180,36,251,0.6);
+    color: #fff; transform: translateX(3px);
+}
+.pf-btn-arrow { display: inline-block; transition: transform 0.3s; }
+.pf-btn:hover .pf-btn-arrow { transform: translateX(4px); }
+
+/* Nota temporária */
+.pf-footer-note {
+    font-size: 11px; color: rgba(255,255,253,0.18);
+}
+
+
+/* ── RESPONSIVO ──────────────────────────────────────────── */
+@media (max-width: 1024px) {
+    .pf-grid, .pf-header, .pf-footer { padding-left: 32px; padding-right: 32px; }
+    .pf-row2 { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+    .portfolio { padding: 72px 0 60px; }
+    .pf-grid { grid-template-columns: 1fr; grid-template-rows: auto; padding: 0 20px; }
+    .pf-grid > .pf-card { height: 230px; }
+    .pf-row2 { grid-template-columns: 1fr; height: auto; }
+    .pf-row2 .pf-card { height: 190px; }
+    .pf-header { padding: 0 20px 36px; }
+    .pf-footer { padding: 24px 20px 0; flex-wrap: wrap; }
+    .pf-cursor { display: none; } /* Sem cursor em touch */
+    /* Em mobile (sem hover), mostra a tag e resultado sempre */
+    .pf-tag, .pf-result { opacity: 1; transform: translateY(0); }
+}

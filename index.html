@@ -807,6 +807,137 @@
 
     </section>
 
+    <!-- ============================================================
+         Seção de depoimentos
+         ============================================================ -->
+    
+<!-- Cursor personalizado (singleton — único na página) -->
+<div class="pf-cursor" id="pfCursor" aria-hidden="true">
+    <span>Ver →</span>
+</div>
+
+
+<!-- ============================================================
+     SEÇÃO PORTFÓLIO — Code Corttex
+
+     PARA ATIVAR UM CASE REAL (remova pf-card-soon do card):
+     ──────────────────────────────────────────────────────── -->
+     <div class="pf-card" data-pf-reveal data-pf-delay="100">
+         <div class="pf-card-bg pf-bg-a"></div>
+
+         <!-- Imagem do projeto -->
+         <div class="pf-card-img">
+             <img src="preview.jpg" alt="Nome do Projeto">
+         </div>
+
+         <!-- Overlay escuro que reforça o contraste no hover -->
+         <div class="pf-card-overlay"></div>
+
+         <!-- Inner glow roxo no hover -->
+         <div class="pf-card-glow"></div>
+
+         <!-- Texto: tag + título + cliente + resultado -->
+         <div class="pf-card-info">
+             <span class="pf-tag">Landing Page</span>
+             <h3 class="pf-card-title">Nome do Projeto</h3>
+             <p class="pf-card-client">Cliente — Segmento</p>
+             <span class="pf-result">+40% de leads em 30 dias</span>
+         </div>
+     </div>
+
+<section class="portfolio" id="portfolio">
+
+    <!-- CABEÇALHO ─────────────────────────────────────────── -->
+    <div class="pf-header">
+        <div class="pf-label"    data-pf-reveal data-pf-delay="0">Portfólio</div>
+        <h2  class="pf-title"    data-pf-reveal data-pf-delay="80">
+            Projetos que <em class="pf-title-em">fizeram diferença</em>
+        </h2>
+        <p   class="pf-subtitle" data-pf-reveal data-pf-delay="160">
+            Cada projeto aqui tem uma história. Uma empresa que queria
+            crescer, um profissional que queria ser levado a sério, um
+            produto que precisava ser encontrado. Confira o que
+            construímos juntos.
+        </p>
+    </div>
+
+    <!-- GRID ──────────────────────────────────────────────── -->
+    <div class="pf-grid">
+
+        <!-- Card 1 — Hero wide (linha 1, ~60%)
+             Futuro: primeiro case real da Code Corttex -->
+        <div class="pf-card pf-card-soon" data-pf-reveal data-pf-delay="100">
+            <div class="pf-card-bg pf-bg-a"></div>
+            <div class="pf-soon-indicator">
+                <div class="pf-soon-dot"></div>
+                <span class="pf-soon-label">Em breve</span>
+                <span class="pf-soon-cat">portfólio sendo atualizado</span>
+            </div>
+        </div>
+
+        <!-- Card 2 — Tall lateral (linha 1, ~40%)
+             Futuro: case de Branding / Identidade Visual -->
+        <div class="pf-card pf-card-soon" data-pf-reveal data-pf-delay="170">
+            <div class="pf-card-bg pf-bg-b"></div>
+            <div class="pf-soon-indicator">
+                <div class="pf-soon-dot"></div>
+                <span class="pf-soon-label">Em breve</span>
+                <span class="pf-soon-cat">Branding</span>
+            </div>
+        </div>
+
+        <!-- Linha 2 — 3 cards menores ──────────────────────── -->
+        <div class="pf-row2">
+
+            <!-- Card 3 — Tráfego Pago -->
+            <div class="pf-card pf-card-soon" data-pf-reveal data-pf-delay="220">
+                <div class="pf-card-bg pf-bg-a"></div>
+                <div class="pf-soon-indicator">
+                    <div class="pf-soon-dot"></div>
+                    <span class="pf-soon-label">Em breve</span>
+                    <span class="pf-soon-cat">Tráfego Pago</span>
+                </div>
+            </div>
+
+            <!-- Card 4 — Site Institucional -->
+            <div class="pf-card pf-card-soon" data-pf-reveal data-pf-delay="280">
+                <div class="pf-card-bg pf-bg-b"></div>
+                <div class="pf-soon-indicator">
+                    <div class="pf-soon-dot"></div>
+                    <span class="pf-soon-label">Em breve</span>
+                    <span class="pf-soon-cat">Site Institucional</span>
+                </div>
+            </div>
+
+            <!-- Card 5 — Social Media -->
+            <div class="pf-card pf-card-soon" data-pf-reveal data-pf-delay="340">
+                <div class="pf-card-bg pf-bg-a"></div>
+                <div class="pf-soon-indicator">
+                    <div class="pf-soon-dot"></div>
+                    <span class="pf-soon-label">Em breve</span>
+                    <span class="pf-soon-cat">Social Media</span>
+                </div>
+            </div>
+
+        </div>
+        <!-- /pf-row2 -->
+
+    </div>
+    <!-- /pf-grid -->
+
+    <!-- RODAPÉ ────────────────────────────────────────────── -->
+    <div class="pf-footer" data-pf-reveal data-pf-delay="380">
+        <!-- href: troque "#" pelo link da página de portfólio completo -->
+        <a href="#" class="pf-btn">
+            Ver portfólio completo <span class="pf-btn-arrow">→</span>
+        </a>
+        <!-- Remova a nota quando o portfólio estiver ativo -->
+        <span class="pf-footer-note">Em atualização — cases reais em breve</span>
+    </div>
+
+</section>
+
+
     <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@beta/bundled/locomotive-scroll.min.js"></script>
     <script>
         const scroll = new LocomotiveScroll({
@@ -819,6 +950,7 @@
     <script src="script/sobre.js"></script>
     <script src="script/roda.js"></script>
     <script src="script/quotes.js"></script>
+    <script src="script/cases.js"></script>
 </body>
 
 </html>
