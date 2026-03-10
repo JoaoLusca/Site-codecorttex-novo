@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    cursor: none;
 }
 
 /*ESTILO CURSOR*/
@@ -504,6 +505,18 @@ body.spotlight-active .spotlight-overlay {
     background: #0c0c0c; /* Mesma cor da .pain-section do seu CSS */
 }
 
+.sobre::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(180,36,251,0.35) 50%,
+        transparent 100%);
+    pointer-events: none;
+    z-index: 1;
+}
+
 /* ── CONTAINER INTERNO ───────────────────────────────────────
    Limita largura e centraliza o conteúdo.
    Prefixo "sb-" evita conflito com qualquer outro .container
@@ -699,7 +712,7 @@ body.spotlight-active .spotlight-overlay {
     padding: 28px 24px;
     position: relative;
     overflow: hidden;
-    cursor: default;
+    cursor: none;
 
     /* Estado inicial (antes do reveal) */
     opacity: 0;
@@ -937,6 +950,18 @@ body.spotlight-active .spotlight-overlay {
     overflow: hidden;
 }
 
+.servicos::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(180,36,251,0.35) 50%,
+        transparent 100%);
+    pointer-events: none;
+    z-index: 1;
+}
+
 
 /* ── CONTAINER ───────────────────────────────────────────────
    pointer-events:none faz cliques passarem para o canvas
@@ -1074,7 +1099,7 @@ body.spotlight-active .spotlight-overlay {
     flex-direction: column;
     position: relative;
     overflow: hidden;
-    cursor: default;
+    cursor: none;
     animation: svFadeUp 0.8s ease both;
     transition: border-color 0.4s ease, box-shadow 0.4s ease;
 }
@@ -1277,7 +1302,7 @@ body.spotlight-active .spotlight-overlay {
     column-gap: 0; /* gap controlado pelo padding do painel direito */
     position: relative;
     overflow: hidden;
-    background: #070709;
+    background: #0C0C0C;
 }
 
 /* Linha decorativa no topo */
@@ -1303,6 +1328,7 @@ body.spotlight-active .spotlight-overlay {
     padding-bottom: 70px;    /* Empurra levemente para cima */
     padding-left: 100px;
     overflow: hidden;
+    background-color: #0C0C0C;
 }
 
 /* Container SVG centralizado */
@@ -1333,7 +1359,7 @@ body.spotlight-active .spotlight-overlay {
 
 /* Grupo de cada arco — recebe a classe mt-arc-active via JS */
 .mt-arc-group {
-    cursor: pointer;
+    cursor: none;
     transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
     transform-origin: center center; /* Sobreescrito por JS para cada arco */
 }
@@ -1533,6 +1559,7 @@ body.spotlight-active .spotlight-overlay {
     border-bottom: 1px solid rgba(255,255,255,0.07);
     margin-bottom: 24px;
     flex-shrink: 0;
+    cursor: none;
 }
 
 .mt-tab {
@@ -1546,7 +1573,7 @@ body.spotlight-active .spotlight-overlay {
     background: none;
     border: none;
     position: relative;
-    cursor: pointer;
+    cursor: none;
     transition: color 0.3s ease;
     white-space: nowrap;
 }
@@ -1692,7 +1719,7 @@ body.spotlight-active .spotlight-overlay {
     border-radius: 50px;
     padding: 12px 28px;
     text-decoration: none;
-    cursor: pointer;
+    cursor: none;
     white-space: nowrap;
     flex-shrink: 0;
     transition: box-shadow 0.3s, transform 0.2s;
@@ -1703,3 +1730,461 @@ body.spotlight-active .spotlight-overlay {
 }
 .mt-footer-btn-arrow { transition: transform 0.3s; }
 .mt-footer-btn:hover .mt-footer-btn-arrow { transform: translateX(3px); }
+
+/* ============================================================
+   SEÇÃO DEPOIMENTOS — Code Corttex
+   ============================================================ */
+
+
+/* ── VARIÁVEIS ────────────────────────────────────────────── */
+:root {
+    --dp-accent:       #B424FB;
+    --dp-accent-soft:  rgba(180,36,251, 0.16);
+    --dp-accent-glow:  rgba(180,36,251, 0.45);
+    --dp-bg:           #050505;
+    --dp-card-bg:      rgba(15, 11, 26, 0.97);
+    --dp-card-border:  rgba(180,36,251, 0.13);
+    --dp-card-active:  rgba(180,36,251, 0.28);
+    --dp-text:         rgba(255,255,253, 0.84);
+    --dp-muted:        rgba(255,255,253, 0.35);
+    --dp-white:        #ffffff;
+    --dp-ease:         cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── WRAPPER DA SEÇÃO ─────────────────────────────────────── */
+.depoimentos {
+    position: relative;
+    background: var(--dp-bg);
+    overflow: hidden;
+    padding: 110px 0 88px;
+    width: 100%;
+}
+
+/* Linha separadora superior (padrão do site) */
+.depoimentos::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(180,36,251,0.35) 50%,
+        transparent 100%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Halo de luz de palco vindo do topo (atmosférico) */
+.dp-stage-light {
+    position: absolute;
+    top: -100px; left: 50%;
+    transform: translateX(-50%);
+    width: 800px; height: 450px;
+    background: radial-gradient(ellipse 65% 55% at 50% 0%,
+        rgba(180,36,251,0.07) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+
+/* ── GRID: SIDEBAR + CARROSSEL ────────────────────────────── */
+/*
+  Layout assimétrico — exatamente como no vídeo de referência:
+  título fixo à esquerda, carrossel ocupa o restante.
+*/
+.dp-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    align-items: center;
+    padding: 0 0 0 48px; /* Padding só na esquerda; o carrossel vai até a borda */
+}
+
+
+/* ═══════════════════════════════════════════════════════════
+   COLUNA ESQUERDA — TÍTULO FIXO
+   ═══════════════════════════════════════════════════════════ */
+.dp-sidebar {
+    display: flex;
+    flex-direction: column;
+    padding-right: 36px;
+    position: relative;
+    z-index: 3;
+}
+/* Linha vertical decorativa à esquerda */
+.dp-sidebar::before {
+    content: '';
+    position: absolute;
+    left: -24px; top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(180deg,
+        transparent 0%,
+        rgba(180,36,251,0.28) 25%,
+        rgba(180,36,251,0.28) 75%,
+        transparent 100%);
+}
+
+/* Label de seção */
+.dp-label {
+    font-family: 'Manrope', sans-serif;
+    font-size: 10px; font-weight: 600;
+    letter-spacing: 0.38em; text-transform: uppercase;
+    color: var(--dp-accent);
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 20px;
+
+    /* Reveal ao scroll */
+    opacity: 0; transform: translateX(-16px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.dp-label.dp-visible { opacity: 1; transform: translateX(0); }
+.dp-label::after {
+    content: ''; display: block;
+    width: 36px; height: 1px;
+    background: var(--dp-accent); opacity: 0.5;
+}
+
+/* Título */
+.dp-title {
+    font-family: 'Manrope', sans-serif;
+    font-size: clamp(24px, 2.6vw, 40px);
+    font-weight: 800; color: var(--dp-white);
+    line-height: 1.1; letter-spacing: -0.025em;
+    margin-bottom: 20px;
+
+    opacity: 0; transform: translateX(-20px);
+    transition: opacity 0.8s ease 0.1s, transform 0.8s ease 0.1s;
+}
+.dp-title.dp-visible { opacity: 1; transform: translateX(0); }
+
+/* Parte em serif itálico roxo */
+.dp-title-em {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic; font-weight: 400;
+    color: var(--dp-accent); display: block;
+}
+
+/* Subtexto */
+.dp-sidebar-desc {
+    font-family: 'Manrope', sans-serif;
+    font-size: 12px; font-weight: 300;
+    color: var(--dp-muted); line-height: 1.7;
+    margin-bottom: 32px; max-width: 210px;
+
+    opacity: 0; transform: translateX(-14px);
+    transition: opacity 0.7s ease 0.2s, transform 0.7s ease 0.2s;
+}
+.dp-sidebar-desc.dp-visible { opacity: 1; transform: translateX(0); }
+
+/* Contador grande "01 / 03" no sidebar */
+.dp-sidebar-counter {
+    opacity: 0;
+    transition: opacity 0.6s ease 0.3s;
+}
+.dp-sidebar-counter.dp-visible { opacity: 1; }
+
+/* Número atual — grande e robusto */
+.dp-current-num {
+    display: block;
+    font-family: 'Manrope', sans-serif;
+    font-size: 48px; font-weight: 800;
+    color: var(--dp-accent);
+    line-height: 1; letter-spacing: -0.04em;
+    margin-bottom: 2px;
+    /* Transição de entrada ao trocar slide */
+    transition: opacity 0.22s ease, transform 0.22s ease;
+}
+.dp-sidebar-total {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic; font-size: 14px;
+    color: var(--dp-muted); letter-spacing: 0.05em;
+}
+
+
+/* ═══════════════════════════════════════════════════════════
+   COLUNA DIREITA — CARROSSEL
+   ═══════════════════════════════════════════════════════════ */
+.dp-carousel-col {
+    position: relative;
+    /* Overflow hidden clipa os cards laterais — efeito do vídeo */
+    overflow: hidden;
+    padding: 28px 0;
+}
+
+/* ── TRILHA DO CARROSSEL ─────────────────────────────────── */
+/*
+  Todos os slides ficam em linha dentro da trilha.
+  O JS move a trilha com translateX para centralizar o ativo.
+  will-change: transform garante que o browser use GPU.
+*/
+.dp-track {
+    display: flex;
+    align-items: stretch;
+    gap: 16px;
+    padding: 12px 80px; /* Padding lateral = espaço para os cards laterais aparecerem */
+    position: relative;
+    z-index: 1;
+    will-change: transform;
+}
+
+/* ── SLIDE individual ────────────────────────────────────── */
+.dp-slide {
+    /*
+      Largura INATIVA (cards laterais).
+      O slide ativo é mais largo — controlado por .dp-slide-active.
+    */
+    flex: 0 0 290px;
+    cursor: pointer;
+
+    transition:
+        flex-basis    0.6s var(--dp-ease),
+        opacity       0.6s var(--dp-ease),
+        filter        0.6s var(--dp-ease),
+        transform     0.6s var(--dp-ease);
+}
+
+/* Estado inativo: recuado, escuro, desfocado */
+.dp-slide:not(.dp-slide-active) {
+    opacity: 0.35;
+    filter: blur(1.6px);
+    transform: scale(0.93) translateY(18px);
+}
+
+/* Estado ativo: em destaque, elevado */
+.dp-slide.dp-slide-active {
+    flex-basis: 460px;
+    opacity: 1; filter: none;
+    transform: scale(1) translateY(0);
+    cursor: default; z-index: 4;
+}
+
+
+/* ── CAIXA VISUAL DO CARD ─────────────────────────────────── */
+.dp-card {
+    background: var(--dp-card-bg);
+    border: 1px solid var(--dp-card-border);
+    border-radius: 18px;
+    padding: 30px 28px 24px;
+    height: 100%;
+    display: flex; flex-direction: column;
+    position: relative; overflow: hidden;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.35);
+
+    transition:
+        border-color  0.6s var(--dp-ease),
+        box-shadow    0.6s var(--dp-ease),
+        background    0.6s var(--dp-ease);
+}
+
+/* Card ativo: borda e sombra roxas mais intensas */
+.dp-slide.dp-slide-active .dp-card {
+    border-color: var(--dp-card-active);
+    background: rgba(18, 10, 34, 0.99);
+    box-shadow:
+        0 0 0 1px rgba(180,36,251,0.09),
+        0 20px 80px rgba(0,0,0,0.55),
+        0 0 90px rgba(180,36,251,0.07);
+}
+
+/* Linha de luz no topo do card ativo */
+.dp-slide.dp-slide-active .dp-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(180,36,251,0.75) 40%,
+        rgba(180,36,251,0.2) 100%);
+}
+
+/* Reflexo de canto superior direito */
+.dp-slide.dp-slide-active .dp-card::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 100px; height: 100px;
+    background: radial-gradient(circle at top right,
+        rgba(180,36,251,0.07) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+
+/* ── ESTRELAS ─────────────────────────────────────────────── */
+.dp-stars {
+    display: flex; gap: 3px;
+    margin-bottom: 18px;
+}
+.dp-star {
+    font-size: 13px; color: var(--dp-accent);
+    line-height: 1; opacity: 0.4;
+    transition: opacity 0.5s ease, text-shadow 0.5s ease;
+}
+.dp-slide.dp-slide-active .dp-star {
+    opacity: 1;
+    animation: dpStarGlow 3.2s ease-in-out infinite;
+}
+.dp-slide.dp-slide-active .dp-star:nth-child(1) { animation-delay: 0.00s; }
+.dp-slide.dp-slide-active .dp-star:nth-child(2) { animation-delay: 0.11s; }
+.dp-slide.dp-slide-active .dp-star:nth-child(3) { animation-delay: 0.22s; }
+.dp-slide.dp-slide-active .dp-star:nth-child(4) { animation-delay: 0.33s; }
+.dp-slide.dp-slide-active .dp-star:nth-child(5) { animation-delay: 0.44s; }
+@keyframes dpStarGlow {
+    0%,55%,100% { text-shadow: none; }
+    28% { text-shadow: 0 0 10px rgba(180,36,251,1), 0 0 22px rgba(180,36,251,0.4); }
+}
+
+
+/* ── TEXTO DO DEPOIMENTO ─────────────────────────────────── */
+.dp-quote {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic; font-weight: 400;
+    font-size: clamp(14px, 1.35vw, 17px);
+    color: var(--dp-text); line-height: 1.8;
+    flex: 1; /* Empurra o autor para baixo */
+    margin-bottom: 22px;
+    position: relative; z-index: 1;
+}
+
+
+/* ── DIVISÓRIA ────────────────────────────────────────────── */
+.dp-divider {
+    width: 28px; height: 1px;
+    background: rgba(180,36,251,0.22);
+    margin-bottom: 18px; flex-shrink: 0;
+    transition: width 0.5s var(--dp-ease), background 0.5s ease;
+}
+.dp-slide.dp-slide-active .dp-divider {
+    width: 50px;
+    background: rgba(180,36,251,0.55);
+}
+
+
+/* ── AUTOR ────────────────────────────────────────────────── */
+.dp-author {
+    display: flex; align-items: center;
+    gap: 11px; flex-shrink: 0;
+}
+
+/* Avatar circular com iniciais */
+.dp-avatar {
+    width: 42px; height: 42px; border-radius: 50%;
+    background: rgba(180,36,251,0.10);
+    border: 1.5px solid rgba(180,36,251,0.22);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    font-family: 'Manrope', sans-serif;
+    font-size: 12px; font-weight: 700;
+    color: var(--dp-accent); letter-spacing: 0.04em;
+    transition: background 0.5s, border-color 0.5s, box-shadow 0.5s;
+}
+.dp-slide.dp-slide-active .dp-avatar {
+    background: rgba(180,36,251,0.18);
+    border-color: rgba(180,36,251,0.5);
+    box-shadow: 0 0 14px rgba(180,36,251,0.32);
+}
+
+.dp-author-info { flex: 1; min-width: 0; }
+.dp-author-name {
+    font-family: 'Manrope', sans-serif;
+    font-size: 13px; font-weight: 700; color: #fff;
+    margin-bottom: 3px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.dp-author-role {
+    font-family: 'Manrope', sans-serif;
+    font-size: 11px; font-weight: 400; color: var(--dp-muted);
+}
+
+/* Badge de segmento */
+.dp-badge {
+    font-family: 'Manrope', sans-serif;
+    font-size: 9px; font-weight: 600;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: rgba(180,36,251,0.5);
+    padding: 4px 10px;
+    border: 1px solid rgba(180,36,251,0.16);
+    border-radius: 50px; white-space: nowrap; flex-shrink: 0;
+    transition: color 0.5s, border-color 0.5s;
+}
+.dp-slide.dp-slide-active .dp-badge {
+    color: rgba(180,36,251,0.9);
+    border-color: rgba(180,36,251,0.38);
+}
+
+
+/* ── SETAS DE NAVEGAÇÃO ───────────────────────────────────── */
+/*
+  Posicionadas absolute, centradas verticalmente nos cards.
+  Exatamente como no vídeo (setas nas bordas do carrossel).
+*/
+.dp-nav {
+    position: absolute;
+    top: 50%; z-index: 10;
+    transform: translateY(-50%);
+    width: 44px; height: 44px; border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.09);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    color: rgba(255,255,255,0.38);
+    transition: background 0.3s, border-color 0.3s, color 0.3s, transform 0.2s;
+}
+.dp-nav:hover {
+    background: rgba(180,36,251,0.13);
+    border-color: rgba(180,36,251,0.44);
+    color: #fff;
+    transform: translateY(-50%) scale(1.1);
+}
+.dp-nav:active { transform: translateY(-50%) scale(0.94); }
+.dp-nav svg {
+    width: 16px; height: 16px;
+    stroke: currentColor; fill: none;
+    stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round;
+}
+.dp-nav-prev { left: 8px; }
+.dp-nav-next { right: 8px; }
+
+
+/* ── DOTS ─────────────────────────────────────────────────── */
+.dp-dots-row {
+    display: flex; align-items: center;
+    justify-content: center; gap: 7px;
+    margin-top: 24px;
+    position: relative; z-index: 2;
+}
+.dp-dot {
+    width: 6px; height: 6px; border-radius: 3px;
+    background: rgba(255,255,255,0.13);
+    border: none; cursor: pointer; padding: 0;
+    transition: width 0.4s var(--dp-ease), background 0.4s ease, box-shadow 0.4s ease;
+}
+.dp-dot.dp-dot-active {
+    width: 22px;
+    background: var(--dp-accent);
+    box-shadow: 0 0 8px rgba(180,36,251,0.5);
+}
+
+
+/* ── RESPONSIVO ───────────────────────────────────────────── */
+@media (max-width: 1100px) {
+    .dp-inner {
+        grid-template-columns: 1fr;
+        padding: 0 32px;
+        gap: 36px;
+    }
+    .dp-sidebar { padding-right: 0; }
+    .dp-sidebar::before { display: none; }
+    .dp-sidebar-desc { max-width: 100%; }
+    .dp-sidebar-counter { display: none; }
+    .dp-track { padding: 12px 60px; }
+}
+@media (max-width: 768px) {
+    .depoimentos { padding: 72px 0 60px; }
+    .dp-inner { padding: 0 20px; }
+    .dp-slide { flex: 0 0 82vw; }
+    .dp-slide.dp-slide-active { flex-basis: 82vw; }
+    .dp-slide:not(.dp-slide-active) { opacity: 0.18; filter: blur(2.5px); }
+    .dp-track { padding: 12px 40px; }
+}
