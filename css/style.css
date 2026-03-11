@@ -173,7 +173,7 @@ header .nav-btn:hover {
     /* Centraliza perfeitamente */
     object-fit: contain;
     /* Garante que preencha sem distorcer */
-    opacity: 0.4;
+    opacity: 0.5;
     /* Controle a transparência aqui para o texto aparecer bem */
 }
 
