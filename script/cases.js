@@ -25,52 +25,6 @@
     revealEls.forEach(function (el) { revealObs.observe(el); });
 
 
-    /* ── 2. CURSOR CUSTOMIZADO ───────────────────────────
-       Posição atualizada em mousemove (instantânea).
-       Lerp suave no loop rAF para o cursor "perseguir" o mouse.
-    ─────────────────────────────────────────────────────── */
-    if (!cursor) return;
-
-    var mouseX = 0, mouseY = 0; /* Posição real do mouse */
-    var curX   = 0, curY   = 0; /* Posição atual do cursor (interpolada) */
-    var LERP   = 0.13;           /* Velocidade: 0=parado, 1=instantâneo */
-
-    /* Loop de animação — sempre rodando */
-    (function loop() {
-        curX += (mouseX - curX) * LERP;
-        curY += (mouseY - curY) * LERP;
-        cursor.style.left = curX + 'px';
-        cursor.style.top  = curY + 'px';
-        requestAnimationFrame(loop);
-    })();
-
-    /* Destino do cursor atualiza em cada mousemove */
-    document.addEventListener('mousemove', function (e) {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-    }, { passive: true });
-
-    /* Mostra o cursor ao entrar em card real (sem .pf-card-soon) */
-    section.addEventListener('mouseover', function (e) {
-        if (e.target.closest('.pf-card:not(.pf-card-soon)')) {
-            cursor.classList.add('pf-cursor-on');
-        }
-    });
-
-    /* Esconde ao sair do card real */
-    section.addEventListener('mouseout', function (e) {
-        var card = e.target.closest('.pf-card:not(.pf-card-soon)');
-        if (card && !card.contains(e.relatedTarget)) {
-            cursor.classList.remove('pf-cursor-on');
-        }
-    });
-
-    /* Esconde ao sair da seção inteira */
-    section.addEventListener('mouseleave', function () {
-        cursor.classList.remove('pf-cursor-on');
-    });
-
-
     /* ── 3. PARALAXE DO FUNDO (.pf-card-bg) ─────────────
        Injeta --pf-rx e --pf-ry no card ao mover o mouse.
        O CSS usa esses valores em translate() dentro do

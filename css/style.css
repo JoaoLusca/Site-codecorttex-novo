@@ -2616,3 +2616,559 @@ body.spotlight-active .spotlight-overlay {
     /* Em mobile (sem hover), mostra a tag e resultado sempre */
     .pf-tag, .pf-result { opacity: 1; transform: translateY(0); }
 }
+
+/* ── VARIÁVEIS ────────────────────────────────────────────── */
+:root {
+    --fq-accent:       #B424FB;
+    --fq-accent-glow:  rgba(180, 36, 251, 0.35);
+    --fq-accent-soft:  rgba(180, 36, 251, 0.12);
+    --fq-bg:           #070709;
+    --fq-surface:      rgba(255, 255, 255, 0.03);
+    --fq-border:       rgba(255, 255, 255, 0.07);
+    --fq-border-hover: rgba(180, 36, 251, 0.3);
+    --fq-text:         rgba(255, 255, 253, 0.82);
+    --fq-muted:        rgba(255, 255, 253, 0.35);
+    --fq-white:        #ffffff;
+    --fq-ease:         cubic-bezier(0.4, 0, 0.2, 1);
+    --fq-spring:       cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   WRAPPER DA SEÇÃO
+   ════════════════════════════════════════════════════════════ */
+.faq-section {
+    position: relative;
+    background: var(--fq-bg);
+    padding: 120px 0 100px;
+    overflow: hidden;
+}
+
+/* Linha separadora no topo */
+.faq-section::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(180, 36, 251, 0.4) 50%,
+        transparent 100%);
+    pointer-events: none;
+}
+
+/* Halo de luz atmosférico no fundo */
+.fq-bg-glow {
+    position: absolute;
+    bottom: -120px;
+    right: -80px;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle,
+        rgba(180, 36, 251, 0.05) 0%,
+        transparent 65%);
+    pointer-events: none;
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   CABEÇALHO
+   ════════════════════════════════════════════════════════════ */
+.fq-header {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 48px 72px;
+}
+
+/* Label "FAQ" */
+.fq-label {
+    font-family: 'Manrope', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.38em;
+    text-transform: uppercase;
+    color: var(--fq-accent);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+
+    /* Estado inicial para animação de entrada */
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.fq-label.fq-visible { opacity: 1; transform: translateY(0); }
+.fq-label::after {
+    content: '';
+    display: block;
+    width: 36px; height: 1px;
+    background: var(--fq-accent);
+    opacity: 0.5;
+}
+
+/* Título principal */
+.fq-title {
+    font-family: 'Manrope', sans-serif;
+    font-size: clamp(28px, 3.8vw, 52px);
+    font-weight: 800;
+    color: var(--fq-white);
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease 0.1s, transform 0.8s ease 0.1s;
+}
+.fq-title.fq-visible { opacity: 1; transform: translateY(0); }
+
+/* Parte itálica serif */
+.fq-title-em {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--fq-accent);
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   GRID PRINCIPAL — FAQ (esq) + FORMULÁRIO (dir)
+   ════════════════════════════════════════════════════════════ */
+.fq-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 48px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: start;
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   COLUNA ESQUERDA — ACCORDION FAQ
+   ════════════════════════════════════════════════════════════ */
+.fq-accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+
+    opacity: 0;
+    transform: translateX(-24px);
+    transition: opacity 0.8s ease 0.2s, transform 0.8s ease 0.2s;
+}
+.fq-accordion.fq-visible { opacity: 1; transform: translateX(0); }
+
+
+/* ── Item do accordion ───────────────────────────────────── */
+.fq-item {
+    position: relative;
+    border-bottom: 1px solid var(--fq-border);
+    overflow: hidden; /* Garante que a linha de luz não vaze */
+}
+.fq-item:first-child { border-top: 1px solid var(--fq-border); }
+
+/*
+  Linha de luz à esquerda do item ativo.
+  Cresce verticalmente de 0 até 100% quando o item está aberto.
+*/
+.fq-item::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0;
+    width: 2px;
+    height: 0%; /* Começa com altura zero */
+    background: linear-gradient(180deg,
+        transparent 0%,
+        var(--fq-accent) 30%,
+        var(--fq-accent) 70%,
+        transparent 100%);
+    transition: height 0.45s var(--fq-ease);
+    pointer-events: none;
+    z-index: 1;
+}
+/* Linha de luz ativa quando o item está aberto */
+.fq-item.fq-open::before {
+    height: 100%;
+}
+
+
+/* ── Botão da pergunta ───────────────────────────────────── */
+.fq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 24px 0 24px 20px; /* 20px deixa espaço para a linha de luz */
+    text-align: left;
+    transition: background 0.3s ease;
+}
+.fq-question:hover { background: rgba(255, 255, 255, 0.02); }
+
+/* Texto da pergunta */
+.fq-question-text {
+    font-family: 'Manrope', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--fq-text);
+    line-height: 1.4;
+    transition: color 0.3s ease;
+}
+/* Pergunta ativa fica branca */
+.fq-item.fq-open .fq-question-text { color: var(--fq-white); }
+
+/* Ícone "+" que vira "−" */
+.fq-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 1px solid var(--fq-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: border-color 0.3s ease, background 0.3s ease, transform 0.4s var(--fq-ease);
+}
+.fq-item.fq-open .fq-icon {
+    border-color: var(--fq-accent);
+    background: var(--fq-accent-soft);
+    transform: rotate(45deg); /* "+" vira "×" */
+}
+
+/* Linhas do ícone + */
+.fq-icon svg {
+    width: 12px;
+    height: 12px;
+    stroke: var(--fq-muted);
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    transition: stroke 0.3s ease;
+}
+.fq-item.fq-open .fq-icon svg { stroke: var(--fq-accent); }
+
+
+/* ── Área da resposta (colapsável) ──────────────────────── */
+/*
+  A resposta usa height: 0 → height: var(--fq-h) para animar.
+  --fq-h é definida pelo JS em pixels, baseada no scrollHeight.
+  Isso garante animação suave sem usar max-height (que tem delay).
+*/
+.fq-answer {
+    height: 0;
+    overflow: hidden;
+    transition: height 0.45s var(--fq-ease);
+}
+.fq-item.fq-open .fq-answer {
+    height: var(--fq-h, auto);
+}
+
+/* Conteúdo da resposta */
+.fq-answer-inner {
+    padding: 0 20px 24px 20px;
+    font-family: 'Manrope', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--fq-muted);
+    line-height: 1.78;
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   COLUNA DIREITA — FORMULÁRIO DE CONTATO
+   ════════════════════════════════════════════════════════════ */
+.fq-form-col {
+    position: sticky;
+    top: 40px; /* Gruda no topo ao rolar */
+
+    opacity: 0;
+    transform: translateX(24px);
+    transition: opacity 0.8s ease 0.35s, transform 0.8s ease 0.35s;
+}
+.fq-form-col.fq-visible { opacity: 1; transform: translateX(0); }
+
+/* Card do formulário */
+.fq-form-card {
+    background: rgba(255, 255, 255, 0.025);
+    border: 1px solid var(--fq-border);
+    border-radius: 20px;
+    padding: 40px 36px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.4s ease;
+}
+.fq-form-card:focus-within {
+    border-color: rgba(180, 36, 251, 0.25);
+}
+
+/* Reflexo de luz no canto superior */
+.fq-form-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(180, 36, 251, 0.6) 35%,
+        rgba(180, 36, 251, 0.2) 100%);
+}
+
+/* Título do formulário */
+.fq-form-title {
+    font-family: 'Manrope', sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--fq-white);
+    letter-spacing: -0.02em;
+    margin-bottom: 6px;
+}
+
+/* Subtexto */
+.fq-form-sub {
+    font-family: 'Manrope', sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--fq-muted);
+    margin-bottom: 32px;
+    line-height: 1.6;
+}
+
+
+/* ── Campo de input com label flutuante ─────────────────── */
+/*
+  Cada campo tem um wrapper .fq-field com position: relative.
+  O label começa centralizado sobre o input.
+  Quando o input é focado OU tem valor, o label sobe e diminui.
+  Controlado por CSS :focus e :not(:placeholder-shown).
+*/
+.fq-field {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+/* Input e textarea compartilham o mesmo visual */
+.fq-input,
+.fq-textarea {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--fq-border);
+    border-radius: 10px;
+    padding: 20px 16px 10px; /* Padding top maior para dar espaço ao label */
+    font-family: 'Manrope', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--fq-white);
+    outline: none;
+    transition: border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+    /* Placeholder invisível — o label faz esse papel */
+    caret-color: var(--fq-accent);
+}
+.fq-input::placeholder,
+.fq-textarea::placeholder { color: transparent; }
+
+.fq-textarea {
+    resize: none;
+    height: 110px;
+    line-height: 1.6;
+}
+
+/* Focus: borda roxa + glow sutil */
+.fq-input:focus,
+.fq-textarea:focus {
+    border-color: rgba(180, 36, 251, 0.5);
+    background: rgba(180, 36, 251, 0.04);
+    box-shadow: 0 0 0 3px rgba(180, 36, 251, 0.08);
+}
+
+/* Label flutuante */
+.fq-label-float {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Manrope', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--fq-muted);
+    pointer-events: none;
+    transition: top 0.25s ease, font-size 0.25s ease,
+                color 0.25s ease, transform 0.25s ease;
+    white-space: nowrap;
+}
+/* Para textarea: label começa no topo */
+.fq-field--textarea .fq-label-float {
+    top: 18px;
+    transform: none;
+}
+
+/* Label sobe quando input está focado ou preenchido */
+.fq-input:focus       + .fq-label-float,
+.fq-input:not(:placeholder-shown) + .fq-label-float {
+    top: 8px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--fq-accent);
+    transform: none;
+}
+.fq-textarea:focus    + .fq-label-float,
+.fq-textarea:not(:placeholder-shown) + .fq-label-float {
+    top: 6px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--fq-accent);
+}
+
+
+/* ── Linha dupla (nome + email lado a lado) ─────────────── */
+.fq-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+
+/* ── Botão de envio ─────────────────────────────────────── */
+/*
+  Efeito: fundo roxo se expande da esquerda para a direita
+  via pseudo-elemento ::before com scale no eixo X.
+*/
+.fq-submit {
+    position: relative;
+    width: 100%;
+    padding: 15px 24px;
+    border: 1px solid var(--fq-accent);
+    border-radius: 50px;
+    background: transparent;
+    font-family: 'Manrope', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--fq-accent);
+    cursor: pointer;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 8px;
+    transition: color 0.35s ease, border-color 0.35s ease;
+}
+/* Fundo que preenche o botão no hover */
+.fq-submit::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--fq-accent);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.4s var(--fq-ease);
+    z-index: 0;
+}
+.fq-submit:hover { color: #fff; border-color: var(--fq-accent); }
+.fq-submit:hover::before { transform: scaleX(1); }
+
+/* Texto e seta ficam acima do fundo */
+.fq-submit span { position: relative; z-index: 1; }
+
+/* Seta do botão */
+.fq-submit-arrow {
+    display: inline-block;
+    position: relative;
+    z-index: 1;
+    transition: transform 0.3s ease;
+}
+.fq-submit:hover .fq-submit-arrow { transform: translateX(4px); }
+
+/* Estado de carregamento */
+.fq-submit.fq-loading {
+    pointer-events: none;
+    opacity: 0.7;
+}
+.fq-submit.fq-loading span::after {
+    content: '...';
+    animation: fqDots 1s steps(3) infinite;
+}
+@keyframes fqDots {
+    0%   { content: '.';   }
+    33%  { content: '..';  }
+    66%  { content: '...'; }
+}
+
+/* Mensagem de sucesso */
+.fq-success {
+    display: none;
+    text-align: center;
+    padding: 20px 0 4px;
+    font-family: 'Manrope', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(180, 36, 251, 0.9);
+    line-height: 1.6;
+}
+.fq-success.fq-show { display: block; }
+.fq-success strong { color: #fff; }
+
+/* Nota abaixo do botão */
+.fq-form-note {
+    font-family: 'Manrope', sans-serif;
+    font-size: 11px;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.18);
+    text-align: center;
+    margin-top: 14px;
+    line-height: 1.5;
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   ANIMAÇÕES DE ENTRADA — ITENS DO ACCORDION
+   ════════════════════════════════════════════════════════════
+   Cada item do FAQ entra com um delay escalonado,
+   deslizando de baixo para cima com fade.
+   O delay é calculado pelo JS via --fq-item-delay.
+*/
+.fq-item {
+    opacity: 0;
+    transform: translateY(20px);
+    transition:
+        opacity   0.6s ease var(--fq-item-delay, 0s),
+        transform 0.6s var(--fq-ease) var(--fq-item-delay, 0s),
+        background 0.3s ease; /* Para o hover */
+}
+.fq-item.fq-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+/* ↑ As transições de border, height, etc. são redefinidas nos
+     seletores específicos acima (fq-item::before, fq-answer, etc.)
+     para não conflitar com a animação de entrada. */
+
+
+/* ════════════════════════════════════════════════════════════
+   RESPONSIVO
+   ════════════════════════════════════════════════════════════ */
+@media (max-width: 1024px) {
+    .fq-grid {
+        grid-template-columns: 1fr;
+        gap: 56px;
+    }
+    .fq-form-col {
+        position: static; /* Remove sticky em mobile */
+    }
+    .faq-section { padding: 88px 0 72px; }
+    .fq-header    { padding: 0 32px 56px; }
+    .fq-grid      { padding: 0 32px; }
+}
+
+@media (max-width: 640px) {
+    .fq-header { padding: 0 20px 44px; }
+    .fq-grid   { padding: 0 20px; gap: 44px; }
+    .fq-row    { grid-template-columns: 1fr; gap: 0; }
+    .fq-form-card { padding: 28px 22px; }
+    .faq-section  { padding: 72px 0 60px; }
+}
