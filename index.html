@@ -2,27 +2,108 @@
 <html lang="pt-br">
 
 <head>
+    <!-- ═══════════════════════════════════════════════════════
+         META ESSENCIAIS
+    ═══════════════════════════════════════════════════════ -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- ═══════════════════════════════════════════════════════
+         SEO PRIMÁRIO
+    ═══════════════════════════════════════════════════════ -->
+    <title>Code Corttex | Agência de Marketing Digital, Desenvolvimento Web e Design</title>
+    <meta name="description" content="A Code Corttex transforma presença digital em resultado real. Desenvolvimento web, gestão de tráfego pago, design e identidade visual para negócios que querem crescer de verdade.">
+    <meta name="keywords" content="agência marketing digital, desenvolvimento web, tráfego pago, design identidade visual, Google Ads, Meta Ads, SEO, landing page, branding">
+    <meta name="author" content="Code Corttex">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#B424FB">
+
+    <!-- ═══════════════════════════════════════════════════════
+         OPEN GRAPH — Facebook, LinkedIn, WhatsApp
+    ═══════════════════════════════════════════════════════ -->
+    <meta property="og:type"        content="website">
+    <meta property="og:site_name"   content="Code Corttex">
+    <meta property="og:url"         content="https://codecorttex.com.br/">
+    <meta property="og:title"       content="Code Corttex | Marketing Digital, Desenvolvimento Web e Design">
+    <meta property="og:description" content="Estratégia, tecnologia e design para negócios que querem crescer de verdade. Da identidade visual ao tráfego pago, a Code Corttex cuida de tudo.">
+    <meta property="og:image"       content="https://codecorttex.com.br/img/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale"      content="pt_BR">
+
+    <!-- ═══════════════════════════════════════════════════════
+         TWITTER / X CARD
+    ═══════════════════════════════════════════════════════ -->
+    <meta name="twitter:card"        content="summary_large_image">
+    <meta name="twitter:title"       content="Code Corttex | Marketing Digital, Desenvolvimento Web e Design">
+    <meta name="twitter:description" content="Estratégia, tecnologia e design para negócios que querem crescer de verdade.">
+    <meta name="twitter:image"       content="https://codecorttex.com.br/img/og-image.jpg">
+
+    <!-- ═══════════════════════════════════════════════════════
+         DADOS ESTRUTURADOS — Schema.org (JSON-LD)
+         Ajuda o Google a entender quem é a empresa.
+    ═══════════════════════════════════════════════════════ -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "MarketingAgency",
+        "name": "Code Corttex",
+        "url": "https://codecorttex.com.br",
+        "logo": "https://codecorttex.com.br/img/logo-codecortex-transparente.png",
+        "description": "Agência de marketing digital especializada em desenvolvimento web, tráfego pago e design de identidade visual.",
+        "areaServed": "BR",
+        "sameAs": [
+            "https://www.instagram.com/codecorttex",
+            "https://www.linkedin.com/company/codecorttex"
+        ],
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "contactType": "customer service",
+            "availableLanguage": "Portuguese"
+        }
+    }
+    </script>
+
+    <!-- ═══════════════════════════════════════════════════════
+         FAVICON
+    ═══════════════════════════════════════════════════════ -->
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
+    <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+
+    <!-- ═══════════════════════════════════════════════════════
+         FONTES — preconnect + preload para performance
+    ═══════════════════════════════════════════════════════ -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Manrope:wght@200..800&family=Space+Grotesk:wght@300..700&display=swap"
         rel="stylesheet">
-    <title>Home</title>
+
+    <!-- ═══════════════════════════════════════════════════════
+         CSS
+    ═══════════════════════════════════════════════════════ -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Variável CSS inicial para o spotlight (evita flash) -->
+    <style>
+        :root { --x: 50vw; --y: 50vh; }
+    </style>
 </head>
 
 <body>
-    <!-- CURSOR -->
-    <div id="cur"></div>
-    <div id="cur-r"></div>
+    <!-- CURSOR CUSTOMIZADO -->
+    <div id="cur" role="presentation" aria-hidden="true"></div>
+    <div id="cur-r" role="presentation" aria-hidden="true"></div>
 
-    <header>
-        <div class="logo"><a href="index.html"><img src="img/logo-codecortex-transparente.png" alt="Code Corttex"></a>
+    <header role="banner" id="headerMain">
+        <div class="logo">
+            <a href="index.html" aria-label="Code Corttex — Página inicial">
+                <img src="img/logo-codecortex-transparente.png" alt="Code Corttex" width="200" height="60">
+            </a>
         </div>
-        <nav>
+        <nav aria-label="Navegação principal">
             <a href="#Início">Início</a>
             <a href="#sobre">Sobre</a>
             <a href="#servicos">Soluções</a>
@@ -34,11 +115,75 @@
         </nav>
 
         <button class="nav-btn">Iniciar nova fase</button>
+
+        <!-- Botão hambúrguer — visível apenas no mobile -->
+        <button
+            class="hamburger"
+            id="hamburgerBtn"
+            aria-label="Abrir menu"
+            aria-expanded="false"
+            aria-controls="mobileDrawer"
+        >
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
     </header>
 
-    <section class="hero" id="Início">
-        <video class="hero-video" autoplay loop playsinline muted preload="metadata">
-            <source src="midia/6009997_Animal_Nature_1920x1080.mp4" type="video/mp4" />
+    <!-- ════════════════════════════════════════════════════
+         HEADER COMPACTO — aparece ao rolar, estilo pílula
+         Segue o design da imagem de referência.
+    ════════════════════════════════════════════════════ -->
+    <div class="header-compact" id="headerCompact" role="navigation" aria-label="Menu compacto">
+        <a href="index.html" class="hc-logo" aria-label="Code Corttex — Início">
+            <img src="img/logo-codecortex-transparente.png" alt="Code Corttex">
+        </a>
+        <nav class="hc-nav" aria-label="Navegação compacta">
+            <a href="#Início">Início</a>
+            <a href="#sobre">Sobre</a>
+            <a href="#servicos">Soluções</a>
+            <a href="#metodo">Método</a>
+            <a href="#cases">Cases</a>
+            <a href="#faq">FAQ</a>
+            <a href="#contato">Contato</a>
+        </nav>
+        <a href="#contato" class="hc-btn">
+            <span>Quero participar</span>
+            <span class="hc-btn-arrow">→</span>
+        </a>
+    </div>
+
+    <!-- ════════════════════════════════════════════════════
+         DRAWER MOBILE — menu hambúrguer
+         Visível apenas em telas ≤ 768px.
+    ════════════════════════════════════════════════════ -->
+    <div
+        class="mobile-drawer"
+        id="mobileDrawer"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Menu de navegação"
+    >
+        <a href="#Início"   onclick="closeDrawer()">Início</a>
+        <a href="#sobre"    onclick="closeDrawer()">Sobre</a>
+        <a href="#servicos" onclick="closeDrawer()">Soluções</a>
+        <a href="#metodo"   onclick="closeDrawer()">Método</a>
+        <a href="#cases"    onclick="closeDrawer()">Cases</a>
+        <a href="#faq"      onclick="closeDrawer()">FAQ</a>
+        <a href="#contato"  onclick="closeDrawer()" class="drawer-cta">Iniciar nova fase</a>
+    </div>
+
+    <main id="main-content">
+
+    <section class="hero" id="Início" aria-label="Apresentação da Code Corttex">
+        <video
+            class="hero-video"
+            autoplay loop playsinline muted
+            preload="metadata"
+            aria-hidden="true"
+            role="presentation"
+        >
+            <source src="midia/6009998_Animal_Nature_4096x2160 (video-converter.com).webm" />
         </video>
 
         <div class="hero-content">
@@ -47,15 +192,15 @@
             <p class="p-hero">A Code Corttex transforma presença digital em resultado real através da tecnologia,
                 estratégia e um cuidado que a maioria das agências esqueceu de ter...</p>
             <div class="btn-container">
-                <button class="btn">Iniciar nova fase</button>
-                <button class="btn-2">Ver portfólio</button>
+                <button class="btn" aria-label="Iniciar nova fase — entrar em contato">Iniciar nova fase</button>
+                <button class="btn-2" aria-label="Ver portfólio de projetos">Ver portfólio</button>
             </div>
         </div>
     </section>
 
 
-    <!--carrossel infinito-->
-    <div class="carousel">
+    <!-- Carrossel de serviços — decorativo -->
+    <div class="carousel" aria-hidden="true" role="presentation">
         <div class="group">
             <p>//</p>
             <p class="card">Desenvolvimento Web</p>
@@ -1206,22 +1351,410 @@
 
 </section>
 <!-- /faq-section -->
+ 
+<!-- ============================================================
+     CTA SECTION
+     Code Corttex
+     ============================================================ -->
+ 
+<section class="ct-section" id="contato">
+ 
+    <!-- ════════════════════════════════════════════════════
+         CAMADA 1 — GRADE PERSPECTIVADA DE FUNDO
+         Reproduz a grade da imagem de referência.
+         O CSS aplica rotateX(55deg) para criar perspectiva.
+         ════════════════════════════════════════════════════ -->
+    <div class="ct-grid" aria-hidden="true">
+        <div class="ct-grid-inner"></div>
+    </div>
+ 
+    <!-- ════════════════════════════════════════════════════
+         CAMADA 2 — HALOS DE LUZ ROXA
+         .ct-halo-outer: luz ampla e difusa
+         .ct-halo-core:  núcleo concentrado e brilhante
+         Ambos pulsam via CSS animation e seguem o mouse via JS.
+         ════════════════════════════════════════════════════ -->
+    <div class="ct-halo-outer" id="ctHaloOuter" aria-hidden="true"></div>
+    <div class="ct-halo-core"  aria-hidden="true"></div>
+ 
+    <!-- ════════════════════════════════════════════════════
+         CAMADA 3 — CANVAS DE PARTÍCULAS ASCENDENTES
+         Gerenciado inteiramente pelo JS (módulo 3 do script).
+         Partículas roxas sobem da base, reforçando a sensação
+         de energia ascendente — "passar de fase, subir de nível".
+         ════════════════════════════════════════════════════ -->
+    <canvas class="ct-canvas" id="ctCanvas" aria-hidden="true"></canvas>
+ 
+    <!-- ════════════════════════════════════════════════════
+         CAMADA 4 — CONTEÚDO PRINCIPAL
+         z-index: 3 — sempre visível acima de tudo.
+         ════════════════════════════════════════════════════ -->
+    <div class="ct-content">
+ 
+        <!-- Label de seção — revela ao scroll -->
+        <div class="ct-eyebrow" data-ct-reveal data-ct-delay="0">
+            Próximo passo
+        </div>
+ 
+        <!--
+          Título com reveal palavra a palavra.
+          O JS (módulo 2) divide em .ct-word / .ct-word-inner
+          e anima cada palavra subindo com efeito de mola.
+ 
+          Estrutura esperada após o processamento do JS:
+          <span class="ct-word">
+            <span class="ct-word-inner">Pronto</span>
+          </span>
+          <span class="ct-word">
+            <span class="ct-word-inner">para</span>
+          </span>
+          ... e assim por diante.
+ 
+          data-ct-title-split: marca este elemento para o JS processar.
+        -->
+        <h2 class="ct-title" data-ct-title-split>
+            Pronto para <em class="ct-title-em">passar de fase?</em>
+        </h2>
+ 
+        <!-- Subtítulo — revela com delay de 500ms após entrar na viewport -->
+        <p class="ct-subtitle" data-ct-reveal data-ct-delay="200">
+            A conversa não custa nada. E pode mudar muito.<br>
+            Me conta o que você está construindo, e a gente
+            descobre juntos o melhor caminho.
+        </p>
+ 
+        <!-- ── BOTÕES DE AÇÃO ─────────────────────────────── -->
+        <div class="ct-actions" data-ct-reveal data-ct-delay="420">
+ 
+            <a
+                href="https://wa.me/5561993771036?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20Code%20Corttex%20e%20quero%20conversar%20sobre%20meu%20projeto!"
+                class="ct-btn-wa"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Abrir conversa no WhatsApp com a Code Corttex"
+            >
+                <!-- Ícone SVG do WhatsApp — inline para ter controle de cor -->
+                <svg
+                    class="ct-wa-svg"
+                    width="18" height="18"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    aria-hidden="true"
+                >
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                </svg>
+                <span class="span-2">Falar no WhatsApp</span>
+            </a>
+            <a
+                href="portfólio.html"
+                class="ct-btn-portfolio"
+                aria-label="Ver portfólio da Code Corttex"
+            >
+                <span>Ver portfólio</span>
+                <span class="ct-btn-arrow" aria-hidden="true">→</span>
+            </a>
+ 
+        </div>
+        <!-- /ct-actions -->
+ 
+        <!-- Nota discreta de rodapé -->
+        <p class="ct-footnote" data-ct-reveal data-ct-delay="650">
+            <strong>Sem compromisso.</strong>
+            Sua privacidade é respeitada em todos os contatos.
+        </p>
+ 
+    </div>
+    <!-- /ct-content -->
+ 
+</section>
+<!-- /ct-section -->
+
+</main><!-- /#main-content -->
+
+<!-- ============================================================
+     FOOTER — Code Corttex
+     ============================================================ -->
+ 
+<footer class="ft-footer" id="footer" role="contentinfo">
+ 
+    <!-- ════════════════════════════════════════════════════
+         ÁREA SUPERIOR — 4 COLUNAS
+         ════════════════════════════════════════════════════ -->
+    <div class="ft-top">
+ 
+ 
+        <!-- ── COLUNA 1: MARCA ──────────────────────────── -->
+        <div class="ft-brand">
+ 
+            <!--
+              LOGO PEQUENA
+              O <img> já aponta para o mesmo arquivo da navbar.
+              Se a imagem não carregar, o .ft-logo-fallback aparece.
+            -->
+            <a href="#" class="ft-logo-wrap" aria-label="Code Corttex — Início">
+                <img
+                    src="img/logo-codecortex-transparente.png"
+                    alt="Code Corttex"
+                    onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-flex';"
+                >
+                <span class="ft-logo-fallback" style="display:none;">Code Corttex</span>
+            </a>
+ 
+            <!-- Frase de valor — curta e objetiva -->
+            <p class="ft-tagline">
+                Estratégia, design e tecnologia para negócios que querem crescer de verdade.
+            </p>
+ 
+            <!-- Redes sociais -->
+            <div class="ft-social" role="list" aria-label="Redes sociais da Code Corttex">
+ 
+                <!-- Instagram — troque href pelo link real -->
+                <a
+                    href="#"
+                    class="ft-social-link"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Instagram"
+                    role="listitem"
+                >
+                    <!-- SVG inline: controle total de cor via currentColor -->
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+                    </svg>
+                </a>
+ 
+                <!-- LinkedIn — troque href pelo link real -->
+                <a
+                    href="#"
+                    class="ft-social-link"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="LinkedIn"
+                    role="listitem"
+                >
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                    </svg>
+                </a>
+ 
+                <!-- WhatsApp — troque SEU_NUMERO -->
+                <a
+                    href="https://wa.me/SEU_NUMERO"
+                    class="ft-social-link"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="WhatsApp"
+                    role="listitem"
+                >
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                    </svg>
+                </a>
+ 
+            </div>
+            <!-- /ft-social -->
+ 
+            <!-- Copyright -->
+            <p class="ft-copy">
+                © 2025 Code Corttex. Todos os direitos reservados.
+            </p>
+ 
+        </div>
+        <!-- /ft-brand -->
+ 
+ 
+        <!-- ── COLUNA 2: SITEMAP ─────────────────────────── -->
+        <nav class="ft-nav-col" aria-label="Navegação principal">
+            <span class="ft-col-title">Sitemap</span>
+            <ul class="ft-nav-list">
+                <li><a href="#Início"   class="ft-nav-link">Início</a></li>
+                <li><a href="#sobre"    class="ft-nav-link">Sobre</a></li>
+                <li><a href="#metodo"   class="ft-nav-link">Método</a></li>
+                <li><a href="#cases"    class="ft-nav-link">Portfólio</a></li>
+                <li><a href="#faq"      class="ft-nav-link">FAQ</a></li>
+                <li><a href="#contato"  class="ft-nav-link">Contato</a></li>
+            </ul>
+        </nav>
+ 
+ 
+        <!-- ── COLUNA 3: SOLUÇÕES ───────────────────────── -->
+        <nav class="ft-nav-col" aria-label="Soluções">
+            <span class="ft-col-title">Soluções</span>
+            <ul class="ft-nav-list">
+                <!-- Troque "#servicos" pelo link da página de cada serviço quando existir -->
+                <li><a href="#servicos" class="ft-nav-link">Desenvolvimento Web</a></li>
+                <li><a href="#servicos" class="ft-nav-link">Tráfego Pago</a></li>
+                <li><a href="#servicos" class="ft-nav-link">Design & Identidade</a></li>
+                <li><a href="#cases"    class="ft-nav-link">Ver portfólio →</a></li>
+            </ul>
+        </nav>
+ 
+ 
+        <!-- ── COLUNA 4: LEGAL + BOTÃO TOPO ─────────────── -->
+        <div class="ft-legal-col">
+ 
+            <!--
+              Botão "Voltar ao topo"
+              O JS intercepta o clique e faz smooth scroll para o topo.
+            -->
+            <a
+                href="#"
+                class="ft-top-btn"
+                id="ftTopBtn"
+                aria-label="Voltar ao topo da página"
+            >
+                <span>Voltar ao topo</span>
+                <span class="ft-top-icon" aria-hidden="true">↑</span>
+            </a>
+ 
+            <span class="ft-col-title">Informações legais</span>
+            <ul class="ft-nav-list">
+                <!-- Troque "#" pelos links reais quando as páginas existirem -->
+                <li><a href="#" class="ft-nav-link">Política de Privacidade</a></li>
+                <li><a href="#" class="ft-nav-link">Termos de Uso</a></li>
+                <li><a href="#" class="ft-nav-link">Política de Cookies</a></li>
+            </ul>
+ 
+        </div>
+        <!-- /ft-legal-col -->
+ 
+ 
+    </div>
+    <!-- /ft-top -->
+ 
+ 
+    <!-- ── LINHA DIVISÓRIA ──────────────────────────────── -->
+    <div class="ft-divider">
+        <hr class="ft-divider-line">
+    </div>
+
+    <div class="ft-logo-stage" data-ft-stage aria-hidden="true">
+        <div class="ft-logo-row">
+ 
+            <!--
+              ══════════════════════════════════════════════
+              PARTE 1 — primeira letra/elemento da logo
+              ══════════════════════════════════════════════
+            -->
+            <div
+                class="ft-logo-part ft-text-mode"
+                data-ft-part="0"
+                data-ft-label="C"
+            >
+                <!--
+                  DESCOMENTE quando tiver a imagem real:
+                  <img
+                      src="img/logo-grande-parte-1.png"
+                      alt=""
+                      draggable="false"
+                  >
+                -->
+            </div>
+ 
+            <!--
+              ══════════════════════════════════════════════
+              PARTE 2
+              ══════════════════════════════════════════════
+            -->
+            <div
+                class="ft-logo-part ft-text-mode"
+                data-ft-part="1"
+                data-ft-label="o"
+            >
+                <!--
+                  <img src="img/logo-grande-parte-2.png" alt="" draggable="false">
+                -->
+            </div>
+ 
+            <!--
+              ══════════════════════════════════════════════
+              PARTE 3
+              ══════════════════════════════════════════════
+            -->
+            <div
+                class="ft-logo-part ft-text-mode"
+                data-ft-part="2"
+                data-ft-label="r"
+            >
+                <!--
+                  <img src="img/logo-grande-parte-3.png" alt="" draggable="false">
+                -->
+            </div>
+ 
+            <!--
+              ══════════════════════════════════════════════
+              PARTE 4
+              ══════════════════════════════════════════════
+            -->
+            <div
+                class="ft-logo-part ft-text-mode"
+                data-ft-part="3"
+                data-ft-label="t"
+            >
+                <!--
+                  <img src="img/logo-grande-parte-4.png" alt="" draggable="false">
+                -->
+            </div>
+ 
+            <!--
+              ══════════════════════════════════════════════
+              PARTE 5
+              ══════════════════════════════════════════════
+            -->
+            <div
+                class="ft-logo-part ft-text-mode"
+                data-ft-part="4"
+                data-ft-label="e"
+            >
+                <!--
+                  <img src="img/logo-grande-parte-5.png" alt="" draggable="false">
+                -->
+            </div>
+ 
+            <!--
+              ══════════════════════════════════════════════
+              PARTE 6
+              ══════════════════════════════════════════════
+            -->
+            <div
+                class="ft-logo-part ft-text-mode"
+                data-ft-part="5"
+                data-ft-label="x"
+            >
+                <!--
+                  <img src="img/logo-grande-parte-6.png" alt="" draggable="false">
+                -->
+            </div>
+ 
+            <!--
+              Adicione mais partes conforme necessário:
+              <div class="ft-logo-part ft-text-mode" data-ft-part="6" data-ft-label="?">
+              </div>
+            -->
+ 
+        </div>
+        <!-- /ft-logo-row -->
+    </div>
+    <!-- /ft-logo-stage -->
+ 
+ 
+</footer>
+<!-- /ft-footer -->
 
 
+    <!-- Locomotive Scroll (smooth scroll) -->
     <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@beta/bundled/locomotive-scroll.min.js"></script>
     <script>
         const scroll = new LocomotiveScroll({
             el: document.querySelector('#app'),
             smooth: true,
         });
+        /* Expõe instância para que o footer.js possa ouvir eventos */
+        window.LocomotiveScrollInstance = scroll;
     </script>
-    <script src="script/cursor.js"></script>
-    <script src="script/video-transition.js"></script>
-    <script src="script/sobre.js"></script>
-    <script src="script/roda.js"></script>
-    <script src="script/quotes.js"></script>
-    <script src="script/cases.js"></script>
-    <script src="script/FAQ.js"></script>
+
+    <!-- JS principal consolidado -->
+    <script src="main.js"></script>
 </body>
 
 </html>

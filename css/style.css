@@ -5,6 +5,10 @@
     cursor: none;
 }
 
+html {
+    overflow-x: hidden;
+}
+
 /*ESTILO CURSOR*/
 
 #cur,
@@ -73,7 +77,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    overflow-x: none;
+    overflow-x: hidden;
     font-size: 18px;
     cursor: none;
     /* Esconde o cursor padrão do sistema */
@@ -96,13 +100,6 @@ header {
 .logo a img {
     height: auto;
     width: 200px;
-}
-
-.logo a img:hover {
-    border: 1px solid rgba(180, 36, 251, .2);
-    border-radius: 20px;
-    box-shadow: 0 0 32px #b324fb, 0 0 64px rgba(180, 36, 251, .1);
-    transform: translateY(-2px)
 }
 
 nav {
@@ -465,10 +462,7 @@ header .nav-btn:hover {
 /* Camada de máscara (Overlay) */
 .spotlight-overlay {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
+    inset: 0;
     background: black;
     z-index: 99990; /* Abaixo do cursor, mas acima de tudo */
     opacity: 0;
@@ -1678,7 +1672,7 @@ body.spotlight-active .spotlight-overlay {
 
 /* ── Rodapé do painel direito ── */
 .mt-content-footer {
-    margin-top: 10px;   /* Era 20px — mais próximo dos cards */
+    margin-top: 80px;   /* Era 20px — mais próximo dos cards */
     padding-top: 12px;  /* Era 18px */
     border-top: 1px solid rgba(255,255,255,0.05);
     display: flex;
@@ -3171,4 +3165,996 @@ body.spotlight-active .spotlight-overlay {
     .fq-row    { grid-template-columns: 1fr; gap: 0; }
     .fq-form-card { padding: 28px 22px; }
     .faq-section  { padding: 72px 0 60px; }
+}
+
+/* ============================================================
+   CTA SECTION — cta-section.css
+   Code Corttex
+   ============================================================
+ 
+   COMO INTEGRAR:
+   Cole o conteúdo deste arquivo no final do seu style.css,
+   após os estilos de FAQ.
+ 
+   CONCEITO VISUAL:
+   Inspirado na referência dourada — fundo escuro com grande
+   luz emergindo de baixo ao centro. Aqui usamos roxo (#B424FB).
+   Grade perspectivada no fundo cria profundidade de "portal".
+   Partículas sobem do halo de luz, reforçando a sensação de
+   energia ascendente e "passar de fase".
+ 
+   PREFIXO: "ct-" em todas as classes → zero conflito com o
+   restante do seu CSS.
+   ============================================================ */
+ 
+ 
+/* ════════════════════════════════════════════════════════════
+   VARIÁVEIS LOCAIS
+   ════════════════════════════════════════════════════════════
+   Reutilizam os tokens visuais já estabelecidos no site.
+   ════════════════════════════════════════════════════════════ */
+:root {
+    --ct-accent:        #B424FB;                   /* Roxo principal */
+    --ct-accent-light:  #d068ff;                   /* Roxo mais claro (gradientes) */
+    --ct-accent-glow:   rgba(180, 36, 251, 0.55);  /* Roxo para sombras/glow */
+    --ct-accent-soft:   rgba(180, 36, 251, 0.10);  /* Roxo suave (fills) */
+    --ct-bg:            #04030a;                   /* Quase preto com tom roxo */
+    --ct-text:          rgba(255, 255, 253, 0.88); /* Branco quase puro */
+    --ct-muted:         rgba(255, 255, 253, 0.38); /* Texto secundário */
+    --ct-border:        rgba(180, 36, 251, 0.18);  /* Borda sutil */
+    --ct-ease:          cubic-bezier(0.4, 0, 0.2, 1);
+    --ct-spring:        cubic-bezier(0.34, 1.56, 0.64, 1); /* Spring: ultrapassagem */
+}
+ 
+ 
+/* ════════════════════════════════════════════════════════════
+   WRAPPER DA SEÇÃO
+   ════════════════════════════════════════════════════════════
+   min-height: 100vh garante impacto de tela cheia.
+   overflow: hidden contém as partículas e o halo.
+   ════════════════════════════════════════════════════════════ */
+.ct-section {
+    position: relative;
+    background: var(--ct-bg);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 80px 24px;
+}
+ 
+/* Linha separadora no topo — padrão das outras seções */
+.ct-section::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(180, 36, 251, 0.5) 50%,
+        transparent 100%
+    );
+    pointer-events: none;
+    z-index: 2;
+}
+ 
+ 
+/* ════════════════════════════════════════════════════════════
+   CAMADA 1 — GRADE PERSPECTIVADA
+   ════════════════════════════════════════════════════════════
+   Reproduz a grade da imagem de referência.
+   Usa perspective CSS para criar profundidade de "portal".
+   A grade se perde no topo (como se fosse infinita).
+   Fica em z-index: 0 — atrás de tudo.
+   ════════════════════════════════════════════════════════════ */
+.ct-grid {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+ 
+.ct-grid-inner {
+    position: absolute;
+    bottom: -10%;
+    left: -20%;
+    right: -20%;
+    height: 120%;
+ 
+    /*
+      transform-origin: bottom center garante que a perspectiva
+      "fuja" para o horizonte no topo, como na referência.
+    */
+    transform-origin: bottom center;
+    transform: rotateX(55deg);
+ 
+    /*
+      Grade via background-image com duas camadas lineares
+      — uma horizontal, uma vertical.
+      Ajuste background-size para mudar a densidade da grade.
+    */
+    background-image:
+        linear-gradient(rgba(180, 36, 251, 0.10) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(180, 36, 251, 0.10) 1px, transparent 1px);
+    background-size: 70px 70px;
+ 
+    /*
+      mask-image: fade no topo — a grade desaparece suavemente.
+      Sem isso a grade "corta" abruptamente no topo da seção.
+    */
+    -webkit-mask-image: linear-gradient(
+        to top,
+        black 0%,
+        black 35%,
+        transparent 72%
+    );
+    mask-image: linear-gradient(
+        to top,
+        black 0%,
+        black 35%,
+        transparent 72%
+    );
+}
+ 
+ 
+/* ════════════════════════════════════════════════════════════
+   CAMADA 2 — HALO DE LUZ ROXA (vindo de baixo)
+   ════════════════════════════════════════════════════════════
+   Reproduz exatamente o efeito da referência (que é dourado)
+   usando o roxo da identidade da Code Corttex.
+ 
+   Dois halos sobrepostos:
+   - .ct-halo-outer: amplo e difuso (atmosfera geral)
+   - .ct-halo-core:  concentrado e brilhante (fonte de luz)
+ 
+   Ambos se movem com o mouse via JS (parallax suave).
+   ════════════════════════════════════════════════════════════ */
+ 
+/* Halo externo — grande e difuso */
+.ct-halo-outer {
+    position: absolute;
+    bottom: -15%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1100px;
+    height: 800px;
+ 
+    background: radial-gradient(
+        ellipse 65% 50% at 50% 100%,  /* Concentrado na base */
+        rgba(180, 36, 251, 0.35) 0%,
+        rgba(180, 36, 251, 0.12) 40%,
+        rgba(180, 36, 251, 0.03) 65%,
+        transparent 80%
+    );
+ 
+    pointer-events: none;
+    z-index: 1;
+ 
+    /* Pulsação suave de "respiração" */
+    animation: ctHaloBreathe 6s ease-in-out infinite;
+    will-change: transform, opacity;
+}
+ 
+/* Halo central — pequeno e intenso (o "núcleo" da fonte de luz) */
+.ct-halo-core {
+    position: absolute;
+    bottom: -8%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 500px;
+    height: 400px;
+ 
+    background: radial-gradient(
+        ellipse 55% 45% at 50% 100%,
+        rgba(180, 36, 251, 0.25) 0%,
+        rgba(180, 36, 251, 0.07) 50%,
+        transparent 70%
+    );
+ 
+    pointer-events: none;
+    z-index: 1;
+ 
+    /* Pulsação no sentido inverso = efeito de cintilação */
+    animation: ctHaloBreathe 6s ease-in-out infinite reverse;
+    animation-delay: -3s;  /* Offset de fase */
+    will-change: transform, opacity;
+}
+ 
+/* Animação de respiração — amplia e contrai o halo levemente */
+@keyframes ctHaloBreathe {
+    0%, 100% {
+        opacity: 0.85;
+        transform: translateX(-50%) scaleY(1);
+    }
+    50% {
+        opacity: 1;
+        transform: translateX(-50%) scaleY(1.12);
+    }
+}
+ 
+ 
+/* ════════════════════════════════════════════════════════════
+   CAMADA 3 — CANVAS DE PARTÍCULAS
+   ════════════════════════════════════════════════════════════
+   O canvas é gerenciado pelo JS (cta-section.js).
+   Fica em z-index: 2 — acima do halo mas abaixo do conteúdo.
+   pointer-events: none garante que não interfere nos cliques.
+   ════════════════════════════════════════════════════════════ */
+.ct-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+}
+ 
+ 
+/* ════════════════════════════════════════════════════════════
+   CAMADA 4 — CONTEÚDO PRINCIPAL
+   ════════════════════════════════════════════════════════════
+   z-index: 3 — sempre acima de tudo.
+   ════════════════════════════════════════════════════════════ */
+.ct-content {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+    max-width: 780px;
+    width: 100%;
+}
+ 
+ 
+/* ── LABEL DE SEÇÃO ──────────────────────────────────────── */
+/*
+  Pequeno texto cápsula acima do título.
+  Mesma linguagem visual das outras seções do site.
+*/
+.ct-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Manrope', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: var(--ct-accent);
+    margin-bottom: 36px;
+ 
+    /* Estado inicial do reveal — invisível */
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+/* Classe adicionada pelo JS ao entrar na viewport */
+.ct-eyebrow.ct-visible { opacity: 1; transform: translateY(0); }
+ 
+/* Linhas decorativas flanqueando o texto */
+.ct-eyebrow::before,
+.ct-eyebrow::after {
+    content: '';
+    display: block;
+    width: 28px;
+    height: 1px;
+    background: var(--ct-accent);
+    opacity: 0.45;
+}
+ 
+ 
+/* ── TÍTULO PRINCIPAL ────────────────────────────────────── */
+/*
+  "Pronto para passar de fase?"
+ 
+  Estratégia de reveal:
+  O JS divide o título em palavras (.ct-word) e anima cada
+  uma subindo com mola (spring). Ver cta-section.js módulo 2.
+ 
+  .ct-title começa invisível (opacity: 0) até o JS processar
+  e adicionar .ct-title-ready, que o torna visível.
+*/
+.ct-title {
+    font-family: 'Manrope', sans-serif;
+    font-size: clamp(38px, 6.5vw, 88px);
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    margin-bottom: 30px;
+ 
+    /* Invisível até o JS processar o split */
+    opacity: 0;
+    transition: opacity 0.01s;
+}
+/* Após processamento — torna visível (as palavras animam por dentro) */
+.ct-title.ct-title-ready { opacity: 1; }
+ 
+/*
+  Cada palavra fica num wrapper com overflow: hidden.
+  Isso esconde o .ct-word-inner que começa abaixo (translateY 110%).
+  Sem overflow: hidden a palavra seria visível antes de animar.
+*/
+.ct-word {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: bottom;
+    line-height: inherit;
+}
+ 
+/* Espaço natural entre as palavras */
+.ct-word + .ct-word { margin-left: 0.22em; }
+ 
+/*
+  Conteúdo interno de cada palavra.
+  Começa empurrado para baixo (fora do .ct-word).
+  O JS adiciona .ct-word-up para animar para translateY(0).
+*/
+.ct-word-inner {
+    display: inline-block;
+    transform: translateY(115%);  /* Começa escondido abaixo */
+    transition: transform 0.75s var(--ct-spring);
+}
+/* Ativado pelo JS — palavra sobe com mola */
+.ct-word-inner.ct-word-up { transform: translateY(0); }
+ 
+/*
+  Parte em itálico serif — "de fase?"
+  DM Serif Display em roxo claro, identidade visual do site.
+*/
+.ct-title-em {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--ct-accent-light);
+    letter-spacing: -0.01em;
+}
+ 
+ 
+/* ── SUBTÍTULO ───────────────────────────────────────────── */
+.ct-subtitle {
+    font-family: 'Manrope', sans-serif;
+    font-size: clamp(15px, 1.6vw, 18px);
+    font-weight: 300;
+    color: var(--ct-muted);
+    line-height: 1.78;
+    max-width: 520px;
+    margin: 0 auto 54px;
+ 
+    /* Reveal com delay — entra após o título */
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease 0.5s, transform 0.8s ease 0.5s;
+}
+.ct-subtitle.ct-visible { opacity: 1; transform: translateY(0); }
+ 
+ 
+/* ── BOTÕES ──────────────────────────────────────────────── */
+.ct-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+ 
+    /* Reveal com delay maior — entra por último */
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.7s ease 0.72s, transform 0.7s ease 0.72s;
+}
+.ct-actions.ct-visible { opacity: 1; transform: translateY(0); }
+ 
+ 
+/* ── Botão primário: WhatsApp ───────────────────────────── */
+/*
+  Sólido roxo com glow. Efeito de "onda de luz" no hover:
+  o ::before é um radial-gradient centrado em --ct-bx/--ct-by
+  (posição do mouse), ativado pelo JS.
+*/
+
+.span-2{
+    color: #fff;
+}
+
+.ct-btn-wa {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 17px 34px;
+    background: var(--ct-accent);
+    border: none;
+    border-radius: 50px;
+    font-family: 'Manrope', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+    overflow: hidden;           /* Contém o ripple e o ::before */
+ 
+    /* Sombra roxa de base — botão "flutua" sobre o halo */
+    box-shadow:
+        0 0 40px rgba(180, 36, 251, 0.35),
+        0 4px 24px rgba(0, 0, 0, 0.4);
+ 
+    transition:
+        transform    0.3s var(--ct-spring),
+        box-shadow   0.35s ease;
+}
+ 
+/* Onda de luz que segue o mouse — ver JS módulo 4 */
+.ct-btn-wa::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        circle 80px at var(--ct-bx, 50%) var(--ct-by, 50%),
+        rgba(255, 255, 255, 0.28) 0%,
+        transparent 70%
+    );
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    pointer-events: none;
+}
+ 
+.ct-btn-wa:hover {
+    transform: translateY(-4px) scale(1.03);
+    box-shadow:
+        0 0 60px rgba(180, 36, 251, 0.6),
+        0 8px 32px rgba(0, 0, 0, 0.5);
+}
+.ct-btn-wa:hover::before { opacity: 1; }
+.ct-btn-wa:active        { transform: translateY(0) scale(0.97); }
+ 
+/* Ícone e texto acima do ::before */
+.ct-btn-wa svg,
+.ct-btn-wa > span { position: relative; z-index: 1; }
+ 
+ 
+/* ── Botão secundário: Ver portfólio ────────────────────── */
+/*
+  Transparente com borda roxa.
+  Hover: fundo preenche da esquerda via ::before scaleX.
+*/
+.ct-btn-portfolio {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 17px 34px;
+    background: transparent;
+    border: 1px solid rgba(180, 36, 251, 0.4);
+    border-radius: 50px;
+    font-family: 'Manrope', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.65);
+    text-decoration: none;
+    cursor: pointer;
+    overflow: hidden;
+    transition:
+        color        0.35s ease,
+        border-color 0.35s ease,
+        transform    0.25s ease;
+}
+ 
+/* Preenchimento da esquerda para direita */
+.ct-btn-portfolio::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--ct-accent-soft);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.4s var(--ct-ease);
+    pointer-events: none;
+}
+ 
+.ct-btn-portfolio:hover {
+    color: #fff;
+    border-color: rgba(180, 36, 251, 0.7);
+    transform: translateY(-3px);
+}
+.ct-btn-portfolio:hover::before { transform: scaleX(1); }
+.ct-btn-portfolio:active          { transform: translateY(0); }
+ 
+/* Seta — avança no hover */
+.ct-btn-arrow {
+    display: inline-block;
+    transition: transform 0.3s ease;
+    position: relative;
+    z-index: 1;
+}
+.ct-btn-portfolio:hover .ct-btn-arrow { transform: translateX(5px); }
+.ct-btn-portfolio > span { position: relative; z-index: 1; }
+ 
+ 
+/* ── NOTA DE RODAPÉ ──────────────────────────────────────── */
+.ct-footnote {
+    font-family: 'Manrope', sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    color: rgba(255, 255, 253, 0.2);
+    letter-spacing: 0.02em;
+ 
+    opacity: 0;
+    transition: opacity 0.8s ease 1s;
+}
+.ct-footnote.ct-visible { opacity: 1; }
+ 
+/* "Sem compromisso." em negrito e mais visível */
+.ct-footnote strong {
+    font-weight: 600;
+    color: rgba(255, 255, 253, 0.38);
+}
+ 
+ 
+/* ════════════════════════════════════════════════════════════
+   RESPONSIVO
+   ════════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+    .ct-section      { padding: 72px 20px; min-height: auto; }
+    .ct-actions      { flex-direction: column; align-items: stretch; }
+    .ct-btn-wa,
+    .ct-btn-portfolio { justify-content: center; }
+    .ct-halo-outer   { width: 600px; }
+    .ct-halo-core    { width: 300px; }
+}
+ 
+@media (max-width: 480px) {
+    .ct-title { letter-spacing: -0.02em; }
+    .ct-grid-inner { background-size: 50px 50px; }
+}
+
+
+/* ============================================================
+   FOOTER — Code Corttex
+   ============================================================ */
+ 
+ 
+/* ── VARIÁVEIS ────────────────────────────────────────────── */
+:root {
+    --ft-accent:  #B424FB;
+    --ft-bg:      #070709;
+    --ft-border:  rgba(255, 255, 255, 0.07);
+    --ft-text:    rgba(255, 255, 253, 0.72);
+    --ft-muted:   rgba(255, 255, 253, 0.30);
+    --ft-white:   #ffffff;
+    --ft-ease:    cubic-bezier(0.4, 0, 0.2, 1);
+}
+ 
+ 
+/* ════════════════════════════════════════════════════════════
+   WRAPPER GERAL
+   ════════════════════════════════════════════════════════════
+   overflow-x: hidden garante que nada vaze horizontalmente.
+   Não usamos overflow: hidden no eixo Y para que o scroll
+   do usuário chegue ao footer normalmente.
+   ════════════════════════════════════════════════════════════ */
+.ft-footer {
+    position: relative;
+    background: var(--ft-bg);
+    overflow-x: hidden;
+}
+ 
+/* Linha roxa de separação no topo */
+.ft-footer::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(180, 36, 251, 0.45) 50%,
+        transparent 100%);
+    z-index: 2;
+    pointer-events: none;
+}
+ 
+ 
+/* ════════════════════════════════════════════════════════════
+   ÁREA SUPERIOR — 4 COLUNAS
+   ════════════════════════════════════════════════════════════
+   Col 1 (marca): mais larga para respirar
+   Col 2 e 3 (links): iguais
+   Col 4 (legal + voltar topo): ligeiramente maior por causa
+   do botão pill
+   ════════════════════════════════════════════════════════════ */
+.ft-top {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 72px 48px 60px;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1.3fr;
+    gap: 40px;
+    align-items: start;
+}
+ 
+ 
+/* ── COLUNA 1: MARCA ─────────────────────────────────────── */
+.ft-brand {
+    display: flex;
+    flex-direction: column;
+}
+ 
+/*
+  LOGO PEQUENA
+  Troque o conteúdo de .ft-logo-wrap por:
+  <img src="img/logo-codecortex-transparente.png" alt="Code Corttex">
+  quando pronto. O fallback .ft-logo-fallback desaparece
+  automaticamente quando o <img> está presente.
+*/
+.ft-logo-wrap {
+    display: block;
+    margin-bottom: 18px;
+    text-decoration: none;
+    line-height: 0; /* Remove espaço extra abaixo da img */
+}
+.ft-logo-wrap img {
+    height: 36px;
+    width: auto;
+    display: block;
+    filter: brightness(1.1);
+}
+ 
+/* Placeholder visual enquanto não há img */
+.ft-logo-fallback {
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    padding: 0 14px;
+    background: rgba(180, 36, 251, 0.08);
+    border: 1px dashed rgba(180, 36, 251, 0.3);
+    border-radius: 6px;
+    font-family: 'Manrope', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(180, 36, 251, 0.45);
+}
+ 
+/* Tagline */
+.ft-tagline {
+    font-family: 'Manrope', sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--ft-muted);
+    line-height: 1.72;
+    max-width: 230px;
+    margin-bottom: 24px;
+}
+ 
+/* Ícones sociais */
+.ft-social {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+ 
+.ft-social-link {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid var(--ft-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ft-muted);
+    text-decoration: none;
+    flex-shrink: 0;
+    transition:
+        border-color 0.28s ease,
+        color        0.28s ease,
+        background   0.28s ease,
+        transform    0.25s ease;
+}
+.ft-social-link:hover {
+    border-color: rgba(180, 36, 251, 0.5);
+    color: #fff;
+    background: rgba(180, 36, 251, 0.1);
+    transform: translateY(-2px);
+}
+.ft-social-link svg {
+    width: 15px;
+    height: 15px;
+    fill: currentColor;
+    display: block;
+}
+ 
+/* Copyright */
+.ft-copy {
+    font-family: 'Manrope', sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--ft-muted);
+    line-height: 1.6;
+}
+ 
+ 
+/* ── COLUNAS 2 e 3: NAVEGAÇÃO ────────────────────────────── */
+.ft-nav-col {
+    display: flex;
+    flex-direction: column;
+}
+ 
+/* Cabeçalho da coluna */
+.ft-col-title {
+    font-family: 'Manrope', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 253, 0.32);
+    margin-bottom: 22px;
+    display: block;
+}
+ 
+/* Lista de links */
+.ft-nav-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+}
+ 
+.ft-nav-link {
+    font-family: 'Manrope', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--ft-text);
+    text-decoration: none;
+    display: inline-block;
+    position: relative;
+    transition: color 0.25s ease;
+}
+/* Sublinhado roxo que cresce da esquerda no hover */
+.ft-nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; left: 0;
+    width: 0%; height: 1px;
+    background: var(--ft-accent);
+    transition: width 0.3s var(--ft-ease);
+}
+.ft-nav-link:hover        { color: #fff; }
+.ft-nav-link:hover::after { width: 100%; }
+ 
+ 
+/* ── COLUNA 4: LEGAL + BOTÃO TOPO ────────────────────────── */
+.ft-legal-col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+ 
+/*
+  Botão "Voltar ao topo"
+  Pill com borda + ícone de seta circular — fiel à referência.
+  O href="#" é interceptado pelo JS para smooth scroll.
+*/
+.ft-top-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Manrope', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--ft-text);
+    background: transparent;
+    border: 1px solid var(--ft-border);
+    border-radius: 50px;
+    padding: 10px 14px 10px 18px;
+    cursor: pointer;
+    text-decoration: none;
+    margin-bottom: 36px;
+    transition:
+        border-color 0.3s ease,
+        color        0.3s ease,
+        transform    0.3s ease;
+}
+.ft-top-btn:hover {
+    border-color: rgba(180, 36, 251, 0.5);
+    color: #fff;
+    transform: translateY(-2px);
+}
+ 
+/* Ícone de seta */
+.ft-top-icon {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    line-height: 1;
+    transition:
+        border-color 0.3s ease,
+        background   0.3s ease,
+        transform    0.35s ease;
+}
+.ft-top-btn:hover .ft-top-icon {
+    border-color: rgba(180, 36, 251, 0.6);
+    background: rgba(180, 36, 251, 0.15);
+    transform: translateY(-3px);
+}
+ 
+ 
+/* ════════════════════════════════════════════════════════════
+   DIVISÓRIA
+   ════════════════════════════════════════════════════════════ */
+.ft-divider {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 48px;
+}
+.ft-divider-line {
+    border: none;
+    border-top: 1px solid var(--ft-border);
+    margin: 0;
+}
+ 
+ 
+/* ════════════════════════════════════════════════════════════
+   LOGO GRANDE — ANIMADA PELO SCROLL
+   ════════════════════════════════════════════════════════════
+ 
+   PRINCÍPIO DO EFEITO:
+   Cada .ft-logo-part começa com translateY positivo alto
+   (letra abaixo do container, escondida pelo overflow:hidden).
+   Conforme o usuário rola para baixo, o JS calcula um valor
+   entre 0 e 1 (progresso do scroll no footer) e aplica
+   translateY proporcional em cada parte.
+   Cada parte tem um delay diferente (stagger) que cria o
+   efeito de cascata: letras da esquerda chegam antes.
+ 
+   CUSTOM PROPERTY --ft-ty:
+   Setada pelo JS como translateY(Xpx) em cada .ft-logo-part.
+   Não use transition aqui — o JS precisa de controle direto
+   do valor sem interpolação CSS (seria para animação de entrada,
+   não para scroll tracking).
+ 
+   QUANTIDADE DE PARTES:
+   Qualquer número. O JS detecta todos os [data-ft-part]
+   dentro do [data-ft-stage] e distribui o stagger automaticamente.
+   ════════════════════════════════════════════════════════════ */
+ 
+/* Container que define a altura visível da logo */
+.ft-logo-stage {
+    width: 100%;
+    overflow: hidden;           /* Recorta partes ainda abaixo */
+    height: clamp(180px, 26vw, 320px); /* Ajuste para encaixar sua logo */
+    position: relative;
+    /* Sem margin-top — cola na linha divisória */
+}
+ 
+/* Alinha as partes pela base, lado a lado */
+.ft-logo-row {
+    position: absolute;
+    bottom: 0;
+    left: 0; right: 0;
+    height: 100%;
+    display: flex;
+    align-items: flex-end;   /* Âncora tudo na base */
+    padding: 0 48px;
+    gap: 0;
+    box-sizing: border-box;
+}
+ 
+/*
+  Cada parte da logo.
+  flex: 1 divide a largura igualmente.
+  Se as proporções das letras forem diferentes, você pode
+  definir width: XX% via atributo style no HTML de cada parte.
+ 
+  Exemplo: data-ft-part="0" style="width: 20%"
+*/
+.ft-logo-part {
+    flex: 1;
+    height: 100%;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;          /* Corta o conteúdo abaixo da borda da parte */
+ 
+    /*
+      --ft-ty é definida pelo JS em pixels.
+      Positivo = abaixo do destino (escondido pelo overflow pai).
+      Zero = na posição final.
+    */
+    transform: translateY(var(--ft-ty, 120%));
+ 
+    /* GPU compositing — evita jank no scroll */
+    will-change: transform;
+}
+ 
+/* Imagem real da logo */
+.ft-logo-part img {
+    width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    object-position: bottom center;
+    display: block;
+    /* Opacidade baixa como na referência */
+    opacity: 0.11;
+    filter: brightness(0) invert(1);
+    user-select: none;
+    pointer-events: none;
+    -webkit-user-drag: none;
+}
+ 
+/*
+  MODO TEXTO (placeholder enquanto as imagens não chegam):
+  Ativado pela classe ft-text-mode + data-ft-label no HTML.
+  O ::before exibe a letra/símbolo.
+  Para desativar: remova a classe ft-text-mode e o atributo
+  data-ft-label. Adicione a <img> dentro do .ft-logo-part.
+*/
+.ft-logo-part.ft-text-mode {
+    justify-content: center;
+}
+.ft-logo-part.ft-text-mode::before {
+    content: attr(data-ft-label);
+    font-family: 'Manrope', sans-serif;
+    font-size: clamp(90px, 15vw, 220px);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1; /* Aumente ligeiramente para evitar cortes */
+    
+    /* Aumente a opacidade para teste (ex: 0.3 ou 1.0) */
+    color: rgba(255, 255, 255, 0.9); 
+    
+    user-select: none;
+    pointer-events: none;
+    
+    /* Adicione estas linhas para garantir a exibição */
+    display: block; 
+    width: 100%;
+    text-align: center;
+}
+/* Esconde img quando em modo texto */
+.ft-logo-part.ft-text-mode img { display: none; }
+ 
+ 
+/* ════════════════════════════════════════════════════════════
+   RESPONSIVO
+   ════════════════════════════════════════════════════════════ */
+@media (max-width: 1100px) {
+    .ft-top {
+        grid-template-columns: 1fr 1fr;
+        gap: 40px 32px;
+        padding: 56px 32px 48px;
+    }
+    .ft-brand { grid-column: 1 / -1; }
+    .ft-logo-stage { height: clamp(130px, 22vw, 220px); }
+    .ft-logo-row   { padding: 0 32px; }
+    .ft-divider    { padding: 0 32px; }
+}
+ 
+@media (max-width: 680px) {
+    .ft-top {
+        grid-template-columns: 1fr;
+        padding: 48px 20px 40px;
+    }
+    .ft-brand { grid-column: auto; }
+    .ft-logo-stage { height: clamp(90px, 28vw, 150px); }
+    .ft-logo-row   { padding: 0 20px; }
+    .ft-divider    { padding: 0 20px; }
+
+}
+ 
+@media (max-width: 420px) {
+    .ft-logo-part.ft-text-mode::before {
+        font-size: clamp(56px, 17vw, 100px);
+    }
 }
