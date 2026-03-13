@@ -43,6 +43,16 @@
     function updateHeader() {
         var y = window.scrollY || window.pageYOffset || 0;
 
+        /* No mobile (≤768px): header principal sempre visível, sem troca */
+        if (window.innerWidth <= 768) {
+            headerMain.classList.remove('header-hidden');
+            headerCompact.classList.remove('compact-visible');
+            isCompact = false;
+            updateActiveLink();
+            ticking = false;
+            return;
+        }
+
         if (footerVisible) {
             // Quando footer está visível, força estado inicial
             if (isCompact) {
@@ -562,7 +572,21 @@
 
 
 /* ============================================================
-   6. SEÇÃO DEPOIMENTOS — carrossel
+   6. SEÇÃO DEPOIMENTOS — carrossel orbital com loop infinito
+   ============================================================
+   TÉCNICA: Clone infinito com flag explícita de "estou num clone"
+
+   Track:  [cloneLast · S0 · S1 · S2 · cloneFirst]
+   índices:      0      1    2    3        4
+
+   `current`    = índice real (0 a TOTAL-1), nunca muda de semântica
+   `trackPos`   = índice corrente no track (inclui clones)
+
+   Fluxo do loop:
+     1. Navega animado para cloneFirst (trackPos = TOTAL+1) ou
+        cloneLast (trackPos = 0)
+     2. transitionend detecta via flag `pendingSnap`
+     3. Desliga transição, salta para o real sem piscar
    ============================================================ */
 (function () {
     'use strict';
@@ -578,123 +602,274 @@
 
     if (!section || !track) return;
 
-    var slides  = Array.prototype.slice.call(track.querySelectorAll('.dp-slide'));
-    var TOTAL   = slides.length;
-    var current = 0;
-    var GAP     = 16;
+    /* ── Slides reais ────────────────────────────────────────── */
+    var realSlides = Array.prototype.slice.call(track.querySelectorAll('.dp-slide'));
+    var TOTAL      = realSlides.length;
+    if (TOTAL < 2) return;
 
-    function calcOffset(index) {
-        var containerW = colOuter.offsetWidth;
-        var offsetX    = 80; /* trackPad */
-        for (var i = 0; i < index; i++) { offsetX += slides[i].offsetWidth + GAP; }
-        offsetX -= (containerW / 2) - (slides[index].offsetWidth / 2);
-        return -offsetX;
+    var SLIDE_GAP = 24;   /* px — mesmo valor do gap CSS */
+    var current   = 0;    /* índice real ativo (0 … TOTAL-1) */
+    var trackPos  = 1;    /* posição no track com clones (1 = S0 no início) */
+    var busy      = false;
+    var pendingSnap = false; /* true quando animamos para um clone */
+    var snapToTrack = 0;     /* trackPos real para o qual vamos pular */
+
+    /* ── Injeta clones ───────────────────────────────────────── */
+    /* Track final: [cLast, S0, S1, …, S(n-1), cFirst] */
+    var cFirst = realSlides[0].cloneNode(true);
+    var cLast  = realSlides[TOTAL - 1].cloneNode(true);
+    cFirst.setAttribute('aria-hidden', 'true');
+    cLast.setAttribute('aria-hidden', 'true');
+    cFirst.classList.add('dp-clone');
+    cLast.classList.add('dp-clone');
+    track.appendChild(cFirst);
+    track.insertBefore(cLast, realSlides[0]);
+
+    /* Array com TODOS os slides (inclui clones) */
+    var all = Array.prototype.slice.call(track.querySelectorAll('.dp-slide'));
+    /* all = [cLast, S0, S1, …, S(n-1), cFirst]  — tamanho TOTAL+2 */
+
+    /* ── Calcula translateX para centralizar um trackPos ─────── */
+    function offsetFor(tp) {
+        if (!colOuter) return 0;
+        var W   = colOuter.offsetWidth;
+        var el  = all[tp];
+        if (!el) return 0;
+        var pos = 0;
+        for (var i = 0; i < tp; i++) {
+            pos += (all[i] ? all[i].offsetWidth : 0) + SLIDE_GAP;
+        }
+        return (W / 2) - (el.offsetWidth / 2) - pos;
     }
 
-    function buildDots() {
-        dotsRow.innerHTML = '';
-        slides.forEach(function (_, i) {
-            var btn = document.createElement('button');
-            btn.className = 'dp-dot' + (i === 0 ? ' dp-dot-active' : '');
-            btn.setAttribute('role', 'tab');
-            btn.setAttribute('aria-label', 'Depoimento ' + (i + 1));
-            btn.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
-            btn.addEventListener('click', function () { goTo(i); resetTimer(); });
-            dotsRow.appendChild(btn);
+    /* ── Aplica estados orbitais sem mexer em transition ──────── */
+    function applyOrbits(activeTp) {
+        all.forEach(function (slide, i) {
+            var d = i - activeTp;
+            slide.classList.remove('dp-slide-active', 'dp-orbit-adj', 'dp-orbit-far');
+
+            if (d === 0) {
+                slide.classList.add('dp-slide-active');
+                slide.style.transform     = 'scale(1)';
+                slide.style.opacity       = '1';
+                slide.style.filter        = 'none';
+                slide.style.zIndex        = '5';
+            } else if (Math.abs(d) === 1) {
+                slide.classList.add('dp-orbit-adj');
+                slide.style.transform     = 'scale(0.82) translateX(' + (d > 0 ? '18px' : '-18px') + ')';
+                slide.style.opacity       = '0.45';
+                slide.style.filter        = 'blur(3px)';
+                slide.style.zIndex        = '3';
+            } else {
+                slide.classList.add('dp-orbit-far');
+                slide.style.transform     = 'scale(0.65)';
+                slide.style.opacity       = '0.12';
+                slide.style.filter        = 'blur(8px)';
+                slide.style.zIndex        = '1';
+            }
         });
+    }
+
+    /* ── Move track ──────────────────────────────────────────── */
+    function moveTo(tp, animate) {
+        if (!animate) {
+            /* Força reflow para garantir que a remoção da transição seja aplicada
+               antes de mudar o transform — evita o flash */
+            track.style.transition = 'none';
+            track.getBoundingClientRect(); /* reflow */
+        } else {
+            track.style.transition = 'transform 0.68s cubic-bezier(0.4, 0, 0.2, 1)';
+        }
+        track.style.transform = 'translateX(' + offsetFor(tp) + 'px)';
+    }
+
+    /* ── Navegação principal ─────────────────────────────────── */
+    function goTo(newReal, dir) {
+        if (busy) return;
+
+        newReal = ((newReal % TOTAL) + TOTAL) % TOTAL;
+
+        var toTp;
+        pendingSnap  = false;
+
+        if (dir === 'next' && newReal === 0) {
+            /* Último → primeiro: anima para cFirst (fim do track) */
+            toTp         = TOTAL + 1;
+            pendingSnap  = true;
+            snapToTrack  = 1; /* depois salta para S0 */
+        } else if (dir === 'prev' && newReal === TOTAL - 1) {
+            /* Primeiro → último: anima para cLast (início do track) */
+            toTp         = 0;
+            pendingSnap  = true;
+            snapToTrack  = TOTAL; /* depois salta para S(n-1) */
+        } else {
+            toTp = newReal + 1;
+        }
+
+        busy     = true;
+        current  = newReal;
+        trackPos = toTp;
+
+        applyOrbits(toTp);
+        moveTo(toTp, true);
+        updateDots();
+        updateCounter();
+    }
+
+    /* ── transitionend: só ouve o transform DO TRACK ─────────── */
+    track.addEventListener('transitionend', function (e) {
+        /* Ignora eventos de outros elementos filhos (opacity, filter…) */
+        if (e.target !== track) return;
+        if (e.propertyName !== 'transform') return;
+
+        busy = false;
+
+        if (pendingSnap) {
+            pendingSnap = false;
+            trackPos    = snapToTrack;
+
+            /* Desliga transition em TODOS os slides antes do teleporte.
+               Sem isso, o CSS transition de 0.68s anima os slides saindo
+               do estado do clone, criando o flash de "sumir e reaparecer". */
+            all.forEach(function (s) { s.style.transition = 'none'; });
+
+            /* Aplica estilos orbitais finais instantaneamente */
+            applyOrbits(trackPos);
+
+            /* Pula o track para a posicao real sem animacao */
+            moveTo(trackPos, false);
+
+            /* Forca reflow: o browser aplica tudo acima antes de reativar */
+            track.getBoundingClientRect();
+
+            /* Reativa transitions nos slides para as proximas navegacoes */
+            all.forEach(function (s) { s.style.transition = ''; });
+        }
+    });
+
+    /* ── Dots ────────────────────────────────────────────────── */
+    function buildDots() {
+        if (!dotsRow) return;
+        dotsRow.innerHTML = '';
+        for (var i = 0; i < TOTAL; i++) {
+            (function (idx) {
+                var btn = document.createElement('button');
+                btn.className = 'dp-dot' + (idx === 0 ? ' dp-dot-active' : '');
+                btn.setAttribute('role', 'tab');
+                btn.setAttribute('aria-label', 'Depoimento ' + (idx + 1));
+                btn.setAttribute('aria-selected', idx === 0 ? 'true' : 'false');
+                btn.addEventListener('click', function () {
+                    if (idx === current) return;
+                    goTo(idx, idx > current ? 'next' : 'prev');
+                    resetTimer();
+                });
+                dotsRow.appendChild(btn);
+            })(i);
+        }
     }
 
     function updateDots() {
+        if (!dotsRow) return;
         Array.prototype.forEach.call(dotsRow.querySelectorAll('.dp-dot'), function (dot, i) {
-            var active = i === current;
-            dot.classList.toggle('dp-dot-active', active);
-            dot.setAttribute('aria-selected', active ? 'true' : 'false');
+            var on = (i === current);
+            dot.classList.toggle('dp-dot-active', on);
+            dot.setAttribute('aria-selected', on ? 'true' : 'false');
         });
     }
 
+    /* ── Contador ────────────────────────────────────────────── */
     function updateCounter() {
         var n = (current + 1 < 10 ? '0' : '') + (current + 1);
-        var t = '/ ' + (TOTAL < 10 ? '0' : '') + TOTAL;
         if (currentNum) {
-            currentNum.style.opacity = '0'; currentNum.style.transform = 'translateY(-6px)';
+            currentNum.style.opacity   = '0';
+            currentNum.style.transform = 'translateY(-6px)';
             setTimeout(function () {
-                currentNum.textContent = n; currentNum.style.opacity = '1'; currentNum.style.transform = 'translateY(0)';
-            }, 200);
+                currentNum.textContent     = n;
+                currentNum.style.opacity   = '1';
+                currentNum.style.transform = 'translateY(0)';
+            }, 180);
         }
-        if (totalNum) totalNum.textContent = t;
+        if (totalNum) totalNum.textContent = '/ ' + (TOTAL < 10 ? '0' : '') + TOTAL;
     }
 
-    function goTo(newIndex) {
-        newIndex = ((newIndex % TOTAL) + TOTAL) % TOTAL;
-        if (newIndex === current && track.style.transform !== '') return;
-        current = newIndex;
-        slides.forEach(function (slide, i) { slide.classList.toggle('dp-slide-active', i === current); });
-        requestAnimationFrame(function () {
-            requestAnimationFrame(function () {
-                track.style.transition = 'transform 0.62s cubic-bezier(0.4, 0, 0.2, 1)';
-                track.style.transform  = 'translateX(' + calcOffset(current) + 'px)';
-            });
-        });
-        updateDots(); updateCounter();
-    }
-
+    /* ── Init ────────────────────────────────────────────────── */
     function init() {
-        buildDots(); updateCounter();
-        if (currentNum) { currentNum.style.transition = 'opacity 0.22s ease, transform 0.22s ease'; }
-        track.style.transition = 'none';
-        requestAnimationFrame(function () { track.style.transform = 'translateX(' + calcOffset(0) + 'px)'; });
+        track.style.gap = SLIDE_GAP + 'px';
+        buildDots();
+
+        if (currentNum) currentNum.style.transition = 'opacity 0.2s ease, transform 0.2s ease';
+        updateCounter();
+
+        /* Começa em S0 (trackPos = 1) sem animação */
+        applyOrbits(1);
+        moveTo(1, false);
     }
 
+    /* Resize */
     var resizeT;
     window.addEventListener('resize', function () {
         clearTimeout(resizeT);
-        resizeT = setTimeout(function () {
-            track.style.transition = 'none';
-            track.style.transform  = 'translateX(' + calcOffset(current) + 'px)';
-        }, 160);
+        resizeT = setTimeout(function () { moveTo(trackPos, false); }, 160);
     }, { passive: true });
 
+    /* ── Autoplay ────────────────────────────────────────────── */
     var timer, paused = false;
-    function startTimer() { clearInterval(timer); timer = setInterval(function () { if (!paused) goTo(current + 1); }, 6000); }
+    function startTimer() {
+        clearInterval(timer);
+        timer = setInterval(function () { if (!paused) goTo(current + 1, 'next'); }, 6000);
+    }
     function resetTimer() { clearInterval(timer); startTimer(); }
 
     section.addEventListener('mouseenter', function () { paused = true; });
     section.addEventListener('mouseleave', function () { paused = false; });
 
-    if (navPrev) navPrev.addEventListener('click', function () { goTo(current - 1); resetTimer(); });
-    if (navNext) navNext.addEventListener('click', function () { goTo(current + 1); resetTimer(); });
+    /* ── Botões ──────────────────────────────────────────────── */
+    if (navPrev) navPrev.addEventListener('click', function () { goTo(current - 1, 'prev'); resetTimer(); });
+    if (navNext) navNext.addEventListener('click', function () { goTo(current + 1, 'next'); resetTimer(); });
 
-    slides.forEach(function (slide, i) {
-        slide.addEventListener('click', function () { if (i !== current) { goTo(i); resetTimer(); } });
+    /* Clique em slide adjacente */
+    all.forEach(function (slide, tp) {
+        slide.addEventListener('click', function () {
+            if (slide.classList.contains('dp-clone')) return;
+            var ri = tp - 1;
+            if (ri !== current) { goTo(ri, ri > current ? 'next' : 'prev'); resetTimer(); }
+        });
     });
 
+    /* Swipe */
     var tx = 0, ty = 0;
-    section.addEventListener('touchstart', function (e) { tx = e.touches[0].clientX; ty = e.touches[0].clientY; }, { passive: true });
-    section.addEventListener('touchend',   function (e) {
+    section.addEventListener('touchstart', function (e) {
+        tx = e.touches[0].clientX; ty = e.touches[0].clientY;
+    }, { passive: true });
+    section.addEventListener('touchend', function (e) {
         var dx = e.changedTouches[0].clientX - tx;
         var dy = e.changedTouches[0].clientY - ty;
-        if (Math.abs(dx) > 44 && Math.abs(dx) > Math.abs(dy) * 1.4) { goTo(dx < 0 ? current + 1 : current - 1); resetTimer(); }
+        if (Math.abs(dx) > 44 && Math.abs(dx) > Math.abs(dy) * 1.4) {
+            goTo(dx < 0 ? current + 1 : current - 1, dx < 0 ? 'next' : 'prev');
+            resetTimer();
+        }
     }, { passive: true });
 
+    /* Teclado */
     document.addEventListener('keydown', function (e) {
         var r = section.getBoundingClientRect();
         if (r.bottom < 0 || r.top > window.innerHeight) return;
-        if (e.key === 'ArrowLeft')  { goTo(current - 1); resetTimer(); }
-        if (e.key === 'ArrowRight') { goTo(current + 1); resetTimer(); }
+        if (e.key === 'ArrowLeft')  { goTo(current - 1, 'prev'); resetTimer(); }
+        if (e.key === 'ArrowRight') { goTo(current + 1, 'next'); resetTimer(); }
     });
 
     /* Reveal sidebar */
-    var dpRevealEls = Array.prototype.slice.call(document.querySelectorAll('[data-dp-reveal]'));
-    var dpRevObs = new IntersectionObserver(function (entries) {
+    var dpRevEls = Array.prototype.slice.call(document.querySelectorAll('[data-dp-reveal]'));
+    var dpObs = new IntersectionObserver(function (entries) {
         entries.forEach(function (e) {
             if (e.isIntersecting) {
-                var idx = dpRevealEls.indexOf(e.target);
+                var idx = dpRevEls.indexOf(e.target);
                 setTimeout(function () { e.target.classList.add('dp-visible'); }, idx * 90);
-                dpRevObs.unobserve(e.target);
+                dpObs.unobserve(e.target);
             }
         });
     }, { threshold: 0.25 });
-    dpRevealEls.forEach(function (el) { dpRevObs.observe(el); });
+    dpRevEls.forEach(function (el) { dpObs.observe(el); });
 
     if (document.readyState === 'complete') { init(); startTimer(); }
     else { window.addEventListener('load', function () { init(); startTimer(); }); }
