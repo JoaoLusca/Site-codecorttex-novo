@@ -4665,6 +4665,10 @@ body.spotlight-active .spotlight-overlay {
         text-align: left;
     }
 
+    .hero .hero-content .btn-container .btn {
+        width: 100%;
+    }
+
     .hero .hero-content h1 {
         font-size: clamp(2.4rem, 8vw, 4rem);
     }
@@ -4793,6 +4797,10 @@ body.spotlight-active .spotlight-overlay {
 
     .dp-nav-row {
         padding: 0 24px;
+    }
+
+    .dp-nav {
+        top: 90%;
     }
 
     .pf-headline {
