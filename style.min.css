@@ -492,13 +492,12 @@ header .nav-btn:hover {
     display: flex;
     flex-direction: column;
     text-align: left;
-    width: 30%;
+    width: 40%;
     gap: 1rem;
-    margin-left: 250px;
     position: relative;
     z-index: 1;
     pointer-events: auto;
-    
+    margin-left: 250px;
 
     & .hero-tagline {
         display: inline-flex;
@@ -4012,14 +4011,15 @@ body.spotlight-active .spotlight-overlay {
 }
 
 .ft-col-title {
-    font-family: 'Manrope', sans-serif;
-    font-size: 10px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 12px;
     font-weight: 700;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.28em;
     text-transform: uppercase;
-    color: rgba(255, 255, 253, 0.60);
+    color: rgba(255, 255, 253, 1);
     margin-bottom: 22px;
     display: block;
+    font-style: normal;
 }
 
 .ft-nav-list {
@@ -4053,10 +4053,13 @@ body.spotlight-active .spotlight-overlay {
 
 .ft-nav-link:hover {
     color: #fff;
+    transform: translateY(0px);
+    font-size: 13px;
 }
 
 .ft-nav-link:hover::after {
     width: 100%;
+
 }
 
 .ft-legal-col {
@@ -4837,7 +4840,17 @@ body.spotlight-active .spotlight-overlay {
     }
 
     .hero {
-        padding: 2rem 24px;
+        padding: 1.5rem;
+    }
+    
+    .hero .hero-content {
+        width: 100%; /* No mobile ocupa a largura toda */
+    }
+
+    .hero .hero-video {
+        height: 100%;
+        width: auto;
+        opacity: 0.3;
     }
 
     .sobre {
