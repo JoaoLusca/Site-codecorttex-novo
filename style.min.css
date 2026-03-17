@@ -5,18 +5,15 @@
     cursor: none;
 }
 
-/*ESTILO CURSOR*/
-
 #cur,
 #cur-r {
     position: fixed !important;
-    /* Força o posicionamento fixo */
+    
     pointer-events: none;
     z-index: 99999;
-    /* Valor muito alto para ficar acima do scroll */
+    
 }
 
-/* O ponto central */
 #cur {
     position: fixed;
     top: 0;
@@ -31,7 +28,6 @@
     will-change: left, top;
 }
 
-/* O círculo seguidor (com atraso/suavização) */
 #cur-r {
     position: fixed;
     top: 0;
@@ -47,7 +43,6 @@
     will-change: left, top;
 }
 
-/* Estilo quando o mouse está sobre um elemento interativo */
 body.h #cur-r {
     width: 56px;
     height: 56px;
@@ -58,7 +53,6 @@ body.h #cur {
     opacity: .4;
 }
 
-/*Estilo do Span*/
 span {
     color: #b324fb;
     font-family: "DM Serif Display", sans-serif;
@@ -74,16 +68,16 @@ body {
     font-size: 18px;
     cursor: none;
     overflow-x: hidden;
-    /* Esconde o cursor padrão do sistema */
+    
 
 }
 
 :root {
-    /* ── Variáveis globais ── */
+    
     --x: 50vw;
     --y: 50vh;
 
-    /* ── Depoimentos ── */
+    
     --dp-accent: #B424FB;
     --dp-accent-soft: rgba(180, 36, 251, 0.16);
     --dp-accent-glow: rgba(180, 36, 251, 0.45);
@@ -96,7 +90,7 @@ body {
     --dp-white: #ffffff;
     --dp-ease: cubic-bezier(0.4, 0, 0.2, 1);
 
-    /* ── Portfólio ── */
+    
     --pf-accent: #B424FB;
     --pf-accent-dim: rgba(180, 36, 251, 0.18);
     --pf-bg: #070709;
@@ -104,7 +98,7 @@ body {
     --pf-muted: rgba(255, 255, 253, 0.32);
     --pf-ease: cubic-bezier(0.4, 0, 0.2, 1);
 
-    /* ── FAQ / Contato ── */
+    
     --fq-accent: #B424FB;
     --fq-accent-glow: rgba(180, 36, 251, 0.35);
     --fq-accent-soft: rgba(180, 36, 251, 0.12);
@@ -113,12 +107,12 @@ body {
     --fq-border: rgba(255, 255, 255, 0.07);
     --fq-border-hover: rgba(180, 36, 251, 0.3);
     --fq-text: rgba(255, 255, 253, 0.82);
-    --fq-muted: rgba(255, 255, 253, 0.35);
+    --fq-muted: rgba(255, 255, 253, 0.58);
     --fq-white: #ffffff;
     --fq-ease: cubic-bezier(0.4, 0, 0.2, 1);
     --fq-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 
-    /* ── CTA ── */
+    
     --ct-accent: #B424FB;
     --ct-accent-light: #d068ff;
     --ct-accent-glow: rgba(180, 36, 251, 0.55);
@@ -130,18 +124,16 @@ body {
     --ct-ease: cubic-bezier(0.4, 0, 0.2, 1);
     --ct-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 
-    /* ── Footer ── */
+    
     --ft-accent: #B424FB;
     --ft-bg: #070709;
     --ft-border: rgba(255, 255, 255, 0.07);
-    --ft-text: rgba(255, 255, 253, 0.72);
-    --ft-muted: rgba(255, 255, 253, 0.30);
+    --ft-text: rgba(255, 255, 253, 0.80);
+    --ft-muted: rgba(255, 255, 253, 0.55);
     --ft-white: #ffffff;
     --ft-ease: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/*===MENU DE NAVEGAÇÃO===*/
-/* ══ HEADER ORIGINAL (topo da página) ══════════════════════ */
 header {
     position: fixed;
     display: flex;
@@ -155,7 +147,6 @@ header {
     transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
-/* Estado: escondido ao rolar */
 header.header-hidden {
     opacity: 0;
     pointer-events: none;
@@ -209,10 +200,6 @@ header .nav-btn:hover {
     transform: translateY(-2px)
 }
 
-
-/* ══ HEADER COMPACTO — aparece ao rolar ════════════════════
-   Estilo pílula/capsule vindo de baixo, conforme solicitado.
-═══════════════════════════════════════════════════════════ */
 .header-compact {
     position: fixed;
     bottom: 20px;
@@ -229,21 +216,19 @@ header .nav-btn:hover {
     border-radius: 50px;
     padding: 10px 12px 10px 20px;
     box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(180, 36, 251, 0.06);
-    /* Estado inicial: invisível abaixo da tela */
+    
     opacity: 0;
     pointer-events: none;
     transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.35s ease;
     white-space: nowrap;
 }
 
-/* Visível após scroll */
 .header-compact.compact-visible {
     transform: translateX(-50%) translateY(0);
     opacity: 1;
     pointer-events: auto;
 }
 
-/* Logo no header compacto */
 .header-compact .hc-logo img {
     height: 28px;
     width: auto;
@@ -252,7 +237,6 @@ header .nav-btn:hover {
     margin-right: 20px;
 }
 
-/* Nav do header compacto */
 .header-compact .hc-nav {
     display: flex;
     gap: 0;
@@ -275,7 +259,6 @@ header .nav-btn:hover {
     color: #fff;
 }
 
-/* Link ativo — ponto embaixo */
 .header-compact .hc-nav a.hc-active {
     color: #fff;
     font-weight: 600;
@@ -293,7 +276,6 @@ header .nav-btn:hover {
     border-radius: 50%;
 }
 
-/* Botão CTA do header compacto */
 .header-compact .hc-btn {
     font-family: 'Manrope', sans-serif;
     font-weight: 600;
@@ -328,11 +310,9 @@ header .nav-btn:hover {
     transform: translateX(3px);
 }
 
-
-/* ══ MENU HAMBÚRGUER — mobile only ═════════════════════════ */
 .hamburger {
     display: none;
-    /* Oculto no desktop */
+    
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -363,7 +343,6 @@ header .nav-btn:hover {
     transform-origin: center;
 }
 
-/* Estado aberto: X */
 .hamburger.open span:nth-child(1) {
     transform: translateY(6.5px) rotate(45deg);
 }
@@ -377,10 +356,9 @@ header .nav-btn:hover {
     transform: translateY(-6.5px) rotate(-45deg);
 }
 
-/* Drawer — menu mobile deslizante */
 .mobile-drawer {
     display: none;
-    /* Só no mobile */
+    
     position: fixed;
     top: 0;
     left: 0;
@@ -389,18 +367,18 @@ header .nav-btn:hover {
     max-height: 100vh;
     box-sizing: border-box;
     z-index: 900;
-    /* Fundo escuro com blur */
+    
     background: rgba(5, 5, 8, 0.97);
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    /* Alinhar à esquerda */
+    
     gap: 8px;
     padding-left: 20px;
-    /* Padding à esquerda */
-    /* Animação de entrada */
+    
+    
     opacity: 0;
     pointer-events: none;
     transform: translateY(-12px);
@@ -449,7 +427,6 @@ header .nav-btn:hover {
     background: rgba(180, 36, 251, 1);
 }
 
-/* Linha decorativa no drawer */
 .mobile-drawer::before {
     content: '';
     position: absolute;
@@ -460,16 +437,15 @@ header .nav-btn:hover {
     background: linear-gradient(90deg, transparent, rgba(180, 36, 251, 0.4), transparent);
 }
 
-/*=== SEÇÃO HERO ===*/
 .hero {
     position: relative;
     min-height: 100vh;
-    /* Garante que a seção tenha altura total */
+    
     display: flex;
     align-items: center;
-    /* Centraliza o conteúdo verticalmente */
+    
     overflow: hidden;
-    /* Esconde sobras do vídeo */
+    
     padding: 2rem;
     width: 100%;
 }
@@ -481,17 +457,15 @@ header .nav-btn:hover {
     min-width: 100%;
     min-height: 100%;
     z-index: -1;
-    /* Joga para trás de tudo */
+    
     transform: translate(-50%, -50%);
-    /* Centraliza perfeitamente */
+    
     object-fit: contain;
-    /* Garante que preencha sem distorcer */
+    
     opacity: 0.5;
-    /* Controle a transparência aqui para o texto aparecer bem */
+    
 }
 
-/* Classe que faremos o trigger via JS */
-/* Garanta que o seletor está correto e tem prioridade */
 .hero-video.video-fade {
     animation: fadeThroughBlack 1.2s ease-in-out forwards;
 }
@@ -501,17 +475,17 @@ header .nav-btn:hover {
         opacity: 0.3;
     }
 
-    /* Opacidade normal do seu vídeo */
+    
     50% {
         opacity: 0;
     }
 
-    /* O "fade out" no momento do reset */
+    
     100% {
         opacity: 0.3;
     }
 
-    /* O "fade in" após o reset */
+    
 }
 
 .hero .hero-content {
@@ -524,7 +498,7 @@ header .nav-btn:hover {
     position: relative;
     z-index: 1;
     pointer-events: auto;
-    /* Garante que botões funcionem */
+    
 
     & .hero-tagline {
         display: inline-flex;
@@ -542,9 +516,9 @@ header .nav-btn:hover {
         margin-bottom: 28px;
         width: 33%;
         backdrop-filter: blur(10px);
-        /* The magic sauce */
+        
         -webkit-backdrop-filter: blur(10px);
-        /* For compatibility */
+        
     }
 
     & .hero-tagline::before {
@@ -583,11 +557,10 @@ header .nav-btn:hover {
     font-weight: 200;
 }
 
-
 .hero .hero-content .btn-container {
     display: flex;
     gap: 10px;
-    /* Espaço entre os botões */
+    
 }
 
 .hero .hero-content .btn-container .btn {
@@ -632,19 +605,17 @@ header .nav-btn:hover {
     color: #fff
 }
 
-/*===CARROSEL INFINITO===*/
-
 .carousel {
     border-top: 1px solid rgba(180, 36, 251, .2);
     border-bottom: 1px solid rgba(180, 36, 251, .2);
     padding: 20px;
     width: 100%;
-    /* Ocupa a largura total */
+    
     overflow: hidden;
-    /* Esconde o que sai da tela */
+    
     display: flex;
     white-space: nowrap;
-    /* Garante que os grupos fiquem lado a lado */
+    
     height: auto;
     background-color: rgba(64, 1, 95, 0.2);
 }
@@ -652,11 +623,11 @@ header .nav-btn:hover {
 .group {
     display: flex;
     flex-shrink: 0;
-    /* Impede que o grupo encolha */
+    
     gap: 80px;
-    /* Distância entre os itens */
+    
     padding-right: 20px;
-    /* Mesma medida do gap para manter o ritmo */
+    
     animation: scroll 20s infinite linear;
     height: auto;
     font-size: 14px;
@@ -672,7 +643,6 @@ header .nav-btn:hover {
     transform: translateY(-2px);
 }
 
-/* Nova animação corrigida */
 @keyframes scroll {
     0% {
         transform: translateX(0);
@@ -683,12 +653,10 @@ header .nav-btn:hover {
     }
 }
 
-/* Pausar ao passar o mouse (opcional, mas fica elegante) */
 .carousel:hover .group {
     animation-play-state: paused;
 }
 
-/*===SEÇÃO DE DOR===*/
 .pain-section {
     padding: 10vh 5% 8vh;
     background: #050505;
@@ -708,20 +676,18 @@ header .nav-btn:hover {
     margin-top: 1rem;
 }
 
-/* Container dos Cartões */
 .cards-stack {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 40px;
-    /* Espaço entre os cartões antes de colarem */
+    
 }
 
-/* O Segredo do Efeito Stacking */
 .pain-card {
     position: sticky;
     top: 15vh;
-    /* Onde o cartão "para" ao scrollar */
+    
     width: 100%;
     max-width: 900px;
     min-height: 300px;
@@ -733,33 +699,31 @@ header .nav-btn:hover {
     flex-direction: column;
     justify-content: center;
     box-shadow: 0 -20px 40px #b324fb1f;
-    /* Sombra para dar profundidade ao sobrepor */
+    
 }
 
-/* Diferenciação sutil de cor/elevação para cada card */
-/* Transição suave entre tons de roxo profundo */
 .card-1 {
     transform: scale(0.95);
     background: #08030a;
-    /* Quase preto */
+    
 }
 
 .card-2 {
     transform: scale(0.97);
     background: #0e0613;
-    /* Roxo extremamente escuro */
+    
 }
 
 .card-3 {
     transform: scale(0.99);
     background: #14081b;
-    /* Transição média */
+    
 }
 
 .card-4 {
     transform: scale(1.00);
     background: #1b0b24;
-    /* Roxo profundo (o mais claro, mas ainda sóbrio) */
+    
 }
 
 .pain-card span {
@@ -798,50 +762,41 @@ header .nav-btn:hover {
     margin: 20px 0;
 }
 
-/*EFEITO DRAMÁTICO MOUSE*/
-/* Camada de máscara (Overlay) */
 .spotlight-overlay {
     position: fixed;
     inset: 0;
     background: black;
     z-index: 99990;
-    /* Abaixo do cursor, mas acima de tudo */
+    
     opacity: 0;
     pointer-events: none;
-    /* Permite clicar através dela */
+    
     transition: opacity 0.5s ease;
-    /* O gradiente cria o furo do holofote */
+    
     mask-image: radial-gradient(circle 150px at var(--x) var(--y), transparent 100%, black 100%);
     -webkit-mask-image: radial-gradient(circle 150px at var(--x) var(--y), transparent 0%, black 100%);
 }
 
-/* Quando o foco está ativo */
 body.spotlight-active .spotlight-overlay {
     opacity: 0.95;
-    /* Nível de escuridão do restante da tela */
+    
 }
 
-/* Estilo da palavra durante o foco */
 .spotlight-trigger {
     cursor: none;
     position: relative;
     z-index: 99991;
-    /* Garante que a palavra fique acima da máscara */
+    
     transition: color 0.2s;
 }
 
-/*SEÇÃO SOBRE*/
-
-/* ── WRAPPER PRINCIPAL DA SEÇÃO ──────────────────────────────
-   Posicionamento relativo para o número fantasma absoluto.
-   overflow:hidden evita scroll horizontal pelo número "03".  */
 .sobre {
     position: relative;
     min-height: 100vh;
     padding: 100px;
     overflow: hidden;
     background: #0c0c0c;
-    /* Mesma cor da .pain-section do seu CSS */
+    
 }
 
 .sobre::before {
@@ -859,44 +814,35 @@ body.spotlight-active .spotlight-overlay {
     z-index: 1;
 }
 
-/* ── CONTAINER INTERNO ───────────────────────────────────────
-   Limita largura e centraliza o conteúdo.
-   Prefixo "sb-" evita conflito com qualquer outro .container
-   que você venha a ter no projeto.                           */
 .sb-container {
     max-width: 1100px;
     margin: 0 auto;
     padding: 0 48px;
     position: relative;
     z-index: 2;
-    /* Acima do número fantasma */
+    
 }
 
-
-/* ── LABEL DA SEÇÃO ("03 — Sobre a Code Corttex") ────────────
-   Entra com fade + slide de baixo via classe .sb-visible,
-   adicionada pelo IntersectionObserver no JS.               */
 .sb-label {
     font-family: 'Manrope', sans-serif;
-    /* Fonte já carregada no seu site */
+    
     font-size: 11px;
     font-weight: 600;
     letter-spacing: 0.3em;
     color: #B424FB;
-    /* Roxo padrão do seu site */
+    
     text-transform: uppercase;
     margin-bottom: 48px;
     display: flex;
     align-items: center;
     gap: 12px;
 
-    /* Estado inicial (antes do reveal) */
+    
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
-/* Linha decorativa após o texto do label */
 .sb-label::after {
     content: '';
     display: block;
@@ -906,51 +852,45 @@ body.spotlight-active .spotlight-overlay {
     opacity: 0.5;
 }
 
-/* Estado visível — adicionado pelo JS */
 .sb-label.sb-visible {
     opacity: 1;
     transform: translateY(0);
 }
 
-
-/* ── HEADLINE PRINCIPAL ──────────────────────────────────────*/
 .sb-headline-wrap {
     margin-bottom: 100px;
 }
 
 .sb-headline {
     font-family: 'Space Grotesk', sans-serif;
-    /* Fonte já carregada no seu site */
+    
     font-size: clamp(42px, 5.5vw, 72px);
     font-weight: 800;
-    /* Peso igual ao h1 do seu hero */
+    
     line-height: 1.1;
     letter-spacing: -0.02em;
     color: #fff;
 
-    /* Estado inicial (antes do reveal) */
+    
     opacity: 0;
     transform: translateY(40px);
     transition: opacity 1s ease 0.2s, transform 1s ease 0.2s;
 }
 
-/* Estado visível — adicionado pelo JS */
 .sb-headline.sb-visible {
     opacity: 1;
     transform: translateY(0);
 }
 
-/* Parte em itálico roxo da headline */
 .sb-headline-em {
     font-family: 'DM Serif Display', serif;
-    /* Fonte já carregada no seu site */
+    
     font-style: italic;
     font-weight: 400;
     color: #B424FB;
     position: relative;
 }
 
-/* Linha sublinhada que cresce da esquerda após reveal */
 .sb-headline-em::after {
     content: '';
     position: absolute;
@@ -960,48 +900,38 @@ body.spotlight-active .spotlight-overlay {
     height: 2px;
     background: #B424FB;
     transition: width 1.5s ease 1s;
-    /* Delay de 1s para aparecer após o texto */
+    
 }
 
 .sb-headline.sb-visible .sb-headline-em::after {
     width: 100%;
 }
 
-
-/* ── GRID PRINCIPAL (manifesto 2 colunas) ───────────────────
-   Coluna esquerda: blocos de texto/carta.
-   Coluna direita: stats + frase de encerramento.            */
 .sb-manifesto {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 0;
 }
 
-
-/* ── COLUNA DA CARTA (esquerda) ──────────────────────────────
-   Separador vertical sutil no lado direito.                 */
 .sb-letter-col {
     padding-right: 80px;
     border-right: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-/* Cada bloco de parágrafo da carta */
 .sb-letter-block {
     margin-bottom: 64px;
 
-    /* Estado inicial (antes do reveal) */
+    
     opacity: 0;
     transform: translateX(-30px);
     transition: opacity 0.9s ease, transform 0.9s ease;
 }
 
-/* Estado visível — adicionado pelo JS */
 .sb-letter-block.sb-visible {
     opacity: 1;
     transform: translateX(0);
 }
 
-/* Numeração estilo código: "// 01" */
 .sb-block-num {
     font-family: 'Manrope', sans-serif;
     font-size: 10px;
@@ -1012,33 +942,28 @@ body.spotlight-active .spotlight-overlay {
     margin-bottom: 16px;
 }
 
-/* Texto corrido dos parágrafos */
 .sb-letter-text {
     font-family: 'Manrope', sans-serif;
-    /* Fonte body já carregada no seu site */
+    
     font-size: clamp(15px, 1.4vw, 18px);
     line-height: 1.85;
     color: rgba(255, 255, 253, 0.65);
-    /* Mesma opacidade usada no .p-hero do seu site */
+    
     font-weight: 300;
 }
 
-/* Destaque em negrito dentro dos parágrafos */
 .sb-letter-text strong {
     color: #fff;
     font-weight: 700;
 }
 
-/* Cursor piscante no último parágrafo (efeito "ainda sendo escrito") */
 .sb-letter-text--typing::after {
     content: '|';
     color: #B424FB;
-    /* Usa o keyframe "blink" que JÁ EXISTE no seu style.css */
+    
     animation: blink 1s step-end infinite;
 }
 
-
-/* ── COLUNA LATERAL (direita: stats + encerramento) ──────────*/
 .sb-side-col {
     padding-left: 80px;
     display: flex;
@@ -1046,9 +971,6 @@ body.spotlight-active .spotlight-overlay {
     justify-content: space-between;
 }
 
-
-/* ── GRID DE STATS (2x2) ─────────────────────────────────────
-   Quatro cards com números de prova social.                 */
 .sb-stats-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -1056,29 +978,26 @@ body.spotlight-active .spotlight-overlay {
     margin-bottom: 48px;
 }
 
-/* Card individual de stat */
 .sb-stat-card {
     background: rgba(180, 36, 251, 0.04);
     border: 1px solid rgba(180, 36, 251, 0.15);
-    /* Roxo do site */
+    
     padding: 28px 24px;
     position: relative;
     overflow: hidden;
     cursor: none;
 
-    /* Estado inicial (antes do reveal) */
+    
     opacity: 0;
     transform: translateY(30px) scale(0.97);
     transition: opacity 0.7s ease, transform 0.7s ease;
 }
 
-/* Estado visível — adicionado pelo JS */
 .sb-stat-card.sb-visible {
     opacity: 1;
     transform: translateY(0) scale(1);
 }
 
-/* Gradiente de hover no fundo do card */
 .sb-stat-card::before {
     content: '';
     position: absolute;
@@ -1093,7 +1012,6 @@ body.spotlight-active .spotlight-overlay {
     opacity: 1;
 }
 
-/* Linha roxa que cresce na base do card no hover */
 .sb-stat-card::after {
     content: '';
     position: absolute;
@@ -1109,7 +1027,6 @@ body.spotlight-active .spotlight-overlay {
     width: 100%;
 }
 
-/* Número grande do stat (ex: "+50", "R$2M") */
 .sb-stat-number {
     font-family: 'Space Grotesk', sans-serif;
     font-size: clamp(36px, 4vw, 52px);
@@ -1119,12 +1036,10 @@ body.spotlight-active .spotlight-overlay {
     letter-spacing: 0.02em;
 }
 
-/* Prefixos/sufixos coloridos dentro do número ("+", "R$", "M", "%") */
 .sb-stat-number .sb-stat-accent {
     color: #B424FB;
 }
 
-/* Descrição abaixo do número */
 .sb-stat-label {
     font-family: 'Manrope', sans-serif;
     font-size: 11px;
@@ -1135,9 +1050,6 @@ body.spotlight-active .spotlight-overlay {
     line-height: 1.4;
 }
 
-
-/* ── FRASE DE ENCERRAMENTO ───────────────────────────────────
-   Bloco com aspas gigantes decorativas e pontos pulsantes.  */
 .sb-closing {
     padding: 52px 40px;
     background: rgba(180, 36, 251, 0.04);
@@ -1145,26 +1057,24 @@ body.spotlight-active .spotlight-overlay {
     position: relative;
     overflow: hidden;
 
-    /* Estado inicial (antes do reveal) */
+    
     opacity: 0;
     transform: translateY(40px);
     transition: opacity 1s ease, transform 1s ease;
 }
 
-/* Estado visível — adicionado pelo JS */
 .sb-closing.sb-visible {
     opacity: 1;
     transform: translateY(0);
 }
 
-/* Aspas decorativas gigantes no fundo do bloco */
 .sb-closing::before {
     content: '"';
     position: absolute;
     top: -40px;
     left: 20px;
     font-family: 'DM Serif Display', serif;
-    /* Já carregada no site */
+    
     font-size: 200px;
     color: rgba(180, 36, 251, 0.06);
     line-height: 1;
@@ -1172,10 +1082,9 @@ body.spotlight-active .spotlight-overlay {
     user-select: none;
 }
 
-/* Texto da frase de encerramento */
 .sb-closing-text {
     font-family: 'DM Serif Display', serif;
-    /* Fonte já carregada no site */
+    
     font-size: clamp(17px, 2vw, 22px);
     font-style: italic;
     font-weight: 400;
@@ -1183,17 +1092,15 @@ body.spotlight-active .spotlight-overlay {
     line-height: 1.8;
     position: relative;
     z-index: 1;
-    /* Acima das aspas decorativas */
+    
 }
 
-/* Ponto final pulsante — reforça o "ritmo" da frase */
 .sb-closing-dot {
     display: inline-block;
     color: #B424FB;
     animation: sb-pulse 2s ease-in-out infinite;
 }
 
-/* Cada ponto tem um delay diferente para criar ondulação */
 .sb-closing-dot:nth-child(2) {
     animation-delay: 0.4s;
 }
@@ -1216,35 +1123,29 @@ body.spotlight-active .spotlight-overlay {
     }
 }
 
-
-/* ── TIRA DIVISÓRIA FINAL ────────────────────────────────────
-   Linha com gradiente que separa esta seção da próxima.     */
 .sb-cta-strip {
     padding: 80px 0 20px;
     display: flex;
     align-items: center;
     gap: 48px;
 
-    /* Estado inicial (antes do reveal) */
+    
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
-/* Estado visível — adicionado pelo JS */
 .sb-cta-strip.sb-visible {
     opacity: 1;
     transform: translateY(0);
 }
 
-/* As duas linhas horizontais de cada lado do texto */
 .sb-cta-line {
     flex: 1;
     height: 1px;
     background: rgba(255, 255, 255, 0.07);
 }
 
-/* Texto "scroll para continuar" entre as linhas */
 .sb-cta-text {
     font-family: 'Manrope', sans-serif;
     font-size: 11px;
@@ -1255,16 +1156,6 @@ body.spotlight-active .spotlight-overlay {
     white-space: nowrap;
 }
 
-
-/* ── RESPONSIVO — MOBILE (≤ 768px) ──────────────────────────
-   Colapsa o grid de 2 colunas para 1 coluna linear.        */
-
-
-/*SEÇÃO SERVIÇOS*/
-
-
-/* ── WRAPPER DA SEÇÃO ────────────────────────────────────────
-   overflow:hidden para bolhas não escaparem lateralmente.   */
 .servicos {
     position: relative;
     background: #050505;
@@ -1287,10 +1178,6 @@ body.spotlight-active .spotlight-overlay {
     z-index: 1;
 }
 
-
-/* ── CONTAINER ───────────────────────────────────────────────
-   pointer-events:none faz cliques passarem para o canvas
-   nas áreas sem conteúdo, mantendo as bolhas clicáveis.    */
 .sv-container {
     max-width: 1200px;
     margin: 0 auto;
@@ -1300,16 +1187,12 @@ body.spotlight-active .spotlight-overlay {
     pointer-events: none;
 }
 
-/* Restaura interatividade nos elementos funcionais */
 .sv-container a,
 .sv-container button,
 .sv-container .sv-card {
     pointer-events: auto;
 }
 
-
-/* ── CABEÇALHO ───────────────────────────────────────────────
-   Entra com fade + slide ao carregar a página.              */
 .sv-header {
     margin-bottom: 72px;
     animation: svFadeUp 0.9s ease 0.1s both;
@@ -1327,7 +1210,6 @@ body.spotlight-active .spotlight-overlay {
     }
 }
 
-/* Label "O QUE FAZEMOS" */
 .sv-label {
     font-family: 'Manrope', sans-serif;
     font-size: 11px;
@@ -1341,7 +1223,6 @@ body.spotlight-active .spotlight-overlay {
     margin-bottom: 20px;
 }
 
-/* Linha decorativa após o label */
 .sv-label::after {
     content: '';
     display: block;
@@ -1351,7 +1232,6 @@ body.spotlight-active .spotlight-overlay {
     opacity: 0.5;
 }
 
-/* Headline principal */
 .sv-headline {
     font-family: 'Space Grotesk', sans-serif;
     font-size: clamp(42px, 4.5vw, 60px);
@@ -1361,7 +1241,6 @@ body.spotlight-active .spotlight-overlay {
     margin-bottom: 16px;
 }
 
-/* Parte itálica da headline */
 .sv-headline-em {
     font-family: 'DM Serif Display', serif;
     font-style: italic;
@@ -1369,7 +1248,6 @@ body.spotlight-active .spotlight-overlay {
     color: #B424FB;
 }
 
-/* Subtítulo */
 .sv-subline {
     font-family: 'Manrope', sans-serif;
     font-size: 14px;
@@ -1379,7 +1257,6 @@ body.spotlight-active .spotlight-overlay {
     padding-bottom: 32px;
 }
 
-/* Hint "Clique nas bolhas" — some após 5.5s */
 .sv-hint {
     display: inline-flex;
     align-items: center;
@@ -1395,14 +1272,13 @@ body.spotlight-active .spotlight-overlay {
     animation: svFadeUp 0.9s ease 0.6s both, svHintOut 0.8s ease 5.5s forwards;
 }
 
-/* Ponto piscante dentro do hint */
 .sv-hint-dot {
     width: 6px;
     height: 6px;
     background: rgba(180, 36, 251, 0.5);
     border-radius: 50%;
     flex-shrink: 0;
-    /* Reutiliza o @keyframes "blink" que já existe no seu style.css */
+    
     animation: blink 1.5s ease-in-out infinite;
 }
 
@@ -1412,18 +1288,12 @@ body.spotlight-active .spotlight-overlay {
     }
 }
 
-
-/* ── GRID DE CARDS ───────────────────────────────────────────
-   3 colunas desktop, adaptável.                            */
 .sv-cards-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 24px;
 }
 
-
-/* ── CARD INDIVIDUAL ─────────────────────────────────────────
-   Entrada escalonada via animation-delay nos nth-child.    */
 .sv-card {
     background: #0d0d14;
     border: 1px solid rgba(180, 36, 251, 0.18);
@@ -1450,14 +1320,12 @@ body.spotlight-active .spotlight-overlay {
     animation-delay: 0.59s;
 }
 
-/* Hover: borda mais brilhante + sombra */
 .sv-card:hover {
     border-color: rgba(180, 36, 251, 0.45);
     box-shadow: 0 0 40px rgba(180, 36, 251, 0.08),
         0 20px 60px rgba(0, 0, 0, 0.4);
 }
 
-/* Gradiente de canto no hover */
 .sv-card::before {
     content: '';
     position: absolute;
@@ -1476,7 +1344,6 @@ body.spotlight-active .spotlight-overlay {
     opacity: 1;
 }
 
-/* Linha roxa no topo do card no hover */
 .sv-card::after {
     content: '';
     position: absolute;
@@ -1492,8 +1359,6 @@ body.spotlight-active .spotlight-overlay {
     width: 60%;
 }
 
-
-/* ── ÍCONE DO CARD ───────────────────────────────────────── */
 .sv-card-icon {
     width: 52px;
     height: 52px;
@@ -1523,10 +1388,6 @@ body.spotlight-active .spotlight-overlay {
     stroke-linejoin: round;
 }
 
-
-/* ── TEXTOS DO CARD ──────────────────────────────────────── */
-
-/* Título do serviço */
 .sv-card-title {
     font-family: 'Space Grotesk', sans-serif;
     font-size: 24px;
@@ -1536,7 +1397,6 @@ body.spotlight-active .spotlight-overlay {
     line-height: 1.2;
 }
 
-/* Descrição */
 .sv-card-desc {
     font-family: 'Manrope', sans-serif;
     font-size: 14px;
@@ -1545,10 +1405,9 @@ body.spotlight-active .spotlight-overlay {
     line-height: 1.75;
     margin-bottom: 20px;
     flex: 1;
-    /* Empurra quote, tags e botão para baixo */
+    
 }
 
-/* Frase de impacto em itálico */
 .sv-card-quote {
     font-family: 'DM Serif Display', serif;
     font-style: italic;
@@ -1560,7 +1419,6 @@ body.spotlight-active .spotlight-overlay {
     border-left: 2px solid rgba(180, 36, 251, 0.3);
 }
 
-/* Container de tags */
 .sv-card-tags {
     display: flex;
     flex-wrap: wrap;
@@ -1568,7 +1426,6 @@ body.spotlight-active .spotlight-overlay {
     margin-bottom: 32px;
 }
 
-/* Badge de tecnologia */
 .sv-tag {
     font-family: 'Manrope', sans-serif;
     font-size: 10px;
@@ -1588,7 +1445,6 @@ body.spotlight-active .spotlight-overlay {
     color: #B424FB;
 }
 
-/* Botão "Saiba mais" */
 .sv-card-btn {
     display: inline-flex;
     align-items: center;
@@ -1604,7 +1460,7 @@ body.spotlight-active .spotlight-overlay {
     padding: 12px 24px;
     text-decoration: none;
     cursor: none;
-    /* Mantém cursor customizado do site */
+    
     transition: color 0.3s ease, border-color 0.3s ease,
         background 0.3s ease, box-shadow 0.3s ease,
         transform 0.2s ease;
@@ -1629,31 +1485,19 @@ body.spotlight-active .spotlight-overlay {
     transform: translateX(4px);
 }
 
-
-/* ── RESPONSIVO TABLET (≤ 1024px) ───────────────────────── */
-
-
-/* ── RESPONSIVO MOBILE (≤ 768px) ────────────────────────── */
-
-
-/* ============================================================
-   SEÇÃO MÉTODO
-   Layout: 100vh, sem scroll, dois painéis lado a lado.
-   ============================================================ */
 .metodo {
     width: 100%;
     height: 90vh;
     display: grid;
-    /* Roda centralizada (42%), gap explícito, conteúdo (55%) */
+    
     grid-template-columns: 42% 58%;
     column-gap: 0;
-    /* gap controlado pelo padding do painel direito */
+    
     position: relative;
     overflow: hidden;
     background: #0C0C0C;
 }
 
-/* Linha decorativa no topo */
 .metodo::before {
     content: '';
     position: absolute;
@@ -1666,75 +1510,54 @@ body.spotlight-active .spotlight-overlay {
     pointer-events: none;
 }
 
-/* ============================================================
-   PAINEL ESQUERDO — RODA
-   A roda é maior que o container e fica parcialmente cortada
-   pela borda esquerda, exatamente como no vídeo de referência.
-   ============================================================ */
 .mt-wheel-panel {
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    /* Centralizado horizontalmente */
+    
     padding-bottom: 70px;
-    /* Empurra levemente para cima */
+    
     padding-left: 100px;
     overflow: hidden;
     background-color: #0C0C0C;
 }
 
-/* Container SVG centralizado */
 .mt-wheel-container {
     position: relative;
     width: clamp(300px, 38vw, 460px);
     height: clamp(300px, 38vw, 460px);
     flex-shrink: 0;
-    /* Sem margin-left negativo — roda fica totalmente visível e centrada */
+    
 }
 
-/* O SVG da roda */
 .mt-wheel-svg {
     width: 100%;
     height: 100%;
     overflow: visible;
-    /* Permite que o arco ativo "saia" */
+    
 
 }
 
-/* ── Arcos (fatias da roda) ── */
-
-/*
-  Cada arco é um <path> SVG.
-  Estado padrão: dentro da roda, tom escuro.
-  Estado ativo: o arco se desloca para fora (translate radial)
-               e acende com roxo brilhante.
-  A animação é feita com CSS transition + transform no SVG.
-*/
-
-/* Grupo de cada arco — recebe a classe mt-arc-active via JS */
 .mt-arc-group {
     cursor: none;
     transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
     transform-origin: center center;
-    /* Sobreescrito por JS para cada arco */
+    
 }
 
-/* O path do arco em si */
 .mt-arc-path {
     transition: fill 0.4s ease, opacity 0.4s ease, filter 0.4s ease;
     fill: #1a0a2e;
     opacity: 0.5;
 }
 
-/* Arco ativo: brilha e se desloca para fora */
 .mt-arc-group.mt-arc-active .mt-arc-path {
     fill: url(#mtArcGrad);
     opacity: 1;
     filter: drop-shadow(0 0 16px rgba(180, 36, 251, 0.8));
 }
 
-/* Número dentro do arco */
 .mt-arc-num {
     font-family: 'Manrope', sans-serif;
     font-size: 11px;
@@ -1749,13 +1572,11 @@ body.spotlight-active .spotlight-overlay {
     fill: rgba(255, 255, 255, 0.9);
 }
 
-/* Círculos concêntricos decorativos (não interativos) */
 .mt-ring {
     fill: none;
     pointer-events: none;
 }
 
-/* Círculo central */
 .mt-center-circle {
     fill: #0e0b1a;
     stroke: rgba(180, 36, 251, 0.25);
@@ -1770,7 +1591,6 @@ body.spotlight-active .spotlight-overlay {
     pointer-events: none;
 }
 
-/* Logo / ícone no centro da roda */
 .mt-wheel-logo {
     position: absolute;
     top: 50%;
@@ -1785,11 +1605,6 @@ body.spotlight-active .spotlight-overlay {
     aspect-ratio: 1;
 }
 
-/*
-  Ícones SVG do centro da roda.
-  Cada .mt-center-icon corresponde a uma etapa (data-mt-icon="0"...).
-  Apenas o ícone da etapa ativa fica visível.
-*/
 .mt-center-icon {
     position: absolute;
     top: 50%;
@@ -1798,24 +1613,21 @@ body.spotlight-active .spotlight-overlay {
     opacity: 0;
     transition: opacity 0.3s ease, transform 0.3s ease;
     pointer-events: none;
-    /* Tamanho do ícone: proporcional ao raio central da roda */
+    
     width: clamp(28px, 3.8vw, 48px);
     height: clamp(28px, 3.8vw, 48px);
 }
 
-/* Ícone ativo: visível e no tamanho normal */
 .mt-center-icon.mt-icon-active {
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);
 }
 
-/* Ícone saindo: encolhe e some */
 .mt-center-icon.mt-icon-exit {
     opacity: 0;
     transform: translate(-50%, -50%) scale(0.6);
 }
 
-/* Stroke dos ícones — roxo suave com brilho */
 .mt-center-icon svg {
     width: 100%;
     height: 100%;
@@ -1827,27 +1639,21 @@ body.spotlight-active .spotlight-overlay {
     filter: drop-shadow(0 0 6px rgba(180, 36, 251, 0.6));
 }
 
-
-/* ============================================================
-   PAINEL DIREITO — CONTEÚDO
-   ============================================================ */
 .mt-content-panel {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    /* padding-left maior = mais distância da roda centralizada */
+    
     padding: 40px 60px 40px 56px;
     position: relative;
     z-index: 2;
 }
 
-/* ── Cabeçalho do painel direito ── */
 .mt-content-header {
     margin-bottom: 28px;
-    /* Era 40px */
+    
 }
 
-/* Label "05 — Processo" */
 .mt-label {
     font-family: 'Manrope', sans-serif;
     font-size: 10px;
@@ -1878,7 +1684,6 @@ body.spotlight-active .spotlight-overlay {
     opacity: 0.5;
 }
 
-/* Título grande */
 .mt-title {
     font-family: 'Space Grotesk', sans-serif;
     font-size: clamp(42px, 3vw, 48px);
@@ -1903,7 +1708,6 @@ body.spotlight-active .spotlight-overlay {
     color: #B424FB;
 }
 
-/* Subtítulo */
 .mt-subtitle {
     font-family: 'Manrope', sans-serif;
     font-size: 14px;
@@ -1921,13 +1725,6 @@ body.spotlight-active .spotlight-overlay {
     transform: translateY(0);
 }
 
-
-/* ── TABS de navegação ── */
-/*
-  Barra de tabs com o nome de cada etapa.
-  A tab ativa tem linha roxa embaixo (idêntico ao vídeo).
-  Clicar numa tab muda a etapa (sincronizado com a roda).
-*/
 .mt-tabs {
     display: flex;
     gap: 0;
@@ -1943,7 +1740,7 @@ body.spotlight-active .spotlight-overlay {
     font-weight: 600;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.28);
+    color: rgba(255, 255, 255, 0.55);
     padding: 10px 22px 12px;
     background: none;
     border: none;
@@ -1954,7 +1751,7 @@ body.spotlight-active .spotlight-overlay {
 }
 
 .mt-tab:hover {
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, 0.80);
 }
 
 .mt-tab::after {
@@ -1978,12 +1775,6 @@ body.spotlight-active .spotlight-overlay {
     transform: scaleX(1);
 }
 
-
-/* ── PAINÉIS DE CARDS ── */
-/*
-  Container relativo com altura fixa.
-  Cada painel fica absolute e transiciona com fade+slide.
-*/
 .mt-panels-wrap {
     position: relative;
     flex: 1;
@@ -1999,7 +1790,7 @@ body.spotlight-active .spotlight-overlay {
     gap: 10px;
     overflow: hidden;
 
-    /* Invisível por padrão */
+    
     opacity: 0;
     transform: translateY(14px);
     pointer-events: none;
@@ -2010,7 +1801,7 @@ body.spotlight-active .spotlight-overlay {
     opacity: 1;
     transform: translateY(0);
     pointer-events: auto;
-    /* Precisa de position: relative para sair do absolute e ter altura */
+    
     position: relative;
 }
 
@@ -2020,13 +1811,6 @@ body.spotlight-active .spotlight-overlay {
     pointer-events: none;
 }
 
-
-/* ── Cards de conteúdo ── */
-/*
-  Cada card: borda sutil, background levemente diferente do fundo.
-  Hover: borda roxa acende.
-  Idêntico ao estilo do vídeo de referência.
-*/
 .mt-card {
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.07);
@@ -2059,13 +1843,11 @@ body.spotlight-active .spotlight-overlay {
     line-height: 1.65;
 }
 
-
-/* ── Rodapé do painel direito ── */
 .mt-content-footer {
     margin-top: 80px;
-    /* Era 20px — mais próximo dos cards */
+    
     padding-top: 12px;
-    /* Era 18px */
+    
     border-top: 1px solid rgba(255, 255, 255, 0.05);
     display: flex;
     align-items: center;
@@ -2129,15 +1911,6 @@ body.spotlight-active .spotlight-overlay {
     transform: translateX(3px);
 }
 
-/* ============================================================
-   SEÇÃO DEPOIMENTOS — Code Corttex
-   ============================================================ */
-
-
-/* ── VARIÁVEIS ────────────────────────────────────────────── */
-
-
-/* ── WRAPPER DA SEÇÃO ─────────────────────────────────────── */
 .depoimentos {
     position: relative;
     background: var(--dp-bg);
@@ -2146,7 +1919,6 @@ body.spotlight-active .spotlight-overlay {
     width: 100%;
 }
 
-/* Linha separadora superior (padrão do site) */
 .depoimentos::before {
     content: '';
     position: absolute;
@@ -2162,7 +1934,6 @@ body.spotlight-active .spotlight-overlay {
     z-index: 1;
 }
 
-/* Halo de luz de palco vindo do topo (atmosférico) */
 .dp-stage-light {
     position: absolute;
     top: -100px;
@@ -2176,12 +1947,6 @@ body.spotlight-active .spotlight-overlay {
     z-index: 0;
 }
 
-
-/* ── GRID: SIDEBAR + CARROSSEL ────────────────────────────── */
-/*
-  Layout assimétrico — exatamente como no vídeo de referência:
-  título fixo à esquerda, carrossel ocupa o restante.
-*/
 .dp-inner {
     position: relative;
     z-index: 2;
@@ -2191,13 +1956,9 @@ body.spotlight-active .spotlight-overlay {
     grid-template-columns: 300px 1fr;
     align-items: center;
     padding: 0 0 0 48px;
-    /* Padding só na esquerda; o carrossel vai até a borda */
+    
 }
 
-
-/* ═══════════════════════════════════════════════════════════
-   COLUNA ESQUERDA — TÍTULO FIXO
-   ═══════════════════════════════════════════════════════════ */
 .dp-sidebar {
     display: flex;
     flex-direction: column;
@@ -2206,7 +1967,6 @@ body.spotlight-active .spotlight-overlay {
     z-index: 3;
 }
 
-/* Linha vertical decorativa à esquerda */
 .dp-sidebar::before {
     content: '';
     position: absolute;
@@ -2221,7 +1981,6 @@ body.spotlight-active .spotlight-overlay {
             transparent 100%);
 }
 
-/* Label de seção */
 .dp-label {
     font-family: 'Manrope', sans-serif;
     font-size: 10px;
@@ -2234,7 +1993,7 @@ body.spotlight-active .spotlight-overlay {
     gap: 10px;
     margin-bottom: 20px;
 
-    /* Reveal ao scroll */
+    
     opacity: 0;
     transform: translateX(-16px);
     transition: opacity 0.7s ease, transform 0.7s ease;
@@ -2254,7 +2013,6 @@ body.spotlight-active .spotlight-overlay {
     opacity: 0.5;
 }
 
-/* Título */
 .dp-title {
     font-family: 'Space Grotesk', sans-serif;
     font-size: clamp(42px, 2.6vw, 40px);
@@ -2275,7 +2033,6 @@ body.spotlight-active .spotlight-overlay {
     transform: translateX(0);
 }
 
-/* Parte em serif itálico roxo */
 .dp-title-em {
     font-family: 'DM Serif Display', serif;
     font-style: italic;
@@ -2284,7 +2041,6 @@ body.spotlight-active .spotlight-overlay {
     display: block;
 }
 
-/* Subtexto */
 .dp-sidebar-desc {
     font-family: 'Manrope', sans-serif;
     font-size: 12px;
@@ -2304,7 +2060,6 @@ body.spotlight-active .spotlight-overlay {
     transform: translateX(0);
 }
 
-/* Contador grande "01 / 03" no sidebar */
 .dp-sidebar-counter {
     opacity: 0;
     transition: opacity 0.6s ease 0.3s;
@@ -2314,7 +2069,6 @@ body.spotlight-active .spotlight-overlay {
     opacity: 1;
 }
 
-/* Número atual — grande e robusto */
 .dp-current-num {
     display: block;
     font-family: 'Manrope', sans-serif;
@@ -2324,7 +2078,7 @@ body.spotlight-active .spotlight-overlay {
     line-height: 1;
     letter-spacing: -0.04em;
     margin-bottom: 2px;
-    /* Transição de entrada ao trocar slide */
+    
     transition: opacity 0.22s ease, transform 0.22s ease;
 }
 
@@ -2336,35 +2090,24 @@ body.spotlight-active .spotlight-overlay {
     letter-spacing: 0.05em;
 }
 
-
-/* ═══════════════════════════════════════════════════════════
-   COLUNA DIREITA — CARROSSEL
-   ═══════════════════════════════════════════════════════════ */
 .dp-carousel-col {
     position: relative;
-    /* Overflow hidden clipa os cards laterais — efeito do vídeo */
+    
     overflow: hidden;
     padding: 28px 0;
 }
 
-/* ── TRILHA DO CARROSSEL ─────────────────────────────────── */
-/*
-  Todos os slides ficam em linha dentro da trilha.
-  O JS move a trilha com translateX para centralizar o ativo.
-  will-change: transform garante que o browser use GPU.
-*/
 .dp-track {
     display: flex;
     align-items: stretch;
     gap: 16px;
     padding: 12px 80px;
-    /* Padding lateral = espaço para os cards laterais aparecerem */
+    
     position: relative;
     z-index: 1;
     will-change: transform;
 }
 
-/* ── SLIDE individual ────────────────────────────────────── */
 .dp-slide {
     flex: 0 0 460px;
     cursor: pointer;
@@ -2373,9 +2116,10 @@ body.spotlight-active .spotlight-overlay {
         filter 0.68s var(--dp-ease),
         transform 0.68s var(--dp-ease);
     will-change: transform, opacity, filter;
+    
+    contain: layout style;
 }
 
-/* Estado base inativo (antes do JS inicializar) */
 .dp-slide:not(.dp-slide-active) {
     opacity: 0.12;
     filter: blur(8px);
@@ -2383,7 +2127,6 @@ body.spotlight-active .spotlight-overlay {
     z-index: 1;
 }
 
-/* Estado ativo */
 .dp-slide.dp-slide-active {
     opacity: 1;
     filter: none;
@@ -2392,24 +2135,20 @@ body.spotlight-active .spotlight-overlay {
     z-index: 4;
 }
 
-/* Card adjacente (±1) */
 .dp-orbit-adj {
     opacity: 0.45;
     filter: blur(3px);
     z-index: 3;
 }
 
-/* Card distante (±2+) */
 .dp-orbit-far {
     opacity: 0.12;
     filter: blur(8px);
     z-index: 1;
 }
 
-
-/* ── CAIXA VISUAL DO CARD ─────────────────────────────────── */
 .dp-card {
-    background: var(--dp-card-bg);
+    background: rgba(18, 10, 34, 0.99);
     border: 1px solid var(--dp-card-border);
     border-radius: 18px;
     padding: 30px 28px 24px;
@@ -2418,27 +2157,33 @@ body.spotlight-active .spotlight-overlay {
     flex-direction: column;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.35);
-
-    transition:
-        border-color 0.6s var(--dp-ease),
-        box-shadow 0.6s var(--dp-ease),
-        background 0.6s var(--dp-ease);
-}
-
-/* Card ativo: borda e sombra roxas mais intensas */
-.dp-slide.dp-slide-active .dp-card {
-    border-color: var(--dp-card-active);
-    background: rgba(18, 10, 34, 0.99);
     box-shadow:
         0 0 0 1px rgba(180, 36, 251, 0.09),
         0 20px 80px rgba(0, 0, 0, 0.55),
         0 0 90px rgba(180, 36, 251, 0.07);
+}
+
+.dp-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 18px;
+    border: 1px solid rgba(180, 36, 251, 0.28);
+    opacity: 0;
+    transition: opacity 0.6s var(--dp-ease);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.dp-slide.dp-slide-active .dp-card {
     margin-left: 25px;
 }
 
-/* Linha de luz no topo do card ativo */
 .dp-slide.dp-slide-active .dp-card::before {
+    opacity: 1;
+}
+
+.dp-slide.dp-slide-active .dp-card::after {
     content: '';
     position: absolute;
     top: 0;
@@ -2449,23 +2194,10 @@ body.spotlight-active .spotlight-overlay {
             transparent 0%,
             rgba(180, 36, 251, 0.75) 40%,
             rgba(180, 36, 251, 0.2) 100%);
-}
-
-/* Reflexo de canto superior direito */
-.dp-slide.dp-slide-active .dp-card::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 100px;
-    height: 100px;
-    background: radial-gradient(circle at top right,
-            rgba(180, 36, 251, 0.07) 0%, transparent 60%);
+    z-index: 1;
     pointer-events: none;
 }
 
-
-/* ── ESTRELAS ─────────────────────────────────────────────── */
 .dp-stars {
     display: flex;
     gap: 3px;
@@ -2477,7 +2209,9 @@ body.spotlight-active .spotlight-overlay {
     color: var(--dp-accent);
     line-height: 1;
     opacity: 0.4;
-    transition: opacity 0.5s ease, text-shadow 0.5s ease;
+    transition: opacity 0.5s ease;
+    
+    will-change: opacity;
 }
 
 .dp-slide.dp-slide-active .dp-star {
@@ -2506,20 +2240,17 @@ body.spotlight-active .spotlight-overlay {
 }
 
 @keyframes dpStarGlow {
-
     0%,
     55%,
     100% {
-        text-shadow: none;
+        opacity: 1;
     }
 
     28% {
-        text-shadow: 0 0 10px rgba(180, 36, 251, 1), 0 0 22px rgba(180, 36, 251, 0.4);
+        opacity: 0.7;
     }
 }
 
-
-/* ── TEXTO DO DEPOIMENTO ─────────────────────────────────── */
 .dp-quote {
     font-family: 'DM Serif Display', serif;
     font-style: italic;
@@ -2528,30 +2259,29 @@ body.spotlight-active .spotlight-overlay {
     color: var(--dp-text);
     line-height: 1.8;
     flex: 1;
-    /* Empurra o autor para baixo */
+    
     margin-bottom: 22px;
     position: relative;
     z-index: 1;
 }
 
-
-/* ── DIVISÓRIA ────────────────────────────────────────────── */
 .dp-divider {
-    width: 28px;
+    width: 50px;
     height: 1px;
     background: rgba(180, 36, 251, 0.22);
     margin-bottom: 18px;
     flex-shrink: 0;
-    transition: width 0.5s var(--dp-ease), background 0.5s ease;
+    transform: scaleX(0.56);
+    transform-origin: left center;
+    transition: transform 0.5s var(--dp-ease), background 0.5s ease;
+    will-change: transform;
 }
 
 .dp-slide.dp-slide-active .dp-divider {
-    width: 50px;
+    transform: scaleX(1);
     background: rgba(180, 36, 251, 0.55);
 }
 
-
-/* ── AUTOR ────────────────────────────────────────────────── */
 .dp-author {
     display: flex;
     align-items: center;
@@ -2559,13 +2289,12 @@ body.spotlight-active .spotlight-overlay {
     flex-shrink: 0;
 }
 
-/* Avatar circular com iniciais */
 .dp-avatar {
     width: 42px;
     height: 42px;
     border-radius: 50%;
-    background: rgba(180, 36, 251, 0.10);
-    border: 1.5px solid rgba(180, 36, 251, 0.22);
+    background: rgba(180, 36, 251, 0.18);
+    border: 1.5px solid rgba(180, 36, 251, 0.5);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -2575,13 +2304,13 @@ body.spotlight-active .spotlight-overlay {
     font-weight: 700;
     color: var(--dp-accent);
     letter-spacing: 0.04em;
-    transition: background 0.5s, border-color 0.5s, box-shadow 0.5s;
+    opacity: 0.5;
+    transition: opacity 0.5s ease;
+    will-change: opacity;
 }
 
 .dp-slide.dp-slide-active .dp-avatar {
-    background: rgba(180, 36, 251, 0.18);
-    border-color: rgba(180, 36, 251, 0.5);
-    box-shadow: 0 0 14px rgba(180, 36, 251, 0.32);
+    opacity: 1;
 }
 
 .dp-author-info {
@@ -2607,33 +2336,27 @@ body.spotlight-active .spotlight-overlay {
     color: var(--dp-muted);
 }
 
-/* Badge de segmento */
 .dp-badge {
     font-family: 'Manrope', sans-serif;
     font-size: 9px;
     font-weight: 600;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: rgba(180, 36, 251, 0.5);
+    color: rgba(180, 36, 251, 0.9);
     padding: 4px 10px;
-    border: 1px solid rgba(180, 36, 251, 0.16);
+    border: 1px solid rgba(180, 36, 251, 0.38);
     border-radius: 50px;
     white-space: nowrap;
     flex-shrink: 0;
-    transition: color 0.5s, border-color 0.5s;
+    opacity: 0.5;
+    transition: opacity 0.5s ease;
+    will-change: opacity;
 }
 
 .dp-slide.dp-slide-active .dp-badge {
-    color: rgba(180, 36, 251, 0.9);
-    border-color: rgba(180, 36, 251, 0.38);
+    opacity: 1;
 }
 
-
-/* ── SETAS DE NAVEGAÇÃO ───────────────────────────────────── */
-/*
-  Posicionadas absolute, centradas verticalmente nos cards.
-  Exatamente como no vídeo (setas nas bordas do carrossel).
-*/
 .dp-nav {
     position: absolute;
     top: 50%;
@@ -2681,8 +2404,6 @@ body.spotlight-active .spotlight-overlay {
     right: 8px;
 }
 
-
-/* ── DOTS ─────────────────────────────────────────────────── */
 .dp-dots-row {
     display: flex;
     align-items: center;
@@ -2701,7 +2422,18 @@ body.spotlight-active .spotlight-overlay {
     border: none;
     cursor: pointer;
     padding: 0;
+    position: relative;
     transition: width 0.4s var(--dp-ease), background 0.4s ease, box-shadow 0.4s ease;
+}
+
+.dp-dot::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 44px;
+    height: 44px;
 }
 
 .dp-dot.dp-dot-active {
@@ -2710,21 +2442,6 @@ body.spotlight-active .spotlight-overlay {
     box-shadow: 0 0 8px rgba(180, 36, 251, 0.5);
 }
 
-
-/* ── RESPONSIVO ───────────────────────────────────────────── */
-
-
-/* ==========================
-        Seção de cases
-   ========================== */
-
-/* ── VARIÁVEIS ───────────────────────────────────────────────
-   Centralize aqui todos os valores que podem mudar.
-   Para trocar a cor principal: altere apenas --pf-accent.
-   ─────────────────────────────────────────────────────────── */
-
-
-/* ── WRAPPER DA SEÇÃO ─────────────────────────────────────── */
 .portfolio {
     position: relative;
     background: #0C0C0C;
@@ -2732,7 +2449,6 @@ body.spotlight-active .spotlight-overlay {
     overflow: hidden;
 }
 
-/* Linha separadora superior — padrão do site */
 .portfolio::before {
     content: '';
     position: absolute;
@@ -2746,15 +2462,12 @@ body.spotlight-active .spotlight-overlay {
     z-index: 1;
 }
 
-
-/* ── CABEÇALHO ───────────────────────────────────────────── */
 .pf-header {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 48px 52px;
 }
 
-/* Label "PORTFÓLIO ——" */
 .pf-label {
     font-size: 10px;
     font-weight: 600;
@@ -2765,7 +2478,7 @@ body.spotlight-active .spotlight-overlay {
     align-items: center;
     gap: 10px;
     margin-bottom: 16px;
-    /* Reveal: começa deslocado, sobe ao ficar visível */
+    
     opacity: 0;
     transform: translateY(14px);
     transition: opacity 0.7s ease, transform 0.7s ease;
@@ -2777,7 +2490,7 @@ body.spotlight-active .spotlight-overlay {
 }
 
 .pf-label::after {
-    /* Traço decorativo */
+    
     content: '';
     width: 36px;
     height: 1px;
@@ -2785,7 +2498,6 @@ body.spotlight-active .spotlight-overlay {
     opacity: 0.5;
 }
 
-/* Título */
 .pf-title {
     font-size: clamp(42px, 4vw, 54px);
     font-weight: 800;
@@ -2803,7 +2515,6 @@ body.spotlight-active .spotlight-overlay {
     transform: translateY(0);
 }
 
-/* Parte em itálico serif */
 .pf-title-em {
     font-family: 'DM Serif Display', serif;
     font-style: italic;
@@ -2812,7 +2523,6 @@ body.spotlight-active .spotlight-overlay {
     text-wrap: nowrap;
 }
 
-/* Subtítulo */
 .pf-subtitle {
     font-size: 14px;
     font-weight: 300;
@@ -2829,20 +2539,17 @@ body.spotlight-active .spotlight-overlay {
     transform: translateY(0);
 }
 
-
-/* ── GRID DE CARDS ───────────────────────────────────────── */
 .pf-grid {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 48px;
     display: grid;
     grid-template-columns: 1.55fr 1fr;
-    /* ~60% / ~40% */
+    
     grid-template-rows: 310px;
     gap: 14px;
 }
 
-/* Linha 2 — ocupa as 2 colunas e divide em 3 iguais */
 .pf-row2 {
     grid-column: 1 / -1;
     display: grid;
@@ -2851,13 +2558,11 @@ body.spotlight-active .spotlight-overlay {
     height: 252px;
 }
 
-
-/* ── CARD BASE ───────────────────────────────────────────── */
 .pf-card {
     position: relative;
     border-radius: 16px;
     overflow: hidden;
-    /* Reveal: começa deslocado */
+    
     opacity: 0;
     transform: translateY(28px);
     transition: opacity 0.75s var(--pf-ease), transform 0.75s var(--pf-ease), box-shadow 0.6s ease;
@@ -2869,18 +2574,10 @@ body.spotlight-active .spotlight-overlay {
     transform: translateY(0);
 }
 
-/* Glow externo roxo no hover */
 .pf-card:hover {
     box-shadow: 0 0 40px 8px rgba(180, 36, 251, 0.25), 0 0 80px 12px rgba(180, 36, 251, 0.12);
 }
 
-
-/* ── FUNDO DE GRADIENTE ──────────────────────────────────── */
-/*
-  A transform usa variáveis CSS injetadas pelo JS no hover.
-  --pf-rx e --pf-ry: deslocamento do paralaxe em px.
-  O scale(1.1) garante que não hajam bordas brancas ao mover.
-*/
 .pf-card-bg {
     position: absolute;
     inset: 0;
@@ -2890,7 +2587,6 @@ body.spotlight-active .spotlight-overlay {
     will-change: transform;
 }
 
-/* Variante A — roxo quente (cards 1, 3, 5) */
 .pf-bg-a {
     background:
         radial-gradient(ellipse 80% 70% at 25% 20%, rgba(130, 20, 210, 0.7) 0%, transparent 60%),
@@ -2898,7 +2594,6 @@ body.spotlight-active .spotlight-overlay {
         linear-gradient(145deg, #0f0822 0%, #1c0a38 50%, #0a0515 100%);
 }
 
-/* Variante B — índigo frio (cards 2, 4) */
 .pf-bg-b {
     background:
         radial-gradient(ellipse 70% 65% at 70% 25%, rgba(85, 15, 185, 0.6) 0%, transparent 58%),
@@ -2906,7 +2601,6 @@ body.spotlight-active .spotlight-overlay {
         linear-gradient(155deg, #0d0723 0%, #160c30 55%, #080514 100%);
 }
 
-/* Borda do card — via ::after para ficar sempre acima de tudo */
 .pf-card::after {
     content: '';
     position: absolute;
@@ -2918,31 +2612,14 @@ body.spotlight-active .spotlight-overlay {
     transition: border-color 0.4s ease;
 }
 
-/* Borda mais intensa ao hover (somente cards reais) */
 .pf-card:not(.pf-card-soon):hover::after {
     border-color: rgba(180, 36, 251, 0.42);
 }
 
-
-/* ── HOVER — CAMADAS EMPILHADAS ──────────────────────────── */
-/*
-  Os cards com projeto real têm 4 camadas sobrepostas que
-  reagem ao hover de formas complementares:
-
-    z-index 0 → .pf-card-bg    (gradiente / paralaxe)
-    z-index 1 → .pf-card-img   (screenshot / foto do projeto)
-    z-index 2 → .pf-card-overlay (escurece no hover)
-    z-index 3 → .pf-card-glow  (inner shadow roxo)
-    z-index 5 → .pf-card-info  (texto que sobe)
-    z-index 10→ ::after         (borda — sempre no topo)
-*/
-
-/* Cursor none — o cursor customizado substitui o padrão */
 .pf-card:not(.pf-card-soon) {
     cursor: none;
 }
 
-/* CAMADA 1 — Imagem do projeto */
 .pf-card-img {
     position: absolute;
     inset: 0;
@@ -2955,19 +2632,18 @@ body.spotlight-active .spotlight-overlay {
     height: 100%;
     object-fit: cover;
     opacity: 0.55;
-    /* Normal: semi-transparente sobre o gradiente */
+    
     transform: scale(1.0);
     transition: opacity 0.7s var(--pf-ease), transform 0.9s var(--pf-ease);
 }
 
 .pf-card:hover .pf-card-img img {
     opacity: 0.35;
-    /* Hover: mais escuro para contraste com texto */
+    
     transform: scale(1.07);
-    /* Zoom suave — sensação de profundidade */
+    
 }
 
-/* Gradiente sobre a imagem: garante legibilidade do texto no rodapé */
 .pf-card-img::after {
     content: '';
     position: absolute;
@@ -2979,7 +2655,6 @@ body.spotlight-active .spotlight-overlay {
     z-index: 1;
 }
 
-/* CAMADA 2 — Overlay escuro (reforça contraste no hover) */
 .pf-card-overlay {
     position: absolute;
     inset: 0;
@@ -2994,7 +2669,6 @@ body.spotlight-active .spotlight-overlay {
     opacity: 1;
 }
 
-/* CAMADA 3 — Glow interno roxo (inner shadow no hover) */
 .pf-card-glow {
     position: absolute;
     inset: 0;
@@ -3009,7 +2683,6 @@ body.spotlight-active .spotlight-overlay {
     box-shadow: inset 0 0 100px rgba(180, 36, 251, 0.25), inset 0 0 50px rgba(180, 36, 251, 0.15);
 }
 
-/* CAMADA 5 — Conteúdo: tag, título, cliente, resultado */
 .pf-card-info {
     position: absolute;
     bottom: 0;
@@ -3023,10 +2696,9 @@ body.spotlight-active .spotlight-overlay {
 
 .pf-card:hover .pf-card-info {
     transform: translateY(-8px);
-    /* Sobe levemente no hover */
+    
 }
 
-/* Tag de categoria — "LANDING PAGE", "BRANDING", etc. */
 .pf-tag {
     display: block;
     font-size: 9px;
@@ -3035,7 +2707,7 @@ body.spotlight-active .spotlight-overlay {
     text-transform: uppercase;
     color: var(--pf-accent);
     margin-bottom: 7px;
-    /* Aparece no hover com delay pequeno */
+    
     opacity: 0;
     transform: translateY(8px);
     transition: opacity 0.4s ease 0.05s, transform 0.4s ease 0.05s;
@@ -3046,7 +2718,6 @@ body.spotlight-active .spotlight-overlay {
     transform: translateY(0);
 }
 
-/* Título do projeto — visível sempre, mais brilhante no hover */
 .pf-card-title {
     font-size: clamp(15px, 1.7vw, 21px);
     font-weight: 800;
@@ -3061,7 +2732,6 @@ body.spotlight-active .spotlight-overlay {
     opacity: 1;
 }
 
-/* Cliente / segmento — sempre visível, mais claro no hover */
 .pf-card-client {
     font-size: 12px;
     font-weight: 400;
@@ -3074,9 +2744,6 @@ body.spotlight-active .spotlight-overlay {
     color: rgba(255, 255, 253, 0.62);
 }
 
-/* Badge de resultado — surge no hover com delay
-   Ex: "+40% de leads em 30 dias"
-   A seta ↑ é via ::before (sem HTML extra necessário) */
 .pf-result {
     display: inline-flex;
     align-items: center;
@@ -3089,7 +2756,7 @@ body.spotlight-active .spotlight-overlay {
     border: 1px solid rgba(180, 36, 251, 0.25);
     border-radius: 50px;
     padding: 5px 13px 5px 10px;
-    /* Oculto inicialmente */
+    
     opacity: 0;
     transform: translateY(10px);
     transition: opacity 0.4s ease 0.12s, transform 0.4s ease 0.12s;
@@ -3106,14 +2773,10 @@ body.spotlight-active .spotlight-overlay {
     color: var(--pf-accent);
 }
 
-
-/* ── ESTADO "EM BREVE" ───────────────────────────────────── */
-/* Cards placeholder: fundo roxo + animação + sem hover */
 .pf-card-soon {
     cursor: default;
 }
 
-/* Container centralizado do indicador */
 .pf-soon-indicator {
     position: absolute;
     top: 50%;
@@ -3128,7 +2791,6 @@ body.spotlight-active .spotlight-overlay {
     user-select: none;
 }
 
-/* Círculo pulsante */
 .pf-soon-dot {
     width: 38px;
     height: 38px;
@@ -3142,7 +2804,7 @@ body.spotlight-active .spotlight-overlay {
 }
 
 .pf-soon-dot::before {
-    /* Ponto central que pulsa */
+    
     content: '';
     width: 7px;
     height: 7px;
@@ -3152,7 +2814,7 @@ body.spotlight-active .spotlight-overlay {
 }
 
 .pf-soon-dot::after {
-    /* Anel que se expande e some */
+    
     content: '';
     position: absolute;
     inset: -7px;
@@ -3193,7 +2855,7 @@ body.spotlight-active .spotlight-overlay {
 }
 
 .pf-soon-label {
-    /* "Em breve" */
+    
     font-family: 'DM Serif Display', serif;
     font-style: italic;
     font-size: 15px;
@@ -3202,7 +2864,7 @@ body.spotlight-active .spotlight-overlay {
 }
 
 .pf-soon-cat {
-    /* Categoria: "Tráfego Pago", etc. */
+    
     font-size: 10px;
     font-weight: 500;
     letter-spacing: 0.18em;
@@ -3210,14 +2872,6 @@ body.spotlight-active .spotlight-overlay {
     color: rgba(255, 255, 255, 0.1);
 }
 
-
-/* ── CURSOR CUSTOMIZADO "Ver →" ──────────────────────────── */
-/*
-  Singleton: um único elemento na página movido pelo JS.
-  position: fixed para acompanhar o scroll.
-  O CSS só gerencia aparição/sumiço via escala.
-  A posição (left/top) é controlada diretamente pelo JS.
-*/
 .pf-cursor {
     position: fixed;
     z-index: 9999;
@@ -3251,8 +2905,6 @@ body.spotlight-active .spotlight-overlay {
     pointer-events: none;
 }
 
-
-/* ── RODAPÉ DA SEÇÃO ─────────────────────────────────────── */
 .pf-footer {
     max-width: 1200px;
     margin: 0 auto;
@@ -3270,7 +2922,6 @@ body.spotlight-active .spotlight-overlay {
     transform: translateY(0);
 }
 
-/* Botão "Ver portfólio completo →" */
 .pf-btn {
     display: inline-flex;
     align-items: center;
@@ -3303,22 +2954,11 @@ body.spotlight-active .spotlight-overlay {
     transform: translateX(4px);
 }
 
-/* Nota temporária */
 .pf-footer-note {
     font-size: 11px;
     color: rgba(255, 255, 253, 0.18);
 }
 
-
-/* ── RESPONSIVO ──────────────────────────────────────────── */
-
-
-/* ── VARIÁVEIS ────────────────────────────────────────────── */
-
-
-/* ════════════════════════════════════════════════════════════
-   WRAPPER DA SEÇÃO
-   ════════════════════════════════════════════════════════════ */
 .faq-section {
     position: relative;
     background: var(--fq-bg);
@@ -3326,7 +2966,6 @@ body.spotlight-active .spotlight-overlay {
     overflow: hidden;
 }
 
-/* Linha separadora no topo */
 .faq-section::before {
     content: '';
     position: absolute;
@@ -3341,7 +2980,6 @@ body.spotlight-active .spotlight-overlay {
     pointer-events: none;
 }
 
-/* Halo de luz atmosférico no fundo */
 .fq-bg-glow {
     position: absolute;
     bottom: -120px;
@@ -3354,17 +2992,12 @@ body.spotlight-active .spotlight-overlay {
     pointer-events: none;
 }
 
-
-/* ════════════════════════════════════════════════════════════
-   CABEÇALHO
-   ════════════════════════════════════════════════════════════ */
 .fq-header {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 48px 72px;
 }
 
-/* Label "FAQ" */
 .fq-label {
     font-family: 'Manrope', sans-serif;
     font-size: 10px;
@@ -3377,7 +3010,7 @@ body.spotlight-active .spotlight-overlay {
     gap: 10px;
     margin-bottom: 20px;
 
-    /* Estado inicial para animação de entrada */
+    
     opacity: 0;
     transform: translateY(16px);
     transition: opacity 0.7s ease, transform 0.7s ease;
@@ -3397,7 +3030,6 @@ body.spotlight-active .spotlight-overlay {
     opacity: 0.5;
 }
 
-/* Título principal */
 .fq-title {
     font-family: 'Manrope', sans-serif;
     font-size: clamp(28px, 3.8vw, 52px);
@@ -3416,7 +3048,6 @@ body.spotlight-active .spotlight-overlay {
     transform: translateY(0);
 }
 
-/* Parte itálica serif */
 .fq-title-em {
     font-family: 'DM Serif Display', serif;
     font-style: italic;
@@ -3424,10 +3055,6 @@ body.spotlight-active .spotlight-overlay {
     color: var(--fq-accent);
 }
 
-
-/* ════════════════════════════════════════════════════════════
-   GRID PRINCIPAL — FAQ (esq) + FORMULÁRIO (dir)
-   ════════════════════════════════════════════════════════════ */
 .fq-grid {
     max-width: 1200px;
     margin: 0 auto;
@@ -3438,10 +3065,6 @@ body.spotlight-active .spotlight-overlay {
     align-items: start;
 }
 
-
-/* ════════════════════════════════════════════════════════════
-   COLUNA ESQUERDA — ACCORDION FAQ
-   ════════════════════════════════════════════════════════════ */
 .fq-accordion {
     display: flex;
     flex-direction: column;
@@ -3457,23 +3080,17 @@ body.spotlight-active .spotlight-overlay {
     transform: translateX(0);
 }
 
-
-/* ── Item do accordion ───────────────────────────────────── */
 .fq-item {
     position: relative;
     border-bottom: 1px solid var(--fq-border);
     overflow: hidden;
-    /* Garante que a linha de luz não vaze */
+    
 }
 
 .fq-item:first-child {
     border-top: 1px solid var(--fq-border);
 }
 
-/*
-  Linha de luz à esquerda do item ativo.
-  Cresce verticalmente de 0 até 100% quando o item está aberto.
-*/
 .fq-item::before {
     content: '';
     position: absolute;
@@ -3481,7 +3098,7 @@ body.spotlight-active .spotlight-overlay {
     top: 0;
     width: 2px;
     height: 0%;
-    /* Começa com altura zero */
+    
     background: linear-gradient(180deg,
             transparent 0%,
             var(--fq-accent) 30%,
@@ -3492,13 +3109,10 @@ body.spotlight-active .spotlight-overlay {
     z-index: 1;
 }
 
-/* Linha de luz ativa quando o item está aberto */
 .fq-item.fq-open::before {
     height: 100%;
 }
 
-
-/* ── Botão da pergunta ───────────────────────────────────── */
 .fq-question {
     width: 100%;
     background: none;
@@ -3509,7 +3123,7 @@ body.spotlight-active .spotlight-overlay {
     justify-content: space-between;
     gap: 16px;
     padding: 24px 0 24px 20px;
-    /* 20px deixa espaço para a linha de luz */
+    
     text-align: left;
     transition: background 0.3s ease;
 }
@@ -3518,7 +3132,6 @@ body.spotlight-active .spotlight-overlay {
     background: rgba(255, 255, 255, 0.02);
 }
 
-/* Texto da pergunta */
 .fq-question-text {
     font-family: 'Manrope', sans-serif;
     font-size: 15px;
@@ -3528,12 +3141,10 @@ body.spotlight-active .spotlight-overlay {
     transition: color 0.3s ease;
 }
 
-/* Pergunta ativa fica branca */
 .fq-item.fq-open .fq-question-text {
     color: var(--fq-white);
 }
 
-/* Ícone "+" que vira "−" */
 .fq-icon {
     width: 28px;
     height: 28px;
@@ -3550,10 +3161,9 @@ body.spotlight-active .spotlight-overlay {
     border-color: var(--fq-accent);
     background: var(--fq-accent-soft);
     transform: rotate(45deg);
-    /* "+" vira "×" */
+    
 }
 
-/* Linhas do ícone + */
 .fq-icon svg {
     width: 12px;
     height: 12px;
@@ -3568,13 +3178,6 @@ body.spotlight-active .spotlight-overlay {
     stroke: var(--fq-accent);
 }
 
-
-/* ── Área da resposta (colapsável) ──────────────────────── */
-/*
-  A resposta usa height: 0 → height: var(--fq-h) para animar.
-  --fq-h é definida pelo JS em pixels, baseada no scrollHeight.
-  Isso garante animação suave sem usar max-height (que tem delay).
-*/
 .fq-answer {
     height: 0;
     overflow: hidden;
@@ -3585,7 +3188,6 @@ body.spotlight-active .spotlight-overlay {
     height: var(--fq-h, auto);
 }
 
-/* Conteúdo da resposta */
 .fq-answer-inner {
     padding: 0 20px 24px 20px;
     font-family: 'Manrope', sans-serif;
@@ -3595,14 +3197,10 @@ body.spotlight-active .spotlight-overlay {
     line-height: 1.78;
 }
 
-
-/* ════════════════════════════════════════════════════════════
-   COLUNA DIREITA — FORMULÁRIO DE CONTATO
-   ════════════════════════════════════════════════════════════ */
 .fq-form-col {
     position: sticky;
     top: 40px;
-    /* Gruda no topo ao rolar */
+    
 
     opacity: 0;
     transform: translateX(24px);
@@ -3614,7 +3212,6 @@ body.spotlight-active .spotlight-overlay {
     transform: translateX(0);
 }
 
-/* Card do formulário */
 .fq-form-card {
     background: rgba(255, 255, 255, 0.025);
     border: 1px solid var(--fq-border);
@@ -3629,7 +3226,6 @@ body.spotlight-active .spotlight-overlay {
     border-color: rgba(180, 36, 251, 0.25);
 }
 
-/* Reflexo de luz no canto superior */
 .fq-form-card::before {
     content: '';
     position: absolute;
@@ -3643,7 +3239,6 @@ body.spotlight-active .spotlight-overlay {
             rgba(180, 36, 251, 0.2) 100%);
 }
 
-/* Título do formulário */
 .fq-form-title {
     font-family: 'Manrope', sans-serif;
     font-size: 20px;
@@ -3653,7 +3248,6 @@ body.spotlight-active .spotlight-overlay {
     margin-bottom: 6px;
 }
 
-/* Subtexto */
 .fq-form-sub {
     font-family: 'Manrope', sans-serif;
     font-size: 13px;
@@ -3663,20 +3257,11 @@ body.spotlight-active .spotlight-overlay {
     line-height: 1.6;
 }
 
-
-/* ── Campo de input com label flutuante ─────────────────── */
-/*
-  Cada campo tem um wrapper .fq-field com position: relative.
-  O label começa centralizado sobre o input.
-  Quando o input é focado OU tem valor, o label sobe e diminui.
-  Controlado por CSS :focus e :not(:placeholder-shown).
-*/
 .fq-field {
     position: relative;
     margin-bottom: 20px;
 }
 
-/* Input e textarea compartilham o mesmo visual */
 .fq-input,
 .fq-textarea {
     width: 100%;
@@ -3684,14 +3269,14 @@ body.spotlight-active .spotlight-overlay {
     border: 1px solid var(--fq-border);
     border-radius: 10px;
     padding: 20px 16px 10px;
-    /* Padding top maior para dar espaço ao label */
+    
     font-family: 'Manrope', sans-serif;
     font-size: 14px;
     font-weight: 400;
     color: var(--fq-white);
     outline: none;
     transition: border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
-    /* Placeholder invisível — o label faz esse papel */
+    
     caret-color: var(--fq-accent);
 }
 
@@ -3706,7 +3291,6 @@ body.spotlight-active .spotlight-overlay {
     line-height: 1.6;
 }
 
-/* Focus: borda roxa + glow sutil */
 .fq-input:focus,
 .fq-textarea:focus {
     border-color: rgba(180, 36, 251, 0.5);
@@ -3714,7 +3298,6 @@ body.spotlight-active .spotlight-overlay {
     box-shadow: 0 0 0 3px rgba(180, 36, 251, 0.08);
 }
 
-/* Label flutuante */
 .fq-label-float {
     position: absolute;
     left: 16px;
@@ -3730,13 +3313,11 @@ body.spotlight-active .spotlight-overlay {
     white-space: nowrap;
 }
 
-/* Para textarea: label começa no topo */
 .fq-field--textarea .fq-label-float {
     top: 18px;
     transform: none;
 }
 
-/* Label sobe quando input está focado ou preenchido */
 .fq-input:focus+.fq-label-float,
 .fq-input:not(:placeholder-shown)+.fq-label-float {
     top: 8px;
@@ -3756,20 +3337,12 @@ body.spotlight-active .spotlight-overlay {
     color: var(--fq-accent);
 }
 
-
-/* ── Linha dupla (nome + email lado a lado) ─────────────── */
 .fq-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 12px;
 }
 
-
-/* ── Botão de envio ─────────────────────────────────────── */
-/*
-  Efeito: fundo roxo se expande da esquerda para a direita
-  via pseudo-elemento ::before com scale no eixo X.
-*/
 .fq-submit {
     position: relative;
     width: 100%;
@@ -3792,7 +3365,6 @@ body.spotlight-active .spotlight-overlay {
     transition: color 0.35s ease, border-color 0.35s ease;
 }
 
-/* Fundo que preenche o botão no hover */
 .fq-submit::before {
     content: '';
     position: absolute;
@@ -3813,13 +3385,11 @@ body.spotlight-active .spotlight-overlay {
     transform: scaleX(1);
 }
 
-/* Texto e seta ficam acima do fundo */
 .fq-submit span {
     position: relative;
     z-index: 1;
 }
 
-/* Seta do botão */
 .fq-submit-arrow {
     display: inline-block;
     position: relative;
@@ -3831,7 +3401,6 @@ body.spotlight-active .spotlight-overlay {
     transform: translateX(4px);
 }
 
-/* Estado de carregamento */
 .fq-submit.fq-loading {
     pointer-events: none;
     opacity: 0.7;
@@ -3856,7 +3425,6 @@ body.spotlight-active .spotlight-overlay {
     }
 }
 
-/* Mensagem de sucesso */
 .fq-success {
     display: none;
     text-align: center;
@@ -3876,7 +3444,6 @@ body.spotlight-active .spotlight-overlay {
     color: #fff;
 }
 
-/* Nota abaixo do botão */
 .fq-form-note {
     font-family: 'Manrope', sans-serif;
     font-size: 11px;
@@ -3887,14 +3454,6 @@ body.spotlight-active .spotlight-overlay {
     line-height: 1.5;
 }
 
-
-/* ════════════════════════════════════════════════════════════
-   ANIMAÇÕES DE ENTRADA — ITENS DO ACCORDION
-   ════════════════════════════════════════════════════════════
-   Cada item do FAQ entra com um delay escalonado,
-   deslizando de baixo para cima com fade.
-   O delay é calculado pelo JS via --fq-item-delay.
-*/
 .fq-item {
     opacity: 0;
     transform: translateY(20px);
@@ -3902,7 +3461,7 @@ body.spotlight-active .spotlight-overlay {
         opacity 0.6s ease var(--fq-item-delay, 0s),
         transform 0.6s var(--fq-ease) var(--fq-item-delay, 0s),
         background 0.3s ease;
-    /* Para o hover */
+    
 }
 
 .fq-item.fq-visible {
@@ -3910,50 +3469,6 @@ body.spotlight-active .spotlight-overlay {
     transform: translateY(0);
 }
 
-/* ↑ As transições de border, height, etc. são redefinidas nos
-     seletores específicos acima (fq-item::before, fq-answer, etc.)
-     para não conflitar com a animação de entrada. */
-
-
-/* ════════════════════════════════════════════════════════════
-   RESPONSIVO
-   ════════════════════════════════════════════════════════════ */
-
-
-/* ============================================================
-   CTA SECTION — cta-section.css
-   Code Corttex
-   ============================================================
- 
-   COMO INTEGRAR:
-   Cole o conteúdo deste arquivo no final do seu style.css,
-   após os estilos de FAQ.
- 
-   CONCEITO VISUAL:
-   Inspirado na referência dourada — fundo escuro com grande
-   luz emergindo de baixo ao centro. Aqui usamos roxo (#B424FB).
-   Grade perspectivada no fundo cria profundidade de "portal".
-   Partículas sobem do halo de luz, reforçando a sensação de
-   energia ascendente e "passar de fase".
- 
-   PREFIXO: "ct-" em todas as classes → zero conflito com o
-   restante do seu CSS.
-   ============================================================ */
-
-
-/* ════════════════════════════════════════════════════════════
-   VARIÁVEIS LOCAIS
-   ════════════════════════════════════════════════════════════
-   Reutilizam os tokens visuais já estabelecidos no site.
-   ════════════════════════════════════════════════════════════ */
-
-
-/* ════════════════════════════════════════════════════════════
-   WRAPPER DA SEÇÃO
-   ════════════════════════════════════════════════════════════
-   min-height: 100vh garante impacto de tela cheia.
-   overflow: hidden contém as partículas e o halo.
-   ════════════════════════════════════════════════════════════ */
 .ct-section {
     position: relative;
     background: var(--ct-bg);
@@ -3965,7 +3480,6 @@ body.spotlight-active .spotlight-overlay {
     padding: 80px 24px;
 }
 
-/* Linha separadora no topo — padrão das outras seções */
 .ct-section::before {
     content: '';
     position: absolute;
@@ -3981,15 +3495,6 @@ body.spotlight-active .spotlight-overlay {
     z-index: 2;
 }
 
-
-/* ════════════════════════════════════════════════════════════
-   CAMADA 1 — GRADE PERSPECTIVADA
-   ════════════════════════════════════════════════════════════
-   Reproduz a grade da imagem de referência.
-   Usa perspective CSS para criar profundidade de "portal".
-   A grade se perde no topo (como se fosse infinita).
-   Fica em z-index: 0 — atrás de tudo.
-   ════════════════════════════════════════════════════════════ */
 .ct-grid {
     position: absolute;
     inset: 0;
@@ -4005,27 +3510,17 @@ body.spotlight-active .spotlight-overlay {
     right: -20%;
     height: 120%;
 
-    /*
-      transform-origin: bottom center garante que a perspectiva
-      "fuja" para o horizonte no topo, como na referência.
-    */
+    
     transform-origin: bottom center;
     transform: rotateX(55deg);
 
-    /*
-      Grade via background-image com duas camadas lineares
-      — uma horizontal, uma vertical.
-      Ajuste background-size para mudar a densidade da grade.
-    */
+    
     background-image:
         linear-gradient(rgba(180, 36, 251, 0.10) 1px, transparent 1px),
         linear-gradient(90deg, rgba(180, 36, 251, 0.10) 1px, transparent 1px);
     background-size: 70px 70px;
 
-    /*
-      mask-image: fade no topo — a grade desaparece suavemente.
-      Sem isso a grade "corta" abruptamente no topo da seção.
-    */
+    
     -webkit-mask-image: linear-gradient(to top,
             black 0%,
             black 35%,
@@ -4036,21 +3531,6 @@ body.spotlight-active .spotlight-overlay {
             transparent 72%);
 }
 
-
-/* ════════════════════════════════════════════════════════════
-   CAMADA 2 — HALO DE LUZ ROXA (vindo de baixo)
-   ════════════════════════════════════════════════════════════
-   Reproduz exatamente o efeito da referência (que é dourado)
-   usando o roxo da identidade da Code Corttex.
- 
-   Dois halos sobrepostos:
-   - .ct-halo-outer: amplo e difuso (atmosfera geral)
-   - .ct-halo-core:  concentrado e brilhante (fonte de luz)
- 
-   Ambos se movem com o mouse via JS (parallax suave).
-   ════════════════════════════════════════════════════════════ */
-
-/* Halo externo — grande e difuso */
 .ct-halo-outer {
     position: absolute;
     bottom: -15%;
@@ -4060,7 +3540,7 @@ body.spotlight-active .spotlight-overlay {
     height: 800px;
 
     background: radial-gradient(ellipse 65% 50% at 50% 100%,
-            /* Concentrado na base */
+            
             rgba(180, 36, 251, 0.35) 0%,
             rgba(180, 36, 251, 0.12) 40%,
             rgba(180, 36, 251, 0.03) 65%,
@@ -4069,12 +3549,11 @@ body.spotlight-active .spotlight-overlay {
     pointer-events: none;
     z-index: 1;
 
-    /* Pulsação suave de "respiração" */
+    
     animation: ctHaloBreathe 6s ease-in-out infinite;
     will-change: transform, opacity;
 }
 
-/* Halo central — pequeno e intenso (o "núcleo" da fonte de luz) */
 .ct-halo-core {
     position: absolute;
     bottom: -8%;
@@ -4091,14 +3570,13 @@ body.spotlight-active .spotlight-overlay {
     pointer-events: none;
     z-index: 1;
 
-    /* Pulsação no sentido inverso = efeito de cintilação */
+    
     animation: ctHaloBreathe 6s ease-in-out infinite reverse;
     animation-delay: -3s;
-    /* Offset de fase */
+    
     will-change: transform, opacity;
 }
 
-/* Animação de respiração — amplia e contrai o halo levemente */
 @keyframes ctHaloBreathe {
 
     0%,
@@ -4113,14 +3591,6 @@ body.spotlight-active .spotlight-overlay {
     }
 }
 
-
-/* ════════════════════════════════════════════════════════════
-   CAMADA 3 — CANVAS DE PARTÍCULAS
-   ════════════════════════════════════════════════════════════
-   O canvas é gerenciado pelo JS (cta-section.js).
-   Fica em z-index: 2 — acima do halo mas abaixo do conteúdo.
-   pointer-events: none garante que não interfere nos cliques.
-   ════════════════════════════════════════════════════════════ */
 .ct-canvas {
     position: absolute;
     inset: 0;
@@ -4130,12 +3600,6 @@ body.spotlight-active .spotlight-overlay {
     pointer-events: none;
 }
 
-
-/* ════════════════════════════════════════════════════════════
-   CAMADA 4 — CONTEÚDO PRINCIPAL
-   ════════════════════════════════════════════════════════════
-   z-index: 3 — sempre acima de tudo.
-   ════════════════════════════════════════════════════════════ */
 .ct-content {
     position: relative;
     z-index: 3;
@@ -4144,12 +3608,6 @@ body.spotlight-active .spotlight-overlay {
     width: 100%;
 }
 
-
-/* ── LABEL DE SEÇÃO ──────────────────────────────────────── */
-/*
-  Pequeno texto cápsula acima do título.
-  Mesma linguagem visual das outras seções do site.
-*/
 .ct-eyebrow {
     display: inline-flex;
     align-items: center;
@@ -4162,19 +3620,17 @@ body.spotlight-active .spotlight-overlay {
     color: var(--ct-accent);
     margin-bottom: 36px;
 
-    /* Estado inicial do reveal — invisível */
+    
     opacity: 0;
     transform: translateY(14px);
     transition: opacity 0.7s ease, transform 0.7s ease;
 }
 
-/* Classe adicionada pelo JS ao entrar na viewport */
 .ct-eyebrow.ct-visible {
     opacity: 1;
     transform: translateY(0);
 }
 
-/* Linhas decorativas flanqueando o texto */
 .ct-eyebrow::before,
 .ct-eyebrow::after {
     content: '';
@@ -4185,18 +3641,6 @@ body.spotlight-active .spotlight-overlay {
     opacity: 0.45;
 }
 
-
-/* ── TÍTULO PRINCIPAL ────────────────────────────────────── */
-/*
-  "Pronto para passar de fase?"
- 
-  Estratégia de reveal:
-  O JS divide o título em palavras (.ct-word) e anima cada
-  uma subindo com mola (spring). Ver cta-section.js módulo 2.
- 
-  .ct-title começa invisível (opacity: 0) até o JS processar
-  e adicionar .ct-title-ready, que o torna visível.
-*/
 .ct-title {
     font-family: 'Manrope', sans-serif;
     font-size: clamp(38px, 6.5vw, 88px);
@@ -4206,21 +3650,15 @@ body.spotlight-active .spotlight-overlay {
     letter-spacing: -0.03em;
     margin-bottom: 30px;
 
-    /* Invisível até o JS processar o split */
+    
     opacity: 0;
     transition: opacity 0.01s;
 }
 
-/* Após processamento — torna visível (as palavras animam por dentro) */
 .ct-title.ct-title-ready {
     opacity: 1;
 }
 
-/*
-  Cada palavra fica num wrapper com overflow: hidden.
-  Isso esconde o .ct-word-inner que começa abaixo (translateY 110%).
-  Sem overflow: hidden a palavra seria visível antes de animar.
-*/
 .ct-word {
     display: inline-block;
     overflow: hidden;
@@ -4228,32 +3666,21 @@ body.spotlight-active .spotlight-overlay {
     line-height: inherit;
 }
 
-/* Espaço natural entre as palavras */
 .ct-word+.ct-word {
     margin-left: 0.22em;
 }
 
-/*
-  Conteúdo interno de cada palavra.
-  Começa empurrado para baixo (fora do .ct-word).
-  O JS adiciona .ct-word-up para animar para translateY(0).
-*/
 .ct-word-inner {
     display: inline-block;
     transform: translateY(115%);
-    /* Começa escondido abaixo */
+    
     transition: transform 0.75s var(--ct-spring);
 }
 
-/* Ativado pelo JS — palavra sobe com mola */
 .ct-word-inner.ct-word-up {
     transform: translateY(0);
 }
 
-/*
-  Parte em itálico serif — "de fase?"
-  DM Serif Display em roxo claro, identidade visual do site.
-*/
 .ct-title-em {
     font-family: 'DM Serif Display', serif;
     font-style: italic;
@@ -4262,8 +3689,6 @@ body.spotlight-active .spotlight-overlay {
     letter-spacing: -0.01em;
 }
 
-
-/* ── SUBTÍTULO ───────────────────────────────────────────── */
 .ct-subtitle {
     font-family: 'Manrope', sans-serif;
     font-size: clamp(15px, 1.6vw, 18px);
@@ -4273,7 +3698,7 @@ body.spotlight-active .spotlight-overlay {
     max-width: 520px;
     margin: 0 auto 54px;
 
-    /* Reveal com delay — entra após o título */
+    
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.8s ease 0.5s, transform 0.8s ease 0.5s;
@@ -4284,8 +3709,6 @@ body.spotlight-active .spotlight-overlay {
     transform: translateY(0);
 }
 
-
-/* ── BOTÕES ──────────────────────────────────────────────── */
 .ct-actions {
     display: flex;
     align-items: center;
@@ -4294,7 +3717,7 @@ body.spotlight-active .spotlight-overlay {
     flex-wrap: wrap;
     margin-bottom: 32px;
 
-    /* Reveal com delay maior — entra por último */
+    
     opacity: 0;
     transform: translateY(16px);
     transition: opacity 0.7s ease 0.72s, transform 0.7s ease 0.72s;
@@ -4304,14 +3727,6 @@ body.spotlight-active .spotlight-overlay {
     opacity: 1;
     transform: translateY(0);
 }
-
-
-/* ── Botão primário: WhatsApp ───────────────────────────── */
-/*
-  Sólido roxo com glow. Efeito de "onda de luz" no hover:
-  o ::before é um radial-gradient centrado em --ct-bx/--ct-by
-  (posição do mouse), ativado pelo JS.
-*/
 
 .span-2 {
     color: #fff;
@@ -4335,9 +3750,9 @@ body.spotlight-active .spotlight-overlay {
     text-decoration: none;
     cursor: pointer;
     overflow: hidden;
-    /* Contém o ripple e o ::before */
+    
 
-    /* Sombra roxa de base — botão "flutua" sobre o halo */
+    
     box-shadow:
         0 0 40px rgba(180, 36, 251, 0.35),
         0 4px 24px rgba(0, 0, 0, 0.4);
@@ -4347,7 +3762,6 @@ body.spotlight-active .spotlight-overlay {
         box-shadow 0.35s ease;
 }
 
-/* Onda de luz que segue o mouse — ver JS módulo 4 */
 .ct-btn-wa::before {
     content: '';
     position: absolute;
@@ -4375,19 +3789,12 @@ body.spotlight-active .spotlight-overlay {
     transform: translateY(0) scale(0.97);
 }
 
-/* Ícone e texto acima do ::before */
 .ct-btn-wa svg,
 .ct-btn-wa>span {
     position: relative;
     z-index: 1;
 }
 
-
-/* ── Botão secundário: Ver portfólio ────────────────────── */
-/*
-  Transparente com borda roxa.
-  Hover: fundo preenche da esquerda via ::before scaleX.
-*/
 .ct-btn-portfolio {
     position: relative;
     display: inline-flex;
@@ -4412,7 +3819,6 @@ body.spotlight-active .spotlight-overlay {
         transform 0.25s ease;
 }
 
-/* Preenchimento da esquerda para direita */
 .ct-btn-portfolio::before {
     content: '';
     position: absolute;
@@ -4438,7 +3844,6 @@ body.spotlight-active .spotlight-overlay {
     transform: translateY(0);
 }
 
-/* Seta — avança no hover */
 .ct-btn-arrow {
     display: inline-block;
     transition: transform 0.3s ease;
@@ -4455,8 +3860,6 @@ body.spotlight-active .spotlight-overlay {
     z-index: 1;
 }
 
-
-/* ── NOTA DE RODAPÉ ──────────────────────────────────────── */
 .ct-footnote {
     font-family: 'Manrope', sans-serif;
     font-size: 12px;
@@ -4472,40 +3875,17 @@ body.spotlight-active .spotlight-overlay {
     opacity: 1;
 }
 
-/* "Sem compromisso." em negrito e mais visível */
 .ct-footnote strong {
     font-weight: 600;
     color: rgba(255, 255, 253, 0.38);
 }
 
-
-/* ════════════════════════════════════════════════════════════
-   RESPONSIVO
-   ════════════════════════════════════════════════════════════ */
-
-
-/* ============================================================
-   FOOTER — Code Corttex
-   ============================================================ */
-
-
-/* ── VARIÁVEIS ────────────────────────────────────────────── */
-
-
-/* ════════════════════════════════════════════════════════════
-   WRAPPER GERAL
-   ════════════════════════════════════════════════════════════
-   overflow-x: hidden garante que nada vaze horizontalmente.
-   Não usamos overflow: hidden no eixo Y para que o scroll
-   do usuário chegue ao footer normalmente.
-   ════════════════════════════════════════════════════════════ */
 .ft-footer {
     position: relative;
     background: var(--ft-bg);
     overflow-x: hidden;
 }
 
-/* Linha roxa de separação no topo */
 .ft-footer::before {
     content: '';
     position: absolute;
@@ -4521,15 +3901,6 @@ body.spotlight-active .spotlight-overlay {
     pointer-events: none;
 }
 
-
-/* ════════════════════════════════════════════════════════════
-   ÁREA SUPERIOR — 4 COLUNAS
-   ════════════════════════════════════════════════════════════
-   Col 1 (marca): mais larga para respirar
-   Col 2 e 3 (links): iguais
-   Col 4 (legal + voltar topo): ligeiramente maior por causa
-   do botão pill
-   ════════════════════════════════════════════════════════════ */
 .ft-top {
     width: 1280px;
     margin: 0 auto;
@@ -4540,26 +3911,17 @@ body.spotlight-active .spotlight-overlay {
     align-items: start;
 }
 
-
-/* ── COLUNA 1: MARCA ─────────────────────────────────────── */
 .ft-brand {
     display: flex;
     flex-direction: column;
 }
 
-/*
-  LOGO PEQUENA
-  Troque o conteúdo de .ft-logo-wrap por:
-  <img src="img/logo-codecortex-transparente.png" alt="Code Corttex">
-  quando pronto. O fallback .ft-logo-fallback desaparece
-  automaticamente quando o <img> está presente.
-*/
 .ft-logo-wrap {
     display: block;
     margin-bottom: 18px;
     text-decoration: none;
     line-height: 0;
-    /* Remove espaço extra abaixo da img */
+    
 }
 
 .ft-logo-wrap img {
@@ -4569,7 +3931,6 @@ body.spotlight-active .spotlight-overlay {
     filter: brightness(1.1);
 }
 
-/* Placeholder visual enquanto não há img */
 .ft-logo-fallback {
     height: 36px;
     display: inline-flex;
@@ -4586,7 +3947,6 @@ body.spotlight-active .spotlight-overlay {
     color: rgba(180, 36, 251, 0.45);
 }
 
-/* Tagline */
 .ft-tagline {
     font-family: 'Manrope', sans-serif;
     font-size: 13px;
@@ -4597,7 +3957,6 @@ body.spotlight-active .spotlight-overlay {
     margin-bottom: 24px;
 }
 
-/* Ícones sociais */
 .ft-social {
     display: flex;
     align-items: center;
@@ -4637,7 +3996,6 @@ body.spotlight-active .spotlight-overlay {
     display: block;
 }
 
-/* Copyright */
 .ft-copy {
     font-family: 'Manrope', sans-serif;
     font-size: 11px;
@@ -4646,8 +4004,6 @@ body.spotlight-active .spotlight-overlay {
     line-height: 1.6;
 }
 
-
-/* ── COLUNAS 2 e 3: NAVEGAÇÃO ────────────────────────────── */
 .ft-nav-col {
     display: flex;
     flex-direction: column;
@@ -4655,19 +4011,17 @@ body.spotlight-active .spotlight-overlay {
     height: 100%;
 }
 
-/* Cabeçalho da coluna */
 .ft-col-title {
     font-family: 'Manrope', sans-serif;
     font-size: 10px;
     font-weight: 700;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: rgba(255, 255, 253, 0.32);
+    color: rgba(255, 255, 253, 0.60);
     margin-bottom: 22px;
     display: block;
 }
 
-/* Lista de links */
 .ft-nav-list {
     list-style: none;
     display: flex;
@@ -4686,7 +4040,6 @@ body.spotlight-active .spotlight-overlay {
     transition: color 0.25s ease;
 }
 
-/* Sublinhado roxo que cresce da esquerda no hover */
 .ft-nav-link::after {
     content: '';
     position: absolute;
@@ -4706,19 +4059,12 @@ body.spotlight-active .spotlight-overlay {
     width: 100%;
 }
 
-
-/* ── COLUNA 4: LEGAL + BOTÃO TOPO ────────────────────────── */
 .ft-legal-col {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
 }
 
-/*
-  Botão "Voltar ao topo"
-  Pill com borda + ícone de seta circular — fiel à referência.
-  O href="#" é interceptado pelo JS para smooth scroll.
-*/
 .ft-top-btn {
     display: inline-flex;
     align-items: center;
@@ -4748,7 +4094,6 @@ body.spotlight-active .spotlight-overlay {
     transform: translateY(-2px);
 }
 
-/* Ícone de seta */
 .ft-top-icon {
     width: 22px;
     height: 22px;
@@ -4771,10 +4116,6 @@ body.spotlight-active .spotlight-overlay {
     transform: translateY(-3px);
 }
 
-
-/* ════════════════════════════════════════════════════════════
-   DIVISÓRIA
-   ════════════════════════════════════════════════════════════ */
 .ft-divider {
     max-width: 1280px;
     margin: 0 auto;
@@ -4787,43 +4128,16 @@ body.spotlight-active .spotlight-overlay {
     margin: 0;
 }
 
-
-/* ════════════════════════════════════════════════════════════
-   LOGO GRANDE — ANIMADA PELO SCROLL
-   ════════════════════════════════════════════════════════════
- 
-   PRINCÍPIO DO EFEITO:
-   Cada .ft-logo-part começa com translateY positivo alto
-   (letra abaixo do container, escondida pelo overflow:hidden).
-   Conforme o usuário rola para baixo, o JS calcula um valor
-   entre 0 e 1 (progresso do scroll no footer) e aplica
-   translateY proporcional em cada parte.
-   Cada parte tem um delay diferente (stagger) que cria o
-   efeito de cascata: letras da esquerda chegam antes.
- 
-   CUSTOM PROPERTY --ft-ty:
-   Setada pelo JS como translateY(Xpx) em cada .ft-logo-part.
-   Não use transition aqui — o JS precisa de controle direto
-   do valor sem interpolação CSS (seria para animação de entrada,
-   não para scroll tracking).
- 
-   QUANTIDADE DE PARTES:
-   Qualquer número. O JS detecta todos os [data-ft-part]
-   dentro do [data-ft-stage] e distribui o stagger automaticamente.
-   ════════════════════════════════════════════════════════════ */
-
-/* Container que define a altura visível da logo */
 .ft-logo-stage {
     width: 100%;
     overflow: hidden;
-    /* Recorta partes ainda abaixo */
+    
     height: clamp(180px, 26vw, 320px);
-    /* Ajuste para encaixar sua logo */
+    
     position: relative;
-    /* Sem margin-top — cola na linha divisória */
+    
 }
 
-/* Alinha as partes pela base, lado a lado */
 .ft-logo-row {
     position: absolute;
     bottom: 0;
@@ -4832,42 +4146,31 @@ body.spotlight-active .spotlight-overlay {
     height: 100%;
     display: flex;
     align-items: flex-end;
-    /* Âncora tudo na base */
+    
     padding: 0 48px;
     gap: 0;
     box-sizing: border-box;
 }
 
-/*
-  Cada parte da logo.
-  flex: 1 divide a largura igualmente.
-  Se as proporções das letras forem diferentes, você pode
-  definir width: XX% via atributo style no HTML de cada parte.
- 
-  Exemplo: data-ft-part="0" style="width: 20%"
-*/
 .ft-logo-part {
     flex: 1;
     height: 100%;
     position: relative;
     display: flex;
     align-items: flex-end;
-    /* CORREÇÃO: removido overflow:hidden daqui.
-       O stage já tem overflow:hidden para cortar partes abaixo.
-       O overflow no part cortava o ::before (texto) por cima. */
+    
 
     transform: translateY(var(--ft-ty, 120%));
     will-change: transform;
 }
 
-/* Imagem real da logo */
 .ft-logo-part img {
     width: 100%;
     max-height: 100%;
     object-fit: contain;
     object-position: bottom center;
     display: block;
-    /* Opacidade baixa como na referência */
+    
     opacity: 0.11;
     filter: brightness(0) invert(1);
     user-select: none;
@@ -4875,13 +4178,6 @@ body.spotlight-active .spotlight-overlay {
     -webkit-user-drag: none;
 }
 
-/*
-  MODO TEXTO (placeholder enquanto as imagens não chegam):
-  Ativado pela classe ft-text-mode + data-ft-label no HTML.
-  O ::before exibe a letra/símbolo.
-  Para desativar: remova a classe ft-text-mode e o atributo
-  data-ft-label. Adicione a <img> dentro do .ft-logo-part.
-*/
 .ft-logo-part.ft-text-mode {
     justify-content: center;
 }
@@ -4893,92 +4189,23 @@ body.spotlight-active .spotlight-overlay {
     font-weight: 800;
     letter-spacing: -0.04em;
     line-height: 1;
-    /* Aumente ligeiramente para evitar cortes */
+    
 
-    /* Aumente a opacidade para teste (ex: 0.3 ou 1.0) */
+    
     color: rgba(255, 255, 255, 1.0);
 
     user-select: none;
     pointer-events: none;
 
-    /* Adicione estas linhas para garantir a exibição */
+    
     display: block;
     width: 100%;
     text-align: center;
 }
 
-/* Esconde img quando em modo texto */
 .ft-logo-part.ft-text-mode img {
     display: none;
 }
-
-
-/* ════════════════════════════════════════════════════════════
-   RESPONSIVO
-   ════════════════════════════════════════════════════════════ */
-
-
-/* ============================================================
-   RESPONSIVIDADE GLOBAL — Code Corttex
-   Adicionada como complemento — NÃO altera nenhuma regra
-   de desktop existente. Apenas ajusta ≤ 1024px e ≤ 768px.
-   ============================================================ */
-
-
-/* ── CURSOR: desabilita em touch (não tem mouse) ─────────── */
-
-
-/* ── HEADER ──────────────────────────────────────────────── */
-
-
-/* ── HERO ────────────────────────────────────────────────── */
-
-
-/* ── CARROSSEL INFINITO ──────────────────────────────────── */
-
-
-/* ── SEÇÃO DOR / PAIN ────────────────────────────────────── */
-
-
-/* ── SEÇÃO SOBRE ─────────────────────────────────────────── */
-
-
-/* (768px já tratado no CSS original) */
-
-
-/* ── SEÇÃO SERVIÇOS ──────────────────────────────────────── */
-
-
-/* ── SEÇÃO MÉTODO ────────────────────────────────────────── */
-
-
-/* ── SEÇÃO DEPOIMENTOS ───────────────────────────────────── */
-
-
-/* ── SEÇÃO PORTFÓLIO ─────────────────────────────────────── */
-
-
-/* ── SEÇÃO FAQ + CONTATO ─────────────────────────────────── */
-
-
-/* ── SEÇÃO CTA ───────────────────────────────────────────── */
-
-
-/* (768px e 480px já tratados no CSS original) */
-
-
-/* ── FOOTER ──────────────────────────────────────────────── */
-/* (já tratado no CSS original para ≤1100px, ≤680px e ≤420px) */
-
-
-/* ── PADDING LATERAL PADRÃO PARA MOBILE ──────────────────── */
-
-
-/* ═══════════════════════════════════════════════════════════
-   RESPONSIVIDADE — MEDIA QUERIES
-   Todas as regras responsivas estão organizadas aqui no final.
-   Ordem: hover:none → 1100px → 1024px → 768px → 680px → 640px → 480px → 420px
-   ═══════════════════════════════════════════════════════════ */
 
 @media (hover: none) {
     #cur-r {
@@ -5081,7 +4308,7 @@ body.spotlight-active .spotlight-overlay {
         padding: 0 32px 56px;
     }
 
-    /* Mobile: reseta animações de entrada para evitar elementos invisíveis */
+    
     .fq-accordion,
     .fq-form-col {
         opacity: 1;
@@ -5096,7 +4323,7 @@ body.spotlight-active .spotlight-overlay {
         gap: 1.2rem;
     }
 
-    /* Header compacto: nav reduzida */
+    
     .header-compact .hc-nav a {
         padding: 6px 10px;
         font-size: 12px;
@@ -5128,7 +4355,7 @@ body.spotlight-active .spotlight-overlay {
         min-height: 420px;
         overflow: visible;
         margin-left: -10px;
-        /* Roda começa 10px "dentro" da borda esquerda */
+        
     }
 
     .mt-wheel-container {
@@ -5186,12 +4413,12 @@ body.spotlight-active .spotlight-overlay {
 
 @media (max-width: 768px) {
 
-    /* Grid passa para coluna única */
+    
     .sb-manifesto {
         grid-template-columns: 1fr;
     }
 
-    /* Remove padding/borda lateral, adiciona separador inferior */
+    
     .sb-letter-col {
         padding-right: 0;
         border-right: none;
@@ -5200,33 +4427,33 @@ body.spotlight-active .spotlight-overlay {
         margin-bottom: 60px;
     }
 
-    /* Remove padding lateral da coluna de stats */
+    
     .sb-side-col {
         padding-left: 0;
     }
 
-    /* Stats mantém 2 colunas mesmo no mobile */
+    
     .sb-stats-grid {
         grid-template-columns: 1fr 1fr;
     }
 
-    /* Reduz padding do container */
+    
     .sb-container {
         padding: 0 24px;
     }
 
-    /* Reduz padding do bloco de encerramento */
+    
     .sb-closing {
         padding: 36px 24px;
     }
 
-    /* Número fantasma menor para não sobrecarregar */
+    
     .sb-ghost-number {
         font-size: 160px;
         right: -30px;
     }
 
-    /* Headline mais compacta */
+    
     .sb-headline-wrap {
         margin-bottom: 60px;
     }
@@ -5271,7 +4498,7 @@ body.spotlight-active .spotlight-overlay {
     .dp-slide:not(.dp-slide-active) {
         opacity: 0.15;
         filter: blur(6px);
-        /* Um pouco menos de blur no celular para não pesar */
+        
         transform: scale(0.85);
     }
 
@@ -5287,7 +4514,7 @@ body.spotlight-active .spotlight-overlay {
         flex-direction: column;
     }
 
-    /* Garante que o texto do depoimento é visível */
+    
     .dp-quote {
         font-size: clamp(13px, 3.8vw, 16px);
         opacity: 1 !important;
@@ -5387,7 +4614,7 @@ body.spotlight-active .spotlight-overlay {
         display: none;
     }
 
-    /* Links ocultados no mobile */
+    
     .logo a img {
         width: 140px;
     }
@@ -5396,18 +4623,18 @@ body.spotlight-active .spotlight-overlay {
         display: none;
     }
 
-    /* Botão CTA oculto — aparece no drawer */
-    /* Exibe o hambúrguer no mobile */
+    
+    
     .hamburger {
         display: flex;
     }
 
-    /* Exibe o drawer no mobile */
+    
     .mobile-drawer {
         display: flex;
     }
 
-    /* Header compacto: oculto no mobile (o hambúrguer já resolve) */
+    
     .header-compact {
         display: none;
     }
@@ -5598,7 +4825,7 @@ body.spotlight-active .spotlight-overlay {
 
     .fq-form select {
         font-size: 16px;
-        /* Evita zoom automático no iOS */
+        
     }
 
     .ft-legal-col {
@@ -5672,7 +4899,7 @@ body.spotlight-active .spotlight-overlay {
         padding: 0 20px 44px;
     }
 
-    /* Grid vira coluna única: título > accordion > formulário */
+    
     .fq-grid {
         grid-template-columns: 1fr;
         gap: 40px;
