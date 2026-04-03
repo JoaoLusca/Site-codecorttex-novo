@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Portfólio — Code Corttex</title>
+  <meta name="description" content="Portfólio da Code Corttex: projetos reais de tráfego pago, desenvolvimento web e design gráfico.">
+  <meta name="author" content="Code Corttex">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#B424FB">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+  <link rel="preload" as="image" href="img/logo-codecortex-transparente.webp" type="image/webp">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Manrope:wght@200..800&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Manrope:wght@200..800&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet"></noscript>
+  <link rel="stylesheet" href="style.min.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="style.min.css"></noscript>
+  <link rel="stylesheet" href="portfolio.css">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;cursor:none}
+    html{scroll-behavior:smooth}
+    body{background:#111;color:#fff;font-family:'Manrope',system-ui,sans-serif;overflow-x:hidden;cursor:none}
+    header{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.2rem 3rem;background:transparent}
+    .logo img{width:200px;height:60px;object-fit:contain}
+    .header-compact{display:none}
+    .mobile-drawer{display:none}
+    :root{--x:50vw;--y:50vh}
+  </style>
+</head>
+<body>
+
+  <div id="cur" role="presentation" aria-hidden="true"></div>
+  <div id="cur-r" role="presentation" aria-hidden="true"></div>
+
+  <header role="banner" id="headerMain">
+    <div class="logo">
+      <a href="index.html" aria-label="Code Corttex — Página inicial">
+        <img src="img/logo-codecortex-transparente.webp" alt="Code Corttex" width="200" height="60" fetchpriority="high">
+      </a>
+    </div>
+    <nav aria-label="Navegação principal">
+      <a href="index.html#Início">Início</a>
+      <a href="index.html#sobre">Sobre</a>
+      <a href="index.html#servicos">Soluções</a>
+      <a href="index.html#metodo">Método</a>
+      <a href="index.html#cases">Cases</a>
+      <a href="index.html#impacto">Impacto</a>
+      <a href="index.html#faq">FAQ</a>
+      <a href="index.html#contato">Contato</a>
+    </nav>
+    <button class="nav-btn"><a href="index.html#contato" style="color:#fff;">Quero passar de fase</a></button>
+    <button class="hamburger" id="hamburgerBtn" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobileDrawer">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <div class="header-compact" id="headerCompact" role="navigation" aria-label="Menu compacto">
+    <a href="index.html" class="hc-logo" aria-label="Code Corttex — Início">
+      <img src="img/logo-codecortex-transparente.webp" alt="Code Corttex" width="160" height="48" loading="lazy">
+    </a>
+    <nav class="hc-nav" aria-label="Navegação compacta">
+      <a href="index.html#Início">Início</a>
+      <a href="index.html#sobre">Sobre</a>
+      <a href="index.html#servicos">Soluções</a>
+      <a href="index.html#metodo">Método</a>
+      <a href="index.html#impacto">Impacto</a>
+      <a href="index.html#cases">Cases</a>
+      <a href="index.html#faq">FAQ</a>
+      <a href="index.html#contato">Contato</a>
+    </nav>
+    <a href="index.html#contato" class="hc-btn">
+      <span>Quero passar de fase</span>
+      <span class="hc-btn-arrow">→</span>
+    </a>
+  </div>
+
+  <div class="mobile-drawer" id="mobileDrawer" role="dialog" aria-modal="true" aria-label="Menu de navegação">
+    <a href="index.html#Início"   onclick="closeDrawer()">Início</a>
+    <a href="index.html#sobre"    onclick="closeDrawer()">Sobre</a>
+    <a href="index.html#servicos" onclick="closeDrawer()">Soluções</a>
+    <a href="index.html#metodo"   onclick="closeDrawer()">Método</a>
+    <a href="index.html#impacto"  onclick="closeDrawer()">Impacto</a>
+    <a href="index.html#cases"    onclick="closeDrawer()">Cases</a>
+    <a href="index.html#faq"      onclick="closeDrawer()">FAQ</a>
+    <a href="index.html#contato"  onclick="closeDrawer()" class="drawer-cta">Quero passar de fase</a>
+  </div>
+
+  <main id="main-content">
+
+    <!-- HERO -->
+    <section class="pf-hero" id="Início" aria-label="Portfólio Code Corttex">
+      <div class="pf-hero__bg" aria-hidden="true"></div>
+      <div class="pf-hero__noise" aria-hidden="true"></div>
+      <div class="pf-hero__line" aria-hidden="true"></div>
+      <div class="pf-hero__content">
+        <span class="pf-hero__eyebrow">Portfólio — Code Corttex</span>
+        <h1 class="pf-hero__title">Trabalho que<br><em>fala por si.</em></h1>
+        <p class="pf-hero__sub">Tráfego pago, desenvolvimento web e design gráfico — cada projeto aqui foi construído com estratégia, precisão e um cuidado que aparece nos resultados.</p>
+        <div class="pf-hero__stats">
+          <div class="pf-hero__stat">
+            <span class="pf-hero__stat-num">+28</span>
+            <span class="pf-hero__stat-label">Projetos entregues</span>
+          </div>
+          <div class="pf-hero__stat-sep"></div>
+          <div class="pf-hero__stat">
+            <span class="pf-hero__stat-num">R$2M</span>
+            <span class="pf-hero__stat-label">Em tráfego gerenciado</span>
+          </div>
+          <div class="pf-hero__stat-sep"></div>
+          <div class="pf-hero__stat">
+            <span class="pf-hero__stat-num">5</span>
+            <span class="pf-hero__stat-label">Estados atendidos</span>
+          </div>
+        </div>
+      </div>
+      <div class="pf-hero__scroll" aria-hidden="true">
+        <span>Role</span>
+        <div class="pf-hero__scroll-line"></div>
+      </div>
+    </section>
+
+    <!-- FILTRO -->
+    <div class="pf-filter" role="navigation" aria-label="Filtrar por categoria">
+      <div class="pf-filter__inner">
+        <button class="pf-filter__btn active" data-filter="all">Todos os projetos</button>
+        <button class="pf-filter__btn" data-filter="trafego">Tráfego Pago</button>
+        <button class="pf-filter__btn" data-filter="web">Desenvolvimento Web</button>
+        <button class="pf-filter__btn" data-filter="design">Design Gráfico</button>
+      </div>
+    </div>
+
+    <!-- TRÁFEGO PAGO -->
+    <section class="pf-cat" data-cat="trafego" aria-label="Tráfego Pago">
+      <div class="pf-cat__header js-header-reveal">
+        <div>
+          <div class="pf-cat__label">01 — Tráfego Pago</div>
+          <h2 class="pf-cat__title">Cada real<br><em>com destino certo.</em></h2>
+        </div>
+        <p class="pf-cat__desc">Google Ads e Meta Ads operados com inteligência. Segmentação cirúrgica, criativos que param o scroll e otimização constante.</p>
+      </div>
+      <div class="pf-cards">
+
+        <article class="pf-card-new col-7 js-card-reveal" style="transition-delay:0ms">
+          <div class="pf-card-new__thumb grad-b h-360"></div>
+          <div class="pf-card-new__body">
+            <span class="pf-card-new__tag">Meta Ads</span>
+            <h3 class="pf-card-new__title">E-commerce de Moda — Funil Completo</h3>
+            <p class="pf-card-new__client">E-commerce — Segmento Fashion</p>
+            <div class="pf-card-new__metrics">
+              <div class="pf-card-new__metric"><span class="pf-card-new__metric-label">ROAS</span><span class="pf-card-new__metric-val">4.8x</span></div>
+              <div class="pf-card-new__metric"><span class="pf-card-new__metric-label">CPL</span><span class="pf-card-new__metric-val">↓38%</span></div>
+              <div class="pf-card-new__metric"><span class="pf-card-new__metric-label">Período</span><span class="pf-card-new__metric-val">90d</span></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="pf-card-new col-5 js-card-reveal" style="transition-delay:80ms">
+          <div class="pf-card-new__thumb grad-c h-360"></div>
+          <div class="pf-card-new__body">
+            <span class="pf-card-new__tag">Google Ads</span>
+            <h3 class="pf-card-new__title">Clínica de Estética — Search</h3>
+            <p class="pf-card-new__client">Saúde & Beleza — Agendamentos</p>
+            <div class="pf-card-new__metrics">
+              <div class="pf-card-new__metric"><span class="pf-card-new__metric-label">CTR</span><span class="pf-card-new__metric-val">9.2%</span></div>
+              <div class="pf-card-new__metric"><span class="pf-card-new__metric-label">Conv.</span><span class="pf-card-new__metric-val">↑3x</span></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="pf-card-new col-4 js-card-reveal" style="transition-delay:160ms">
+          <div class="pf-card-new__thumb grad-a h-280"></div>
+          <div class="pf-card-new__body">
+            <span class="pf-card-new__tag">Meta Ads</span>
+            <h3 class="pf-card-new__title">Infoproduto — Lançamento</h3>
+            <p class="pf-card-new__client">Educação Digital — Curso Online</p>
+            <div class="pf-card-new__metrics">
+              <div class="pf-card-new__metric"><span class="pf-card-new__metric-label">Leads</span><span class="pf-card-new__metric-val">1.2k</span></div>
+              <div class="pf-card-new__metric"><span class="pf-card-new__metric-label">CPL</span><span class="pf-card-new__metric-val">R$4,20</span></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="pf-card-new col-4 js-card-reveal" style="transition-delay:240ms">
+          <div class="pf-card-new__thumb grad-f h-280"></div>
+          <div class="pf-card-new__body">
+            <span class="pf-card-new__tag">Google + Meta</span>
+            <h3 class="pf-card-new__title">Escritório Jurídico — Full Funnel</h3>
+            <p class="pf-card-new__client">Advocacia — Aquisição de Clientes</p>
+            <div class="pf-card-new__metrics">
+              <div class="pf-card-new__metric"><span class="pf-card-new__metric-label">Contatos</span><span class="pf-card-new__metric-val">+200%</span></div>
+              <div class="pf-card-new__metric"><span class="pf-card-new__metric-label">CPA</span><span class="pf-card-new__metric-val">↓52%</span></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="pf-card-new col-4 js-card-reveal" style="transition-delay:320ms">
+          <div class="pf-card-new__thumb grad-d h-280"></div>
+          <div class="pf-card-new__body">
+            <span class="pf-card-new__tag">Meta Ads</span>
+            <h3 class="pf-card-new__title">Varejo Local — Geração de Tráfego</h3>
+            <p class="pf-card-new__client">Comércio — Loja Física + Digital</p>
+            <div class="pf-card-new__metrics">
+              <div class="pf-card-new__metric"><span class="pf-card-new__metric-label">Alcance</span><span class="pf-card-new__metric-val">280k</span></div>
+              <div class="pf-card-new__metric"><span class="pf-card-new__metric-label">Visitas</span><span class="pf-card-new__metric-val">↑4x</span></div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <div class="pf-divider" aria-hidden="true">
+      <div class="pf-divider__bar"></div>
+      <span class="pf-divider__text">Desenvolvimento Web</span>
+      <div class="pf-divider__bar"></div>
+    </div>
+
+    <!-- DESENVOLVIMENTO WEB -->
+    <section class="pf-cat" data-cat="web" aria-label="Desenvolvimento Web">
+      <div class="pf-cat__header js-header-reveal">
+        <div>
+          <div class="pf-cat__label">02 — Desenvolvimento Web</div>
+          <h2 class="pf-cat__title">Sites que vendem<br><em>enquanto você dorme.</em></h2>
+        </div>
+        <p class="pf-cat__desc">Nada de templates. Cada linha de código escrita para converter visitante em cliente. Performance, SEO e design que comunica autoridade.</p>
+      </div>
+      <div class="pf-cards">
+
+        <article class="pf-card-new col-7 js-card-reveal" style="transition-delay:0ms">
+          <a href="https://joaolusca.github.io/Fhabiola-Mercaldo/" target="_blank" class="pf-card-new__link">Ver projeto ↗</a>
+          <div class="pf-card-new__thumb h-400" style="background:#0d0d18;">
+            <img src="img/capa-Fhabiolla.webp" alt="Advocacia Fhabiolla Mercaldo" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
+          </div>
+          <div class="pf-card-new__body">
+            <span class="pf-card-new__tag">Landing Page</span>
+            <h3 class="pf-card-new__title">Advocacia Fhabiolla Mercaldo</h3>
+            <p class="pf-card-new__client">Advocacia — Setor do Direito</p>
+            <div class="pf-card-new__metrics">
+              <div class="pf-card-new__metric"><span class="pf-card-new__metric-label">Leads</span><span class="pf-card-new__metric-val">+40%</span></div>
+              <div class="pf-card-new__metric"><span class="pf-card-new__metric-label">Período</span><span class="pf-card-new__metric-val">30 dias</span></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="pf-card-new col-5 js-card-reveal" style="transition-delay:100ms">
+          <a href="https://mobicomunicacao.com.br/" target="_blank" class="pf-card-new__link">Ver projeto ↗</a>
+          <div class="pf-card-new__thumb h-400" style="background:#060e08;">
+            <img src="img/capa-mobi.webp" alt="Mobi Comunicação" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
+          </div>
+          <div class="pf-card-new__body">
+            <span class="pf-card-new__tag">Site Institucional</span>
+            <h3 class="pf-card-new__title">Mobi Comunicação</h3>
+            <p class="pf-card-new__client">Agência de Comunicação — Marketing</p>
+            <div class="pf-card-new__metrics">
+              <div class="pf-card-new__metric"><span class="pf-card-new__metric-label">Contatos</span><span class="pf-card-new__metric-val">+10/sem</span></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="pf-card-new col-4 js-card-reveal" style="transition-delay:180ms">
+          <a href="https://alvesfrazao.com.br/" target="_blank" class="pf-card-new__link">Ver projeto ↗</a>
+          <div class="pf-card-new__thumb h-280" style="background:#100a02;">
+            <img src="img/capa-alvesfrazao.png" alt="Alves Frazão" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
+          </div>
+          <div class="pf-card-new__body">
+            <span class="pf-card-new__tag">Site Institucional</span>
+            <h3 class="pf-card-new__title">Advocacia Alves Frazão</h3>
+            <p class="pf-card-new__client">Direito — Posicionamento Premium</p>
+          </div>
+        </article>
+
+        <article class="pf-card-new col-4 js-card-reveal" style="transition-delay:260ms">
+          <a href="https://joaolusca.github.io/Projeto-DriveShow/" target="_blank" class="pf-card-new__link">Ver projeto ↗</a>
+          <div class="pf-card-new__thumb h-280" style="background:#08080e;">
+            <img src="img/capa-driveshow.png" alt="DriveShow" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
+          </div>
+          <div class="pf-card-new__body">
+            <span class="pf-card-new__tag">Concept — Luxo</span>
+            <h3 class="pf-card-new__title">DriveShow</h3>
+            <p class="pf-card-new__client">Automóveis de Luxo — Projeto Pessoal</p>
+          </div>
+        </article>
+
+        <article class="pf-card-new col-4 js-card-reveal" style="transition-delay:340ms">
+          <a href="https://joaolusca.github.io/Projeto-DevClub-Store/" target="_blank" class="pf-card-new__link">Ver projeto ↗</a>
+          <div class="pf-card-new__thumb h-280" style="background:#0a0a0a;">
+            <img src="img/capa-devclub-store.png" alt="DevClub Store" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
+          </div>
+          <div class="pf-card-new__body">
+            <span class="pf-card-new__tag">E-commerce LP</span>
+            <h3 class="pf-card-new__title">DevClub Store</h3>
+            <p class="pf-card-new__client">Tecnologia — E-commerce</p>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <div class="pf-divider" aria-hidden="true">
+      <div class="pf-divider__bar"></div>
+      <span class="pf-divider__text">Design Gráfico</span>
+      <div class="pf-divider__bar"></div>
+    </div>
+
+    <!-- DESIGN GRÁFICO -->
+    <section class="pf-cat" data-cat="design" aria-label="Design Gráfico">
+      <div class="pf-cat__header js-header-reveal">
+        <div>
+          <div class="pf-cat__label">03 — Design Gráfico</div>
+          <h2 class="pf-cat__title">Reconhecida antes<br><em>de ser lida.</em></h2>
+        </div>
+        <p class="pf-cat__desc">Branding, identidade visual, social media e materiais impressos. Design que gera autoridade e faz o público parar de rolar o feed.</p>
+      </div>
+      <div class="pf-cards">
+
+        <article class="pf-card-new col-6 js-card-reveal" style="transition-delay:0ms">
+          <div class="pf-card-new__thumb grad-e h-340"></div>
+          <div class="pf-card-new__body">
+            <span class="pf-card-new__tag">Branding</span>
+            <h3 class="pf-card-new__title">Identidade Visual — Clínica Premium</h3>
+            <p class="pf-card-new__client">Saúde & Estética — Manual de Marca Completo</p>
+          </div>
+        </article>
+
+        <article class="pf-card-new col-6 js-card-reveal" style="transition-delay:80ms">
+          <div class="pf-card-new__thumb grad-h h-340"></div>
+          <div class="pf-card-new__body">
+            <span class="pf-card-new__tag">Social Media</span>
+            <h3 class="pf-card-new__title">Social Media — Escritório Jurídico</h3>
+            <p class="pf-card-new__client">Advocacia — Feed, Stories & Carrosséis</p>
+          </div>
+        </article>
+
+        <article class="pf-card-new col-12 js-card-reveal" style="transition-delay:160ms">
+          <div class="pf-card-new__thumb grad-g h-260"></div>
+          <div class="pf-card-new__body">
+            <span class="pf-card-new__tag">Rebranding + Print</span>
+            <h3 class="pf-card-new__title">Rebranding — Empresa de Tecnologia</h3>
+            <p class="pf-card-new__client">Tecnologia — Logo, Papelaria, Apresentações e Assinaturas Digitais</p>
+          </div>
+        </article>
+
+        <article class="pf-card-new col-4 js-card-reveal" style="transition-delay:240ms">
+          <div class="pf-card-new__thumb grad-a h-260"></div>
+          <div class="pf-card-new__body">
+            <span class="pf-card-new__tag">Social Media</span>
+            <h3 class="pf-card-new__title">Criativos — Infoprodutor</h3>
+            <p class="pf-card-new__client">Educação — Ads & Feed Orgânico</p>
+          </div>
+        </article>
+
+        <article class="pf-card-new col-4 js-card-reveal" style="transition-delay:320ms">
+          <div class="pf-card-new__thumb grad-i h-260"></div>
+          <div class="pf-card-new__body">
+            <span class="pf-card-new__tag">Print</span>
+            <h3 class="pf-card-new__title">Materiais Impressos — Varejo</h3>
+            <p class="pf-card-new__client">Comércio — Flyers, Banners & Embalagens</p>
+          </div>
+        </article>
+
+        <article class="pf-card-new col-4 js-card-reveal" style="transition-delay:400ms">
+          <div class="pf-card-new__thumb grad-f h-260"></div>
+          <div class="pf-card-new__body">
+            <span class="pf-card-new__tag">Branding</span>
+            <h3 class="pf-card-new__title">Identidade — Consultoria Financeira</h3>
+            <p class="pf-card-new__client">Finanças — Posicionamento & Logomarca</p>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="pf-cta" aria-label="Fale com a Code Corttex">
+      <div class="pf-cta__bg" aria-hidden="true"></div>
+      <div class="pf-cta__noise" aria-hidden="true"></div>
+      <div class="pf-cta__content">
+        <span class="pf-cta__eyebrow js-reveal">— Próximo capítulo</span>
+        <h2 class="pf-cta__title js-reveal">O seu projeto<br><em>pode ser o próximo.</em></h2>
+        <p class="pf-cta__sub js-reveal">Cada trabalho que você viu aqui começou com uma conversa. Conta o que você está construindo — a gente traz a estratégia, o design e a tecnologia.</p>
+        <div class="pf-cta__actions js-reveal">
+          <a href="https://wa.me/5561993771036?text=Olá%2C%20vim%20pelo%20portfólio%20da%20Code%20Corttex%20e%20quero%20conversar%20sobre%20meu%20projeto!" class="ct-btn-wa" target="_blank" rel="noopener noreferrer">
+            <svg class="ct-wa-svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            <span class="span-2">Quero passar de fase</span>
+          </a>
+          <a href="index.html" class="ct-btn-portfolio">
+            <span>Voltar ao site</span>
+            <span class="ct-btn-arrow" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER IDÊNTICO AO INDEX -->
+  <footer class="ft-footer" id="footer" role="contentinfo">
+    <div class="ft-top">
+      <div class="ft-brand">
+        <a href="index.html" class="ft-logo-wrap" aria-label="Code Corttex — Início">
+          <img src="img/logo-codecortex-transparente.png" alt="Code Corttex" width="160" height="48" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-flex';">
+          <span class="ft-logo-fallback" style="display:none;">Code Corttex</span>
+        </a>
+        <p class="ft-tagline">Estratégia, design e tecnologia para negócios que querem crescer de verdade.</p>
+        <div class="ft-social" role="list" aria-label="Redes sociais da Code Corttex">
+          <a href="https://www.instagram.com/codecorttexmarketing/" class="ft-social-link" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          </a>
+          <a href="https://www.linkedin.com/in/joaolucasgm/" class="ft-social-link" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+          <a href="https://wa.me/5561993771036?text=Olá%2C%20vim%20pelo%20site%20da%20Code%20Corttex%20e%20quero%20conversar%20sobre%20meu%20projeto!" class="ft-social-link" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </a>
+        </div>
+        <p class="ft-copy">© 2025 Code Corttex. Todos os direitos reservados.</p>
+      </div>
+      <nav class="ft-nav-col" aria-label="Navegação principal">
+        <span class="ft-col-title">Sitemap</span>
+        <ul class="ft-nav-list">
+          <li><a href="index.html#Início"  class="ft-nav-link">Início</a></li>
+          <li><a href="index.html#sobre"   class="ft-nav-link">Sobre</a></li>
+          <li><a href="index.html#metodo"  class="ft-nav-link">Método</a></li>
+          <li><a href="index.html#impacto" class="ft-nav-link">Impacto</a></li>
+          <li><a href="index.html#cases"   class="ft-nav-link">Cases</a></li>
+          <li><a href="index.html#faq"     class="ft-nav-link">FAQ</a></li>
+          <li><a href="index.html#contato" class="ft-nav-link">Contato</a></li>
+        </ul>
+      </nav>
+      <nav class="ft-nav-col" aria-label="Soluções">
+        <span class="ft-col-title">Soluções</span>
+        <ul class="ft-nav-list">
+          <li><a href="services/web-development.html" class="ft-nav-link">Desenvolvimento Web</a></li>
+          <li><a href="services/gestao-trafego.html"  class="ft-nav-link">Tráfego Pago</a></li>
+          <li><a href="services/design.html"          class="ft-nav-link">Design & Identidade</a></li>
+          <li><a href="portfolio.html"                class="ft-nav-link">Ver portfólio →</a></li>
+        </ul>
+      </nav>
+      <div class="ft-legal-col">
+        <span class="ft-col-title">Informações legais</span>
+        <ul class="ft-nav-list">
+          <li><a href="#" class="ft-nav-link">Política de Privacidade</a></li>
+          <li><a href="#" class="ft-nav-link">Termos de Uso</a></li>
+          <li><a href="#" class="ft-nav-link">Política de Cookies</a></li>
+        </ul>
+        <a href="#" class="ft-top-btn" id="ftTopBtn" aria-label="Voltar ao topo da página">
+          <span>Voltar ao topo</span>
+          <span class="ft-top-icon" aria-hidden="true">↑</span>
+        </a>
+      </div>
+    </div>
+    <div class="ft-divider"><hr class="ft-divider-line"></div>
+    <div class="ft-logo-stage" data-ft-stage aria-hidden="true">
+      <div class="ft-logo-row">
+        <div class="ft-logo-part ft-text-mode" data-ft-part="0" data-ft-label="C"></div>
+        <div class="ft-logo-part ft-text-mode" data-ft-part="1" data-ft-label="o"></div>
+        <div class="ft-logo-part ft-text-mode" data-ft-part="2" data-ft-label="r"></div>
+        <div class="ft-logo-part ft-text-mode" data-ft-part="3" data-ft-label="t"></div>
+        <div class="ft-logo-part ft-text-mode" data-ft-part="4" data-ft-label="e"></div>
+        <div class="ft-logo-part ft-text-mode" data-ft-part="5" data-ft-label="x"></div>
+      </div>
+    </div>
+  </footer>
+
+  <script defer src="main.min.js"></script>
+  <script src="portfolio.js"></script>
+   <!-- Locomotive Scroll (smooth scroll) -->
+    <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@beta/bundled/locomotive-scroll.min.js"></script>
+    <script>
+        const scroll = new LocomotiveScroll({
+            el: document.querySelector('#app'),
+            smooth: true,
+        });
+        /* Expõe instância para que o footer.js possa ouvir eventos */
+        window.LocomotiveScrollInstance = scroll;
+    </script>
+</body>
+</html>
